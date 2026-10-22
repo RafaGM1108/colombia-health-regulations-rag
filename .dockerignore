@@ -1,0 +1,10 @@
+.git
+.venv
+data
+notebooks
+docs
+tests
+.env
+**/__pycache__
+.*_cache
+htmlcov

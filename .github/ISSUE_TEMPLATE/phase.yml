@@ -1,0 +1,34 @@
+name: Phase
+description: A roadmap phase. Tracks the milestone "Phase N - <name>".
+labels: [phase]
+body:
+  - type: input
+    id: milestone
+    attributes:
+      label: Milestone
+      placeholder: Phase 1 - Data collection
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What this phase delivers and why it matters.
+    validations:
+      required: true
+  - type: textarea
+    id: issues
+    attributes:
+      label: Issues
+      description: Small issues (half a day to two days each) that make up this phase.
+      placeholder: |
+        - [ ] #
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Exit criteria
+      description: How we know the phase is done. Note whether a tag/release is created.
+    validations:
+      required: true

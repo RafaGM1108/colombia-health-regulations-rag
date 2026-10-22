@@ -1,0 +1,46 @@
+# --- Data: everything ignored except structure, docs and small samples -------
+data/**
+!data/**/
+!data/**/.gitkeep
+!data/README.md
+# Small, redistributable samples only (e.g. data/01_raw/listings_sample.csv)
+!data/**/*_sample.*
+# Reporting outputs that back README numbers/figures are committed
+!data/08_reporting/**
+
+# --- Models & experiment tracking -------------------------------------------
+*.pkl
+*.joblib
+*.onnx
+*.pt
+mlruns/
+mlartifacts/
+*.duckdb
+*.duckdb.wal
+
+# --- Secrets -----------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+build/
+dist/
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- Notebooks / tools -------------------------------------------------------
+.ipynb_checkpoints/
+site/
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json

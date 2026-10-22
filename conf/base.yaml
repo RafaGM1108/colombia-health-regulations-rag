@@ -1,0 +1,22 @@
+# Project configuration. Paths are relative to the project root.
+# Override the file location with the DS_PROJECT_CONF environment variable.
+project:
+  name: ds-project
+  random_seed: 42
+
+paths:
+  raw: data/01_raw
+  intermediate: data/02_intermediate
+  primary: data/03_primary
+  feature: data/04_feature
+  model_input: data/05_model_input
+  models: data/06_models
+  model_output: data/07_model_output
+  reporting: data/08_reporting
+
+logging:
+  level: INFO
+
+# Free-form parameters for pipelines (TODO: fill per project).
+params:
+  test_size: 0.2

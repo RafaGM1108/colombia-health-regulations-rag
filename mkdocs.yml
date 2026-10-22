@@ -1,0 +1,28 @@
+site_name: ds-project
+site_description: TODO
+site_author: Rafael E. Garcia
+repo_url: https://github.com/RafaGM1108/ds-project
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.superfences
+nav:
+  - Home: index.md
+  - Methodology: methodology.md
+  - Data: data.md

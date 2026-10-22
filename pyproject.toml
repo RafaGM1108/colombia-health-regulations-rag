@@ -1,0 +1,80 @@
+[project]
+name = "ds-project"
+version = "0.1.0"
+description = "TODO: one-line description of the project."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Rafael E. Garcia" }]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "pydantic>=2.9",
+    "pyyaml>=6.0",
+    "uvicorn[standard]>=0.32",
+]
+
+[dependency-groups]
+dev = [
+    "bandit[toml]>=1.7",
+    "httpx>=0.27",
+    "mypy>=1.13",
+    "pre-commit>=4.0",
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.8",
+    "types-pyyaml>=6.0",
+]
+app = ["streamlit>=1.40"]
+docs = ["mkdocs-material>=9.5"]
+
+[tool.uv]
+default-groups = ["dev", "app", "docs"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ds_project"]
+
+# --- ruff -------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "N", "UP", "B", "SIM", "C4", "PT", "RUF", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+"notebooks/**" = ["D"]
+"**/__main__.py" = ["D"]
+
+# --- mypy -------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests"]
+plugins = ["pydantic.mypy"]
+
+# --- bandit -----------------------------------------------------------------
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
+
+# --- pytest / coverage ------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+
+[tool.coverage.run]
+source = ["ds_project"]
+branch = true
+# Streamlit UI and `python -m` entry points are exercised manually, not by unit tests.
+omit = ["*/app/*", "*/__main__.py"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
