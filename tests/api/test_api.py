@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
-from ds_project import __version__
-from ds_project.api.main import app
+from colombia_health_rag import __version__
+from colombia_health_rag.api.main import app
 
 
 def test_health() -> None:

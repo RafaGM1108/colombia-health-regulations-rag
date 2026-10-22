@@ -1,7 +1,7 @@
 [project]
-name = "ds-project"
+name = "colombia-health-regulations-rag"
 version = "0.1.0"
-description = "TODO: one-line description of the project."
+description = "Article-level retrieval of official Colombian health regulations"
 readme = "README.md"
 license = "MIT"
 authors = [{ name = "Rafael E. Garcia" }]
@@ -16,6 +16,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "bandit[toml]>=1.7",
+    "detect-secrets>=1.5",
     "httpx>=0.27",
     "mypy>=1.13",
     "pre-commit>=4.0",
@@ -35,7 +36,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ds_project"]
+packages = ["src/colombia_health_rag"]
 
 # --- ruff -------------------------------------------------------------------
 [tool.ruff]
@@ -50,7 +51,6 @@ convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["D"]
-"notebooks/**" = ["D"]
 "**/__main__.py" = ["D"]
 
 # --- mypy -------------------------------------------------------------------
@@ -70,7 +70,7 @@ testpaths = ["tests"]
 addopts = "--import-mode=importlib"
 
 [tool.coverage.run]
-source = ["ds_project"]
+source = ["colombia_health_rag"]
 branch = true
 # Streamlit UI and `python -m` entry points are exercised manually, not by unit tests.
 omit = ["*/app/*", "*/__main__.py"]

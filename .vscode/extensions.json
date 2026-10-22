@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "ms-python.python",
-    "ms-toolsai.jupyter",
     "charliermarsh.ruff",
     "ms-python.mypy-type-checker",
     "tamasfe.even-better-toml",
