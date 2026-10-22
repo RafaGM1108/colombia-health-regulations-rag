@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from ds_project.utils.config import CONF_ENV_VAR, find_config_file, load_config
+from colombia_health_rag.utils.config import CONF_ENV_VAR, find_config_file, load_config
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -10,13 +10,13 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_load_config_resolves_paths_against_project_root() -> None:
     config = load_config(ROOT / "conf" / "base.yaml")
     assert config.paths.raw == ROOT / "data" / "01_raw"
-    assert config.paths.reporting == ROOT / "data" / "08_reporting"
-    assert config.project.random_seed == 42
+    assert config.paths.reporting == ROOT / "data" / "07_reporting"
+    assert config.paths.chunks == ROOT / "data" / "03_chunks"
 
 
 def test_find_config_file_walks_up_from_subdirectory(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv(CONF_ENV_VAR, raising=False)
-    assert find_config_file(ROOT / "notebooks" / "1-data") == ROOT / "conf" / "base.yaml"
+    assert find_config_file(ROOT / "src" / "colombia_health_rag") == ROOT / "conf" / "base.yaml"
 
 
 def test_find_config_file_uses_env_var(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

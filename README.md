@@ -1,140 +1,81 @@
-# TODO: Project title
+# Colombian Health Regulations RAG
 
-[![CI](https://github.com/RafaGM1108/ds-project/actions/workflows/ci.yml/badge.svg)](https://github.com/RafaGM1108/ds-project/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/RafaGM1108/ds-project/graph/badge.svg)](https://codecov.io/gh/RafaGM1108/ds-project)
+[![CI](https://github.com/RafaGM1108/colombia-health-regulations-rag/actions/workflows/ci.yml/badge.svg)](https://github.com/RafaGM1108/colombia-health-regulations-rag/actions/workflows/ci.yml)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-> TODO: one-sentence pitch: what problem this solves and for whom.
+Retrieval and article-level citation of public Colombian health regulations. The planned system answers questions about topics such as MIPRES prescriptions and home healthcare using only official public documents.
 
-## Using this template
+> Informational only; not legal or medical advice. Confirm current rules in the cited official document before acting.
 
-> Delete this section once the project is set up.
+## Scope and data policy
 
-1. On GitHub, click **Use this template → Create a new repository**, then clone it.
-2. Rename the placeholder package. Everything that needs renaming is spelled
-   `ds_project` (Python package), `ds-project` (distribution / repo name, used in URLs) or
-   `DS_PROJECT` (environment variable prefix). On Linux:
+- Sources are limited to public documents published by the Ministerio de Salud y Protección Social and other official Colombian authorities.
+- Each document must have a recorded URL, title, publication date, version or revision, retrieval date, and SHA-256 checksum before indexing.
+- Patient records, personal data, private messages, and non-public documents are excluded.
+- Answers must cite the resolution and article or section. When the indexed corpus cannot support an answer, the system must say so.
+- No corpus or evaluation results are claimed yet. The first release will report measured results from a reproducible evaluation run.
 
-   ```bash
-   PKG=rent_predictor        # snake_case package name
-   REPO=rent-price-predictor # GitHub repo name
-   git mv src/ds_project "src/$PKG"
-   grep -rlE 'ds_project|ds-project|DS_PROJECT' --exclude-dir={.git,.venv} . \
-     | xargs sed -i "s/ds_project/$PKG/g; s/ds-project/$REPO/g; s/DS_PROJECT/${PKG^^}/g"
-   uv lock
-   make install
-   make lint typecheck test
-   ```
+## Architecture
 
-   On macOS use `sed -i ''` instead of `sed -i`.
-3. Fill in every `TODO` (`grep -rn TODO .`), starting with this README and the
-   **Project** section of `CLAUDE.md`.
-4. Create the labels (they are not copied from the template): `type:feat`, `type:data`,
-   `type:analysis`, `type:model`, `type:docs`, `type:test`, `type:ci`, `type:bug` and `phase`.
-5. Create the GitHub Project (Backlog, Ready, In Progress, In Review, Done, plus
-   **Priority** and **Size** fields), link it to the repo, and create one milestone per
-   roadmap phase.
-6. Make sure the [Codecov GitHub App](https://github.com/apps/codecov) has access to the
-   repo. Uploads authenticate with OIDC, so no token secret is needed.
+The FTI pattern is mapped to this retrieval system as follows:
 
-## Overview
+| Pipeline | Input | Output | Roadmap |
+|---|---|---|---|
+| Ingestion | Official public documents and source manifest | Parsed articles and sections with provenance | Phases 1–2 |
+| Indexing | Validated chunks | Multilingual embeddings and vector index | Phases 3–4 |
+| Serving | Question, index, and cited passages | Grounded answer with resolution and article citations | Phases 5–6 |
 
-TODO: what the project does, in two or three sentences.
-
-## Motivation
-
-TODO: why this problem matters and who benefits.
-
-## Data
-
-TODO: sources, size, time span, license and how the data was collected. Full details are in
-[`data/README.md`](data/README.md).
-
-## Approach
-
-TODO: the method, from raw data to model to deployment.
-
-1. TODO
-2. TODO
-3. TODO
-
-## Results
-
-TODO: results go here **only** after an actual run. Every number and figure must come
-from a file in [`data/08_reporting/`](data/08_reporting/).
-
-| Metric | Value | Source |
-|--------|-------|--------|
-| TODO | TODO | `data/08_reporting/TODO.json` |
-
-## Project structure
-
-```text
-├── conf/base.yaml          # Paths and parameters
-├── data/                   # Layered data (01_raw … 08_reporting), see data/README.md
-├── docs/                   # MkDocs Material site
-├── notebooks/              # Numbered by stage (1-data … 8-reports), see notebooks/README.md
-├── src/ds_project/
-│   ├── data/               # Loading and cleaning
-│   ├── features/           # Feature engineering
-│   ├── model/              # Training and evaluation
-│   ├── inference/          # Prediction logic
-│   ├── pipelines/          # feature_pipeline, training_pipeline, inference_pipeline
-│   ├── api/                # FastAPI service
-│   ├── app/                # Streamlit app
-│   └── utils/              # Config loader and logging
-├── tests/                  # Mirrors src/
-├── Dockerfile              # Multi-stage image for the API
-└── Makefile                # Common commands (make help)
-```
-
-## Quickstart
-
-Requires [uv](https://docs.astral.sh/uv/) and `make`.
-
-```bash
-git clone https://github.com/RafaGM1108/ds-project.git
-cd ds-project
-make install                 # dependencies + pre-commit hooks
-cp .env.example .env         # then fill in secrets, if any
-make lint typecheck test     # check everything works
-```
-
-| Command | What it does |
-|---------|--------------|
-| `make feature` / `make train` / `make infer` | Run the pipelines |
-| `make api` | FastAPI on http://localhost:8000 (docs at `/docs`) |
-| `make app` | Streamlit on http://localhost:8501 |
-| `make coverage` | Tests with an HTML coverage report |
-| `make docs` | Serve the documentation locally |
-
-Docker (API):
-
-```bash
-docker build -t ds-project .
-docker run --rm -p 8000:8000 ds-project
-```
+The planned stack is PyMuPDF, sentence-transformers, Chroma or DuckDB VSS, Anthropic API, FastAPI, and Streamlit. The current repository contains the project foundation, a health endpoint, and a UI landing page. Retrieval and answer generation will be added through the roadmap issues.
 
 ## Roadmap
 
-| Phase | Milestone | Status |
-|-------|-----------|--------|
-| 1 | TODO: Phase 1 - Data collection | ⬜ |
-| 2 | TODO: Phase 2 - Exploration | ⬜ |
-| 3 | TODO: Phase 3 - Modelling | ⬜ |
-| 4 | TODO: Phase 4 - Deployment | ⬜ |
+| Phase | Deliverable |
+|---|---|
+| 0 | Repository, public [Project](https://github.com/users/RafaGM1108/projects/13), and green CI |
+| 1 | Official-source corpus and metadata manifest |
+| 2 | PDF parsing and article-aware chunking with tests |
+| 3 | Multilingual embeddings and reproducible index |
+| 4 | Hand-written Q&A set, hit rate@k, MRR, and chunking comparison |
+| 5 | Cited generation, faithfulness and correctness evaluation, and refusal on missing evidence |
+| 6 | FastAPI and Streamlit chat with visible disclaimer |
+| 7 | README results from real measurements and v1.0.0 release |
 
-## Tech stack
+Each phase is a [GitHub milestone](https://github.com/RafaGM1108/colombia-health-regulations-rag/milestones). Work moves through Backlog, Ready, In Progress, In Review, and Done, with at most two items In Progress. Each issue is developed on a branch and reviewed in a pull request before merging.
 
-Python 3.12 · uv · pandas (TODO) · scikit-learn (TODO) · FastAPI · Streamlit · pytest ·
-ruff · mypy · bandit · pre-commit · GitHub Actions · Docker · MkDocs Material
+## Development
+
+Requires Python 3.12, [uv](https://docs.astral.sh/uv/), and `make`.
+
+```bash
+git clone https://github.com/RafaGM1108/colombia-health-regulations-rag.git
+cd colombia-health-regulations-rag
+make install
+make lint typecheck test
+```
+
+The local API health endpoint is available with `make api`; the landing page with `make app`. A real Anthropic key belongs only in a local `.env` file, never in Git. The generation feature is not available during Phase 0.
+
+CI checks lockfile consistency, formatting, lint, types, tests with coverage, documentation, static security issues, and committed-file secrets. The same core checks run locally with `make lint typecheck test`.
+
+## Repository structure
+
+```text
+conf/base.yaml                 Paths and application name
+data/                          Local raw, parsed, chunk, embedding, index, evaluation, reporting layers
+docs/                          Source policy and methodology
+src/colombia_health_rag/       Ingestion, indexing, serving, API, UI, and shared utilities
+tests/                         Configuration and API checks
+```
+
+The [data policy](data/README.md) explains the layer boundaries. [Methodology](docs/methodology.md) describes the planned evaluation and citation contract.
+
+## Results
+
+Evaluation metrics will appear here only after the Q&A set and index are run. Values will link to committed files in `data/07_reporting/`.
 
 ## Author
 
-**Rafael E. Garcia**
+Rafael E. Garcia · [GitHub](https://github.com/RafaGM1108) · [LinkedIn](https://www.linkedin.com/in/rafaelgarcia11)
 
-- GitHub: [@RafaGM1108](https://github.com/RafaGM1108)
-- LinkedIn: [linkedin.com/in/rafaelgarcia11](https://www.linkedin.com/in/rafaelgarcia11)
-
-Licensed under the [MIT License](LICENSE).
+Code is licensed under [MIT](LICENSE). Source documents retain their original terms and remain attributable to their publishers.

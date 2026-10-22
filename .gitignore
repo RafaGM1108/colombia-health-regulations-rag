@@ -1,12 +1,10 @@
-# --- Data: everything ignored except structure, docs and small samples -------
+# --- Data: generated artifacts stay local; keep only directory structure -------
 data/**
 !data/**/
 !data/**/.gitkeep
 !data/README.md
-# Small, redistributable samples only (e.g. data/01_raw/listings_sample.csv)
-!data/**/*_sample.*
 # Reporting outputs that back README numbers/figures are committed
-!data/08_reporting/**
+!data/07_reporting/**
 
 # --- Models & experiment tracking -------------------------------------------
 *.pkl
@@ -27,6 +25,7 @@ mlartifacts/
 __pycache__/
 *.py[cod]
 .venv/
+.uv-cache/
 build/
 dist/
 *.egg-info/
@@ -35,10 +34,10 @@ dist/
 .ruff_cache/
 .coverage
 coverage.xml
+report.xml
 htmlcov/
 
-# --- Notebooks / tools -------------------------------------------------------
-.ipynb_checkpoints/
+# --- Tools -------------------------------------------------------------------
 site/
 .DS_Store
 .idea/

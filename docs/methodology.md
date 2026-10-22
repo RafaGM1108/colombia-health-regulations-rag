@@ -1,19 +1,17 @@
 # Methodology
 
-## Data layers
+## Pipeline map
 
-Data flows `01_raw → 02_intermediate → 03_primary → 04_feature → 05_model_input →
-06_models → 07_model_output → 08_reporting`. Raw data is immutable. See `data/README.md`.
+| FTI role | This project | Main output |
+|---|---|---|
+| Feature | Ingestion and article-aware chunking | Passage with source and article metadata |
+| Training | Multilingual embedding and index build | Versioned vector index |
+| Inference | Retrieval and cited generation | Answer grounded in retrieved passages |
 
-## Pipelines
+Raw files are immutable. Parsing preserves resolution and article boundaries when present. Every indexed chunk retains its document URL, title, version, article or section identifier, and page reference so that answers can cite evidence precisely.
 
-| Pipeline | Command | Reads | Writes |
-|----------|---------|-------|--------|
-| Feature | `make feature` | `01_raw` | `05_model_input` |
-| Training | `make train` | `05_model_input` | `06_models`, `08_reporting` |
-| Inference | `make infer` | `06_models` + new data | `07_model_output` |
+## Evaluation plan
 
-## Notebook stages
+Phase 4 will use a hand-written Q&A set with expected source and article identifiers. Retrieval will be scored with hit rate@k and mean reciprocal rank (MRR). Article-aware chunks will be compared with at least one baseline chunking strategy on the same questions.
 
-`1-data → 2-exploration → 3-analysis → 4-feat_eng → 5-models → 6-interpretation →
-7-deploy → 8-reports`. See `notebooks/README.md`.
+Phase 5 will evaluate whether each generated claim is supported by cited passages, whether the answer addresses the question, and whether the system abstains when the corpus lacks evidence. Metrics and examples will be published only after an actual run. No clinical or legal decision should be based solely on a generated answer.

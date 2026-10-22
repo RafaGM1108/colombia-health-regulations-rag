@@ -3,12 +3,11 @@
 import os
 from functools import lru_cache
 from pathlib import Path
-from typing import Any
 
 import yaml
 from pydantic import BaseModel, ConfigDict
 
-CONF_ENV_VAR = "DS_PROJECT_CONF"
+CONF_ENV_VAR = "COLOMBIA_HEALTH_RAG_CONF"
 CONF_RELATIVE_PATH = Path("conf/base.yaml")
 
 
@@ -18,7 +17,6 @@ class ProjectConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     name: str
-    random_seed: int = 42
 
 
 class PathsConfig(BaseModel):
@@ -27,12 +25,11 @@ class PathsConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     raw: Path
-    intermediate: Path
-    primary: Path
-    feature: Path
-    model_input: Path
-    models: Path
-    model_output: Path
+    parsed: Path
+    chunks: Path
+    embeddings: Path
+    index: Path
+    evaluation: Path
     reporting: Path
 
 
@@ -52,15 +49,13 @@ class Config(BaseModel):
     project: ProjectConfig
     paths: PathsConfig
     logging: LoggingConfig = LoggingConfig()
-    params: dict[str, Any] = {}
 
 
 def find_config_file(start: Path | None = None) -> Path:
     """Locate the config file.
 
-    Uses ``$DS_PROJECT_CONF`` if set; otherwise walks up from ``start`` (default: the
-    current directory) until it finds ``conf/base.yaml``. This works from the project
-    root, from ``notebooks/<stage>/`` and inside the Docker image.
+    Uses ``$COLOMBIA_HEALTH_RAG_CONF`` if set; otherwise walks up from ``start``
+    (default: the current directory) until it finds ``conf/base.yaml``.
 
     Args:
         start: Directory to start searching from.

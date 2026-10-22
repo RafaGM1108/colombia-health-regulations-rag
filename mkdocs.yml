@@ -1,7 +1,7 @@
-site_name: ds-project
-site_description: TODO
+site_name: Colombian Health Regulations RAG
+site_description: Official-source retrieval with article-level citations
 site_author: Rafael E. Garcia
-repo_url: https://github.com/RafaGM1108/ds-project
+repo_url: https://github.com/RafaGM1108/colombia-health-regulations-rag
 theme:
   name: material
   features:
