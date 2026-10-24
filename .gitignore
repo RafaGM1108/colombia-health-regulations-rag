@@ -3,6 +3,7 @@ data/**
 !data/**/
 !data/**/.gitkeep
 !data/README.md
+!data/manifest.json
 # Reporting outputs that back README numbers/figures are committed
 !data/07_reporting/**
 
