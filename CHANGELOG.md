@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- Official-source manifest schema and validation for public regulation provenance.
 - Public regulation RAG roadmap, source policy, FTI pipeline map, and Project workflow.
 - GitHub Actions checks for locked dependencies, code quality, tests, documentation, static security issues, and committed-file secrets.
 

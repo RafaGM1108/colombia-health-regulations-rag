@@ -12,6 +12,7 @@ install:  ## Install locked dependencies
 lint:  ## Lint, check formatting and run the security scan
 	uv run --frozen ruff format --check src tests
 	uv run --frozen ruff check src tests
+	uv run --frozen python -m colombia_health_rag.ingestion.manifest
 	uv run --frozen bandit -c pyproject.toml -r src -q
 	$(MAKE) docs-check
 	$(MAKE) security
