@@ -14,7 +14,7 @@ Retrieval and article-level citation of public Colombian health regulations. The
 - Each document must have a recorded URL, title, publication date, version or revision, retrieval date, and SHA-256 checksum before indexing.
 - Patient records, private messages, and non-public documents are excluded. Original official PDFs may contain the names, roles, and signatures of officials in signing or approval blocks; this is the sole permitted personal-data exception. Those details are never indexed or reproduced in answers. See the [corpus policy](docs/data.md).
 - Answers must cite the resolution and article or section. When the indexed corpus cannot support an answer, the system must say so.
-- The initial source manifest contains four official resolutions. Article parsing and reviewed-layout annex section parsing are available for local PDFs; annex records require manual OCR review before indexing. Indexing and evaluation results are not yet available. The first release will report measured results from a reproducible evaluation run.
+- The initial source manifest contains four official resolutions. Article parsing and reviewed annex excerpts are available for local PDFs. A reproducible local embedding build is available for reviewed passages; vector indexing and evaluation results are not yet available. The first release will report measured results from a reproducible evaluation run.
 
 ## Architecture
 
