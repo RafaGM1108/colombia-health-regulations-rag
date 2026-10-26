@@ -28,9 +28,18 @@ dev = [
 ]
 app = ["streamlit>=1.40"]
 docs = ["mkdocs-material>=9.5"]
+embeddings = ["sentence-transformers>=5.1,<6", "torch>=2.6,<3"]
 
 [tool.uv]
 default-groups = ["dev", "app", "docs"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
 
 [build-system]
 requires = ["hatchling"]
