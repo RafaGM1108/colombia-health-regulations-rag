@@ -18,6 +18,10 @@ Inputs come only from checksum-matched manifest documents: numbered main-resolut
 
 The local `03_chunks` snapshot and `04_embeddings/<build-id>` batches are ignored by Git. Batch files are written atomically; a resumed run validates existing input fingerprints, passage metadata, and vector shape before skipping them. The build identifier covers the passage set, model revision, batch size, vector dimension, and installed embedding-library versions. CPU inference uses deterministic operations, although floating-point values can vary slightly across different hardware or library builds. These embeddings are a historical-source snapshot; legal effect and later amendments still require separate review.
 
+## Vector index
+
+`make index` builds a persistent [Chroma](https://docs.trychroma.com/docs/run-chroma/cloud-client) collection from the already computed vectors. Before indexing, it checks the raw source checksums and compares passage provenance with the official manifest. The index manifest records the embedding build ID, hashes of the build manifest and batches, model revision, passage count, indexed passage IDs, and Chroma version. The local collection stores text plus resolution, article or section, exact citation, source URL, title, date, version, checksum, and page span. It uses cosine distance and disables telemetry. Repeating an unchanged build verifies the stored IDs; changed batches require an explicit rebuild. `search_index` accepts a normalized vector from the pinned model and supports resolution, article, section, and kind filters. Query text must be prefixed with `query: ` before embedding, as described above.
+
 ## Evaluation plan
 
 Phase 4 will use a hand-written Q&A set with expected source and article identifiers. Retrieval will be scored with hit rate@k and mean reciprocal rank (MRR). Article-aware chunks will be compared with at least one baseline chunking strategy on the same questions.

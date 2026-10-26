@@ -29,9 +29,12 @@ dev = [
 app = ["streamlit>=1.40"]
 docs = ["mkdocs-material>=9.5"]
 embeddings = ["sentence-transformers>=5.1,<6", "torch>=2.6,<3"]
+index = [
+    "chromadb>=1.1,<2",
+]
 
 [tool.uv]
-default-groups = ["dev", "app", "docs"]
+default-groups = ["dev", "app", "docs", "index"]
 
 [tool.uv.sources]
 torch = { index = "pytorch-cpu" }
