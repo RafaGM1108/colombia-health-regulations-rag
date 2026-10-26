@@ -5,6 +5,7 @@ data/**
 !data/README.md
 !data/manifest.json
 !data/reviews/**
+!data/06_evaluation/questions.json
 # Reporting outputs that back README numbers/figures are committed
 !data/07_reporting/**
 
