@@ -2,7 +2,7 @@
 
 import hashlib
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
@@ -12,7 +12,17 @@ from colombia_health_rag.ingestion.manifest import SourceRecord
 
 _RESOLUTION = re.compile(r"^Resolución\s+(\d+)\s+de\s+(\d{4})\b", re.IGNORECASE)
 _RESOLVE = re.compile(r"^R\s*E\s*S\s*U\s*E\s*L\s*V\s*E\s*:?$", re.IGNORECASE)
-_CLOSE = re.compile(r"\bC[ÚU]MPLASE\b", re.IGNORECASE)
+_CLOSE = re.compile(
+    r"^(?:(?:P[UÚ]B|C[OÓ]M|N[OÓ]T).{0,50}\s)?C[ÚU]MPLASE\.?$",
+    re.IGNORECASE,
+)
+_SIGNING_LINE = re.compile(
+    r"^(?:APRO\w*|REVI\w*|PROYE\w*|ELABO\w*|FIRM\w*)\s*:"
+    r"|^FIRMADO\s+(?:DIGITALMENTE|ELECTR[ÓO]NICAMENTE)\b"
+    r"|^(?:EL\s+MINISTRO|LA\s+MINISTRA)\b"
+    r"|^DAD[AO]\s+EN\b",
+    re.IGNORECASE,
+)
 _ARTICLE = re.compile(
     r"^ART[ÍI]CULO\s*['\u2019]?\s*(\d+)"
     r"(?:\s*[.°º:]|\s+(?=(?-i:[A-ZÁÉÍÓÚÜ])))",
@@ -32,7 +42,7 @@ class ArticleRecord:
     """One normative article and the provenance needed for a citation."""
 
     number: int
-    text: str
+    text: str = field(repr=False)
     page_start: int
     page_end: int
     section_path: tuple[str, ...]
@@ -136,10 +146,14 @@ def parse_resolution(record: SourceRecord, root: Path) -> ResolutionRecord:
                         if _RESOLVE.fullmatch(line):
                             inside = True
                         continue
-                    if _CLOSE.search(line):
+                    if _CLOSE.fullmatch(line):
                         finish_article()
                         closed = True
                         break
+                    if _SIGNING_LINE.match(line):
+                        raise ArticleParseError(
+                            f"Possible signing block before closing formula on page {page_number}"
+                        )
 
                     title = _TITLE.fullmatch(line)
                     if title:
