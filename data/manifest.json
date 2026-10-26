@@ -1,1 +1,54 @@
-[]
+[
+  {
+    "source_url": "https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/DIJ/resolucion-0740-de-2024.pdf",
+    "authority": "Ministerio de Salud y Protección Social",
+    "title": "Resolución 740 de 2024 — Por la cual se actualiza el procedimiento de acceso, reporte de prescripción, suministro, verificación, control, pago y análisis de la información de tecnologías en salud y servicios complementarios no financiadas con recursos de la UPC y se dictan otras disposiciones",
+    "publication_date": "2024-05-02",
+    "version": "Original signed PDF issued 2024-04-30; not consolidated",
+    "retrieved_at": "2026-10-26T04:10:49.688341Z",
+    "sha256": "d8f627565539d0340d04e653ddcbc8aa11c9eb2de23a9b3aefbad818ad997281",
+    "reuse_terms": "Publicly accessible on the official site; reuse permission not determined. The PDF is linked and kept local, not redistributed by this repository.",
+    "raw_path": "data/01_raw/resolution-740.pdf",
+    "public_document_confirmed": true,
+    "personal_data_scope": "official_attribution_only"
+  },
+  {
+    "source_url": "https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/DIJ/resolucion-1816-de-2026.pdf",
+    "authority": "Ministerio de Salud y Protección Social",
+    "title": "Resolución 1816 de 2026 — Por la cual se actualizan los procedimientos de acceso, prescripción, suministro, verificación, control, pago y análisis de la información de tecnologías en salud y servicios complementarios no financiados con recursos de la Unidad de Pago por Capitación (UPC), y se dictan otras disposiciones",
+    "publication_date": "2026-09-07",
+    "version": "Original signed PDF issued 2026-08-06; not consolidated",
+    "retrieved_at": "2026-10-26T04:10:51.187337Z",
+    "sha256": "1e0d6b50b0e11b62c62e13e216b49de615413cd6fb2323891641f64b7f76455a",
+    "reuse_terms": "Publicly accessible on the official site; reuse permission not determined. The PDF is linked and kept local, not redistributed by this repository.",
+    "raw_path": "data/01_raw/resolution-1816.pdf",
+    "public_document_confirmed": true,
+    "personal_data_scope": "official_attribution_only"
+  },
+  {
+    "source_url": "https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/DIJ/resolucion-3100-de-2019.pdf",
+    "authority": "Ministerio de Salud y Protección Social",
+    "title": "Resolución 3100 de 2019 — Por la cual se definen los procedimientos y condiciones de inscripción de los prestadores de servicios de salud y de habilitación de los servicios de salud y se adopta el Manual de Inscripción de Prestadores y Habilitación de Servicios de Salud",
+    "publication_date": "2019-11-26",
+    "version": "Original signed PDF issued 2019-11-25; not consolidated",
+    "retrieved_at": "2026-10-26T04:10:55.505328Z",
+    "sha256": "de742ffbb978ca19b848db19a95b6ff60b3038533eb25726bfdc756c37a369ac",
+    "reuse_terms": "Publicly accessible on the official site; reuse permission not determined. The PDF is linked and kept local, not redistributed by this repository.",
+    "raw_path": "data/01_raw/resolution-3100.pdf",
+    "public_document_confirmed": true,
+    "personal_data_scope": "official_attribution_only"
+  },
+  {
+    "source_url": "https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/DIJ/resolucion-2080-de-2026.pdf",
+    "authority": "Ministerio de Salud y Protección Social",
+    "title": "Resolución 2080 de 2026 — Por la cual se revoca la Resolución 1732 de 2026",
+    "publication_date": "2026-09-08",
+    "version": "Original signed PDF issued 2026-09-08; not consolidated",
+    "retrieved_at": "2026-10-26T04:10:46.398348Z",
+    "sha256": "aece13737e29e25c2d76eec81a758c77e5590aee5b56bd0de100d0ea7a5d90c6",
+    "reuse_terms": "Publicly accessible on the official site; reuse permission not determined. The PDF is linked and kept local, not redistributed by this repository.",
+    "raw_path": "data/01_raw/resolution-2080.pdf",
+    "public_document_confirmed": true,
+    "personal_data_scope": "official_attribution_only"
+  }
+]
