@@ -22,4 +22,4 @@ Run `make corpus-check` to compare the live official files with their recorded c
 
 The tracked `reviews/resolution-740-annex.json` contains checked, non-personal table terms for one exact official PDF checksum. It is not a replacement for the official PDF and cannot validate a changed source version.
 
-The tracked `reviews/resolution-3100-home-care.json` records three visually checked manual excerpts from the exact official PDF checksum. All other manual text remains flagged and excluded until reviewed.
+The tracked `reviews/resolution-3100-home-care.json` records 19 visually checked manual excerpts from the exact official PDF checksum, including consultation and therapy service blocks applicable to domiciliary care. Each excerpt has an official section citation and page span; `excerpt_id` keeps excerpts from the same section distinct. All other manual text remains flagged and excluded until reviewed.

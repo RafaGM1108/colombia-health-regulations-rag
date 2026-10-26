@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- OCR-reviewed domiciliary consultation and therapy service excerpts from Resolution 3100, with distinct excerpt IDs and checked page boundaries.
 - OCR-reviewed home-care manual excerpts from Resolution 3100, with section/page citations and a checksum-bound indexing gate.
 - Source-checked Resolution 740 annex table ledger for 212 rows, with corrected OCR codes, page-local citations, and a verified-row indexing gate.
 - Annex section parsing for the reviewed MIPRES table and service-habilitation manual, with citation metadata and mandatory OCR review flags.

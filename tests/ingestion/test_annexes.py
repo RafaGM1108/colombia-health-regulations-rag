@@ -339,6 +339,7 @@ def test_only_source_checked_manual_excerpts_are_indexable(tmp_path: Path) -> No
                 (72, 220, "Intro de modalidad."),
                 (72, 250, "2.2. DOMICILIARIA"),
                 (72, 280, "REGISTRO ESPECIA! de servicios."),
+                (72, 310, "SEGUNDA REGLA DOMICILIARIA."),
             ],
         ],
     )
@@ -373,9 +374,21 @@ def test_only_source_checked_manual_excerpts_are_indexable(tmp_path: Path) -> No
                 "page_start": 4,
                 "page_end": 4,
                 "start_anchor": "2.2. DOMICILIARIA",
-                "end_anchor": None,
+                "end_anchor": "SEGUNDA REGLA DOMICILIARIA.",
                 "heading": "Domiciliaria",
                 "text": "2.2. DOMICILIARIA\nREGISTRO ESPECIAL de servicios.",
+                "verified": True,
+            },
+            {
+                "excerpt_id": "2.2-additional-rule",
+                "section_id": "2.2",
+                "parent_section": "2.2",
+                "page_start": 4,
+                "page_end": 4,
+                "start_anchor": "SEGUNDA REGLA DOMICILIARIA.",
+                "end_anchor": None,
+                "heading": "Domiciliaria",
+                "text": "SEGUNDA REGLA DOMICILIARIA.",
                 "verified": True,
             },
         ],
@@ -387,7 +400,8 @@ def test_only_source_checked_manual_excerpts_are_indexable(tmp_path: Path) -> No
     result = parse_reviewed_manual_sections(source, tmp_path, review_path)
 
     assert all(section.review_required for section in provisional.sections)
-    assert [section.section_id for section in result.sections] == ["1.3.2.2", "2.2"]
+    assert [section.section_id for section in result.sections] == ["1.3.2.2", "2.2", "2.2"]
+    assert result.sections[-1].excerpt_id == "2.2-additional-rule"
     assert all(not section.review_required for section in result.sections)
     assert result.sections[0].citation.endswith("sección 1.3.2.2, p. 3")
     assert "REGISTRO ESPECIAL" in result.sections[1].text
@@ -407,6 +421,13 @@ def test_only_source_checked_manual_excerpts_are_indexable(tmp_path: Path) -> No
 
     first_entry = cast(list[dict[str, object]], review["entries"])[0]
     first_entry["text"] = "1.3.2.2. Domiciliaria\nEs la forma de prestar el servicio en domicilio."
+    last_entry = cast(list[dict[str, object]], review["entries"])[-1]
+    last_entry["excerpt_id"] = "2.2"
+    review_path.write_text(json.dumps(review))
+    with pytest.raises(AnnexParseError, match="source or privacy validation"):
+        parse_reviewed_manual_sections(source, tmp_path, review_path)
+
+    last_entry["excerpt_id"] = "2.2-additional-rule"
     first_entry["page_start"] = 4
     first_entry["page_end"] = 4
     review_path.write_text(json.dumps(review))
@@ -426,13 +447,19 @@ def test_reviewed_local_home_care_sections_when_available() -> None:
 
     result = parse_reviewed_manual_sections(source, root)
 
-    assert [(section.section_id, section.page_start) for section in result.sections] == [
+    assert [(section.section_id, section.page_start) for section in result.sections[:3]] == [
         ("1.3.2.2", 19),
         ("2", 21),
         ("2.2", 22),
     ]
+    assert len(result.sections) == 19
+    assert len({section.excerpt_id for section in result.sections}) == 19
     assert all(not section.review_required for section in result.sections)
-    assert result.sections[-1].citation.endswith("sección 2.2, p. 22")
-    assert "Registro Especial de Prestadores" in result.sections[-1].text
-    assert "Especia!" not in result.sections[-1].text
+    assert result.sections[2].citation.endswith("sección 2.2, p. 22")
+    assert "Registro Especial de Prestadores" in result.sections[2].text
+    assert "Especia!" not in result.sections[2].text
+    assert result.sections[6].citation.endswith("sección 11.2.1, pp. 82-83")
+    assert "24.1. Fonendoscopio" in result.sections[6].text
+    assert "Termómetro, cuanto lo requiera" in result.sections[6].text
+    assert result.sections[-1].citation.endswith("sección 11.3.1, p. 97")
     assert result.warnings
