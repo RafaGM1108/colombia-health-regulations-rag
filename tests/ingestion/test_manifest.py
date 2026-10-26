@@ -22,7 +22,7 @@ def record() -> dict[str, object]:
         "reuse_terms": "Acceso público; verificar condiciones del portal",
         "raw_path": "data/01_raw/resolucion.pdf",
         "public_document_confirmed": True,
-        "personal_data_excluded": True,
+        "personal_data_scope": "official_attribution_only",
     }
 
 
@@ -35,6 +35,15 @@ def test_valid_official_record_and_manifest(tmp_path: Path) -> None:
     assert load_manifest(path) == [source]
 
 
+def test_initial_manifest_covers_both_topics_with_distinct_sources() -> None:
+    manifest = load_manifest(Path(__file__).parents[2] / "data/manifest.json")
+    assert len(manifest) >= 2
+    assert len({str(source.source_url) for source in manifest}) == len(manifest)
+    assert len({source.sha256 for source in manifest}) == len(manifest)
+    assert any("resolucion-1816-de-2026.pdf" in str(source.source_url) for source in manifest)
+    assert any("resolucion-3100-de-2019.pdf" in str(source.source_url) for source in manifest)
+
+
 @pytest.mark.parametrize(
     ("field", "value"),
     [
@@ -43,7 +52,7 @@ def test_valid_official_record_and_manifest(tmp_path: Path) -> None:
         ("sha256", "not-a-checksum"),
         ("retrieved_at", "2026-10-24T12:00:00"),
         ("raw_path", "data/01_raw/../private.pdf"),
-        ("personal_data_excluded", False),
+        ("personal_data_scope", "patient_data_allowed"),
     ],
 )
 def test_rejects_untrusted_or_incomplete_metadata(field: str, value: object) -> None:

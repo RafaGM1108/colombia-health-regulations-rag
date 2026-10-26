@@ -32,7 +32,7 @@ class SourceRecord(BaseModel):
     reuse_terms: str = Field(min_length=1)
     raw_path: str
     public_document_confirmed: Literal[True]
-    personal_data_excluded: Literal[True]
+    personal_data_scope: Literal["official_attribution_only"]
 
     @field_validator("source_url")
     @classmethod
