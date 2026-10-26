@@ -91,11 +91,13 @@ def format_query(text: str) -> str:
     return f"query: {normalized}"
 
 
-def split_text(text: str, tokenizer: Tokenizer, max_tokens: int) -> tuple[str, ...]:
-    """Split on word boundaries so every prefixed passage fits the model window."""
+def split_text(
+    text: str, tokenizer: Tokenizer, max_tokens: int, *, overlap_words: int = 0
+) -> tuple[str, ...]:
+    """Split on word boundaries with optional overlap, within the model window."""
     normalized = normalize_text(text)
     words = list(_WORDS.finditer(normalized))
-    if not words or max_tokens < 4:
+    if not words or max_tokens < 4 or overlap_words < 0:
         raise ValueError("Passage is empty or token limit is invalid")
     parts: list[str] = []
     start = 0
@@ -115,7 +117,9 @@ def split_text(text: str, tokenizer: Tokenizer, max_tokens: int) -> tuple[str, .
         if best == start:
             raise ValueError("A source token exceeds the model context window")
         parts.append(normalized[words[start].start() : words[best - 1].end()])
-        start = best
+        if best == len(words):
+            break
+        start = max(start + 1, best - overlap_words)
     return tuple(parts)
 
 
@@ -130,14 +134,18 @@ def _sha256(value: object) -> str:
 
 
 def make_passages(
-    records: Sequence[ArticleRecord | AnnexSectionRecord], tokenizer: Tokenizer, max_tokens: int
+    records: Sequence[ArticleRecord | AnnexSectionRecord],
+    tokenizer: Tokenizer,
+    max_tokens: int,
+    *,
+    overlap_words: int = 0,
 ) -> tuple[Passage, ...]:
     """Keep article/section boundaries and reject provisional annex text."""
     passages: list[Passage] = []
     for record in records:
         if isinstance(record, AnnexSectionRecord) and record.review_required:
             raise ValueError("Unreviewed annex text cannot be embedded")
-        parts = split_text(record.text, tokenizer, max_tokens)
+        parts = split_text(record.text, tokenizer, max_tokens, overlap_words=overlap_words)
         if isinstance(record, ArticleRecord):
             kind: Literal["article", "annex"] = "article"
             locator = f"article:{record.number}"
@@ -203,13 +211,19 @@ def collect_official_records(root: Path) -> tuple[ArticleRecord | AnnexSectionRe
     return tuple(records)
 
 
-def _write_atomic(path: Path, payload: object) -> None:
+def _write_atomic(path: Path, payload: object, *, indent: int | None = None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary: str | None = None
     try:
         with tempfile.NamedTemporaryFile(mode="wb", dir=path.parent, delete=False) as stream:
             temporary = stream.name
-            stream.write(_json_bytes(payload))
+            stream.write(
+                _json_bytes(payload)
+                if indent is None
+                else (
+                    json.dumps(payload, sort_keys=True, ensure_ascii=False, indent=indent) + "\n"
+                ).encode("utf-8")
+            )
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(temporary, path)

@@ -1,0 +1,546 @@
+{
+  "chunking": {
+    "article_aware": {
+      "max_tokens": 512,
+      "overlap_words": 0
+    },
+    "fixed_window": {
+      "max_tokens": 192,
+      "overlap_words": 24
+    }
+  },
+  "model_id": "intfloat/multilingual-e5-small",
+  "model_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "question_set_sha256": "ccf7b3b22e59d0a6f82bf3f64e8ac33b32c0af4d55bc3ac84ce675aee42c36a0",
+  "ranking": "exact cosine of normalized vectors; passage ID breaks ties",
+  "relevance": "exact source SHA-256 and article or reviewed annex locator",
+  "results": {
+    "article_aware": {
+      "answerable_count": 22,
+      "build_id": "c652d29b4e708444e65f",
+      "hit_rate_at_k": {
+        "1": 0.454545,
+        "10": 0.863636,
+        "3": 0.727273,
+        "5": 0.863636
+      },
+      "mrr": 0.62927,
+      "passage_count": 416,
+      "per_question": [
+        {
+          "first_relevant_rank": 5,
+          "question_id": "q01",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 10",
+            "Resolución 1816 de 2026, artículo 10",
+            "Resolución 740 de 2024, artículo 6",
+            "Resolución 740 de 2024, artículo 14",
+            "Resolución 740 de 2024, artículo 5"
+          ]
+        },
+        {
+          "first_relevant_rank": 2,
+          "question_id": "q02",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 6",
+            "Resolución 740 de 2024, artículo 15",
+            "Resolución 1816 de 2026, artículo 15",
+            "Resolución 740 de 2024, artículo 45",
+            "Resolución 1816 de 2026, artículo 10"
+          ]
+        },
+        {
+          "first_relevant_rank": 2,
+          "question_id": "q03",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 24",
+            "Resolución 740 de 2024, artículo 21",
+            "Resolución 1816 de 2026, artículo 28",
+            "Resolución 1816 de 2026, artículo 13",
+            "Resolución 740 de 2024, artículo 17"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q04",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 25",
+            "Resolución 1816 de 2026, artículo 29",
+            "Resolución 740 de 2024, artículo 19",
+            "Resolución 740 de 2024, artículo 17",
+            "Resolución 740 de 2024, artículo 22"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q05",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 30",
+            "Resolución 740 de 2024, artículo 21",
+            "Resolución 740 de 2024, artículo 12",
+            "Resolución 1816 de 2026, artículo 34",
+            "Resolución 1816 de 2026, artículo 25"
+          ]
+        },
+        {
+          "first_relevant_rank": 73,
+          "question_id": "q06",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 6",
+            "Resolución 740 de 2024, artículo 3",
+            "Resolución 740 de 2024, artículo 1",
+            "Resolución 740 de 2024, artículo 8",
+            "Resolución 740 de 2024, artículo 3"
+          ]
+        },
+        {
+          "first_relevant_rank": 17,
+          "question_id": "q07",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 10",
+            "Resolución 1816 de 2026, artículo 24",
+            "Resolución 740 de 2024, artículo 20",
+            "Resolución 1816 de 2026, artículo 3",
+            "Resolución 740 de 2024, artículo 17"
+          ]
+        },
+        {
+          "first_relevant_rank": 2,
+          "question_id": "q08",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 15",
+            "Resolución 1816 de 2026, artículo 15",
+            "Resolución 1816 de 2026, artículo 8",
+            "Resolución 740 de 2024, artículo 21",
+            "Resolución 740 de 2024, artículo 16"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q09",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 18",
+            "Resolución 740 de 2024, artículo 17",
+            "Resolución 3100 de 2019, artículo 17",
+            "Resolución 1816 de 2026, artículo 3",
+            "Resolución 2080 de 2026, artículo 1"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q10",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 39",
+            "Resolución 1816 de 2026, artículo 40",
+            "Resolución 1816 de 2026, artículo 3",
+            "Resolución 1816 de 2026, artículo 18",
+            "Resolución 740 de 2024, artículo 3"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q11",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 59",
+            "Resolución 740 de 2024, artículo 6",
+            "Resolución 1816 de 2026, artículo 24",
+            "Resolución 1816 de 2026, artículo 35",
+            "Resolución 740 de 2024, artículo 21"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q12",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 60",
+            "Resolución 3100 de 2019, artículo 27",
+            "Resolución 2080 de 2026, artículo 1",
+            "Resolución 1816 de 2026, artículo 3",
+            "Resolución 740 de 2024, artículo 53"
+          ]
+        },
+        {
+          "first_relevant_rank": 2,
+          "question_id": "q13",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 8",
+            "Resolución 3100 de 2019, artículo 4",
+            "Resolución 3100 de 2019, artículo 7",
+            "Resolución 3100 de 2019, artículo 17",
+            "Resolución 3100 de 2019, artículo 22"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q14",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 5",
+            "Resolución 3100 de 2019, artículo 26",
+            "Resolución 3100 de 2019, artículo 3",
+            "Resolución 3100 de 2019, artículo 11",
+            "Resolución 3100 de 2019, artículo 16"
+          ]
+        },
+        {
+          "first_relevant_rank": 2,
+          "question_id": "q15",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 17",
+            "Resolución 3100 de 2019, artículo 14",
+            "Resolución 3100 de 2019, artículo 26",
+            "Resolución 3100 de 2019, artículo 17",
+            "Resolución 3100 de 2019, artículo 16"
+          ]
+        },
+        {
+          "first_relevant_rank": 2,
+          "question_id": "q16",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 8",
+            "Resolución 3100 de 2019, artículo 22",
+            "Resolución 3100 de 2019, artículo 17",
+            "Resolución 3100 de 2019, artículo 7",
+            "Resolución 3100 de 2019, artículo 4"
+          ]
+        },
+        {
+          "first_relevant_rank": 14,
+          "question_id": "q17",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 81",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 95",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 96",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q18",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, anexo técnico, sección 2.2, p. 22",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 81",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 95",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 96"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q19",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 80",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 82-83",
+            "Resolución 1816 de 2026, artículo 13",
+            "Resolución 740 de 2024, artículo 13",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 83-84"
+          ]
+        },
+        {
+          "first_relevant_rank": 4,
+          "question_id": "q20",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 26",
+            "Resolución 1816 de 2026, artículo 3",
+            "Resolución 740 de 2024, artículo 33",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 94",
+            "Resolución 1816 de 2026, artículo 13"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q21",
+          "top_5_citations": [
+            "Resolución 2080 de 2026, artículo 1",
+            "Resolución 1816 de 2026, artículo 60",
+            "Resolución 740 de 2024, artículo 53",
+            "Resolución 740 de 2024, artículo 40",
+            "Resolución 1816 de 2026, artículo 3"
+          ]
+        },
+        {
+          "first_relevant_rank": 4,
+          "question_id": "q22",
+          "top_5_citations": [
+            "Resolución 2080 de 2026, artículo 1",
+            "Resolución 1816 de 2026, artículo 60",
+            "Resolución 3100 de 2019, artículo 27",
+            "Resolución 2080 de 2026, artículo 2",
+            "Resolución 740 de 2024, artículo 53"
+          ]
+        }
+      ],
+      "unanswerable_count": 4
+    },
+    "fixed_window": {
+      "answerable_count": 22,
+      "build_id": "afb172385251ae0d6f99",
+      "hit_rate_at_k": {
+        "1": 0.590909,
+        "10": 0.863636,
+        "3": 0.727273,
+        "5": 0.772727
+      },
+      "mrr": 0.67426,
+      "passage_count": 617,
+      "per_question": [
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q01",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 5",
+            "Resolución 740 de 2024, artículo 27",
+            "Resolución 1816 de 2026, artículo 31",
+            "Resolución 740 de 2024, artículo 30",
+            "Resolución 740 de 2024, artículo 14"
+          ]
+        },
+        {
+          "first_relevant_rank": 2,
+          "question_id": "q02",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 15",
+            "Resolución 740 de 2024, artículo 15",
+            "Resolución 740 de 2024, artículo 27",
+            "Resolución 1816 de 2026, artículo 14",
+            "Resolución 1816 de 2026, artículo 31"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q03",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 21",
+            "Resolución 740 de 2024, artículo 24",
+            "Resolución 1816 de 2026, artículo 28",
+            "Resolución 1816 de 2026, artículo 25",
+            "Resolución 1816 de 2026, artículo 24"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q04",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 25",
+            "Resolución 1816 de 2026, artículo 29",
+            "Resolución 1816 de 2026, artículo 17",
+            "Resolución 740 de 2024, artículo 17",
+            "Resolución 740 de 2024, artículo 19"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q05",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 30",
+            "Resolución 1816 de 2026, artículo 12",
+            "Resolución 740 de 2024, artículo 12",
+            "Resolución 1816 de 2026, artículo 34",
+            "Resolución 1816 de 2026, artículo 3"
+          ]
+        },
+        {
+          "first_relevant_rank": 146,
+          "question_id": "q06",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 6",
+            "Resolución 1816 de 2026, artículo 3",
+            "Resolución 1816 de 2026, artículo 4",
+            "Resolución 1816 de 2026, artículo 6",
+            "Resolución 740 de 2024, artículo 3"
+          ]
+        },
+        {
+          "first_relevant_rank": 10,
+          "question_id": "q07",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 24",
+            "Resolución 740 de 2024, artículo 3",
+            "Resolución 740 de 2024, artículo 22",
+            "Resolución 740 de 2024, artículo 18",
+            "Resolución 740 de 2024, artículo 20"
+          ]
+        },
+        {
+          "first_relevant_rank": 3,
+          "question_id": "q08",
+          "top_5_citations": [
+            "Resolución 740 de 2024, artículo 15",
+            "Resolución 740 de 2024, artículo 29",
+            "Resolución 1816 de 2026, artículo 15",
+            "Resolución 740 de 2024, artículo 27",
+            "Resolución 740 de 2024, artículo 15"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q09",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 18",
+            "Resolución 740 de 2024, artículo 17",
+            "Resolución 3100 de 2019, artículo 17",
+            "Resolución 1816 de 2026, artículo 18",
+            "Resolución 2080 de 2026, artículo 1"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q10",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 39",
+            "Resolución 1816 de 2026, artículo 39",
+            "Resolución 1816 de 2026, artículo 39",
+            "Resolución 1816 de 2026, artículo 40",
+            "Resolución 1816 de 2026, artículo 39"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q11",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 59",
+            "Resolución 1816 de 2026, artículo 59",
+            "Resolución 1816 de 2026, artículo 12",
+            "Resolución 740 de 2024, artículo 27",
+            "Resolución 1816 de 2026, artículo 31"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q12",
+          "top_5_citations": [
+            "Resolución 1816 de 2026, artículo 60",
+            "Resolución 3100 de 2019, artículo 27",
+            "Resolución 2080 de 2026, artículo 1",
+            "Resolución 1816 de 2026, artículo 24",
+            "Resolución 1816 de 2026, artículo 3"
+          ]
+        },
+        {
+          "first_relevant_rank": 3,
+          "question_id": "q13",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 11",
+            "Resolución 3100 de 2019, artículo 24",
+            "Resolución 3100 de 2019, artículo 4",
+            "Resolución 3100 de 2019, artículo 7",
+            "Resolución 3100 de 2019, artículo 6"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q14",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 5",
+            "Resolución 3100 de 2019, artículo 26",
+            "Resolución 3100 de 2019, artículo 11",
+            "Resolución 3100 de 2019, artículo 5",
+            "Resolución 3100 de 2019, artículo 16"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q15",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 14",
+            "Resolución 3100 de 2019, artículo 17",
+            "Resolución 3100 de 2019, artículo 26",
+            "Resolución 3100 de 2019, artículo 17",
+            "Resolución 3100 de 2019, artículo 8"
+          ]
+        },
+        {
+          "first_relevant_rank": 6,
+          "question_id": "q16",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 11",
+            "Resolución 3100 de 2019, artículo 24",
+            "Resolución 3100 de 2019, artículo 6",
+            "Resolución 3100 de 2019, artículo 8",
+            "Resolución 3100 de 2019, artículo 7"
+          ]
+        },
+        {
+          "first_relevant_rank": 19,
+          "question_id": "q17",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 12",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 81",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 95",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 96"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q18",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, anexo técnico, sección 2.2, p. 22",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 81",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 95",
+            "Resolución 3100 de 2019, artículo 3",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q19",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 80",
+            "Resolución 1816 de 2026, artículo 13",
+            "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 82-83",
+            "Resolución 3100 de 2019, artículo 12",
+            "Resolución 3100 de 2019, artículo 3"
+          ]
+        },
+        {
+          "first_relevant_rank": 11,
+          "question_id": "q20",
+          "top_5_citations": [
+            "Resolución 3100 de 2019, artículo 26",
+            "Resolución 3100 de 2019, artículo 3",
+            "Resolución 3100 de 2019, artículo 14",
+            "Resolución 3100 de 2019, artículo 12",
+            "Resolución 3100 de 2019, artículo 19"
+          ]
+        },
+        {
+          "first_relevant_rank": 1,
+          "question_id": "q21",
+          "top_5_citations": [
+            "Resolución 2080 de 2026, artículo 1",
+            "Resolución 1816 de 2026, artículo 60",
+            "Resolución 740 de 2024, artículo 53",
+            "Resolución 740 de 2024, artículo 43",
+            "Resolución 1816 de 2026, artículo 18"
+          ]
+        },
+        {
+          "first_relevant_rank": 4,
+          "question_id": "q22",
+          "top_5_citations": [
+            "Resolución 2080 de 2026, artículo 1",
+            "Resolución 1816 de 2026, artículo 60",
+            "Resolución 3100 de 2019, artículo 27",
+            "Resolución 2080 de 2026, artículo 2",
+            "Resolución 1816 de 2026, artículo 3"
+          ]
+        }
+      ],
+      "unanswerable_count": 4
+    }
+  },
+  "schema_version": 1,
+  "software_versions": {
+    "sentence-transformers": "5.7.0",
+    "torch": "2.14.1+cpu",
+    "transformers": "5.21.0"
+  },
+  "source_manifest_sha256": "8f73fcf418d6b64eeccb25bfe13b8fa3177503f6ab25694f3a8df23eae411a36",
+  "unanswerable_question_ids": [
+    "u01",
+    "u02",
+    "u03",
+    "u04"
+  ]
+}
