@@ -1,12 +1,18 @@
 """Exercise both reviewed annex layouts with small non-personal PDFs."""
 
 import hashlib
+import json
 from pathlib import Path
+from typing import cast
 
 import pymupdf
 import pytest
 
-from colombia_health_rag.ingestion.annexes import AnnexParseError, parse_annex
+from colombia_health_rag.ingestion.annexes import (
+    AnnexParseError,
+    parse_annex,
+    parse_reviewed_table_rows,
+)
 from colombia_health_rag.ingestion.manifest import SourceRecord, load_manifest
 
 
@@ -218,3 +224,94 @@ def test_reviewed_local_annex_layouts_when_available() -> None:
     assert all(
         section.review_required for result in results.values() for section in result.sections
     )
+
+
+def test_only_verified_review_rows_are_indexable(tmp_path: Path) -> None:
+    source = _source(
+        tmp_path,
+        740,
+        [
+            _main_page(),
+            [
+                (72, 160, "ANEXO TECNICO"),
+                (90, 250, "TEC A"),
+                (180, 250, "MOTIVO A"),
+                (320, 250, "0379"),
+                (380, 250, "DIAGNOSTICO A"),
+                (90, 300, "TEC B"),
+                (180, 300, "MOTIVO B"),
+                (320, 300, "G518"),
+                (380, 300, "DIAGNOSTICO B"),
+            ],
+        ],
+    )
+    review = {
+        "source_sha256": source.sha256,
+        "source_pages": [2],
+        "page_row_counts": [2],
+        "common_rows": [
+            {"code": "G379", "diagnosis": "DIAGNOSTICO REVISADO A", "verified": True},
+            {"code": "G518", "diagnosis": "DIAGNOSTICO B", "verified": False},
+        ],
+        "common_technologies": ["TEC REVISADA"],
+        "common_reason": "MOTIVO REVISADO",
+        "additional_rows": [],
+    }
+    review_path = tmp_path / "review.json"
+    review_path.write_text(json.dumps(review))
+
+    provisional = parse_annex(source, tmp_path)
+    result = parse_reviewed_table_rows(source, tmp_path, review_path)
+
+    assert all(section.review_required for section in provisional.sections)
+    assert len(result.sections) == 1
+    assert not result.sections[0].review_required
+    assert result.sections[0].citation == "Resolución 740 de 2024, anexo técnico, fila 1, p. 2"
+    assert result.sections[0].text == (
+        "Tecnología: TEC REVISADA; motivo: MOTIVO REVISADO; "
+        "CIE-10: G379; diagnóstico: DIAGNOSTICO REVISADO A"
+    )
+    assert "TEC B" not in repr(result)
+    assert result.warnings == ("1 unverified table rows excluded",)
+
+    review["source_sha256"] = "0" * 64
+    review_path.write_text(json.dumps(review))
+    with pytest.raises(AnnexParseError, match="source checksum"):
+        parse_reviewed_table_rows(source, tmp_path, review_path)
+
+    review["source_sha256"] = source.sha256
+    review["page_row_counts"] = [1]
+    review_path.write_text(json.dumps(review))
+    with pytest.raises(AnnexParseError, match="row layout"):
+        parse_reviewed_table_rows(source, tmp_path, review_path)
+
+    review["page_row_counts"] = [2]
+    cast(list[dict[str, object]], review["common_rows"])[0]["code"] = "G999"
+    review_path.write_text(json.dumps(review))
+    with pytest.raises(AnnexParseError, match="failed validation"):
+        parse_reviewed_table_rows(source, tmp_path, review_path)
+
+
+def test_reviewed_local_table_rows_when_available() -> None:
+    root = Path(__file__).resolve().parents[2]
+    source = next(
+        source
+        for source in load_manifest(root / "data/manifest.json")
+        if "resolution-740" in source.raw_path
+    )
+    if not (root / source.raw_path).is_file():
+        pytest.skip("Original official PDF is intentionally excluded from Git")
+
+    result = parse_reviewed_table_rows(source, root)
+
+    assert len(result.sections) == 212
+    assert all(not row.review_required for row in result.sections)
+    assert [row.page_start for row in result.sections[:29]] == [30] * 28 + [31]
+    assert [row.text.split("CIE-10: ", 1)[1].split(";", 1)[0] for row in result.sections[:3]] == [
+        "G379",
+        "G518",
+        "G519",
+    ]
+    assert result.sections[198].text.startswith("Tecnología: DIAZEPAM")
+    assert result.sections[-1].citation.endswith("fila 10, p. 37")
+    assert not result.warnings

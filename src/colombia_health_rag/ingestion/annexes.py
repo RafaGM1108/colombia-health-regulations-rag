@@ -1,5 +1,6 @@
 """Read reviewed regulation annexes as provenance-aware sections."""
 
+import json
 import re
 from dataclasses import dataclass, field
 from datetime import date
@@ -16,6 +17,7 @@ _INTRODUCTION = re.compile(r"^INTRODUC\w{3,8}$", re.IGNORECASE)
 _HEADING = re.compile(r"^(\d{1,2}(?:[.,]\d{1,2}){0,4})\.?\s+(.+)$")
 _NUMBER_ONLY = re.compile(r"^\d{1,2}(?:[.,]\d{1,2}){0,4}\.?$")
 _CODE = re.compile(r"^[A-Z0-9-]{3,6}$", re.IGNORECASE)
+_TABLE_HEADING = "Medicamentos excluidos explícitamente que excepcionalmente podrán ser prescritos"
 _SIGNING = re.compile(r"^(?:APRO\w*|REVI\w*|PROYE\w*|ELABO\w*|FIRM\w*)\s*:", re.I)
 
 
@@ -40,6 +42,7 @@ class AnnexSectionRecord:
     sha256: str
     review_required: bool
     row_count: int | None = None
+    row_number: int | None = None
 
     @property
     def citation(self) -> str:
@@ -50,7 +53,8 @@ class AnnexSectionRecord:
             else f"pp. {self.page_start}-{self.page_end}"
         )
         if self.section_id == "Anexo técnico":
-            return f"{self.resolution}, anexo técnico, {pages}"
+            row = f", fila {self.row_number}" if self.row_number is not None else ""
+            return f"{self.resolution}, anexo técnico{row}, {pages}"
         return f"{self.resolution}, anexo técnico, sección {self.section_id}, {pages}"
 
     @property
@@ -149,7 +153,7 @@ def _parse_table_annex(
         sections.append(
             AnnexSectionRecord(
                 section_id="Anexo técnico",
-                heading="Tabla de medicamentos excluidos",
+                heading=_TABLE_HEADING,
                 text=text,
                 page_start=page_number,
                 page_end=page_number,
@@ -333,3 +337,96 @@ def parse_annex(record: SourceRecord, root: Path) -> AnnexRecord:
         if main.resolution == "Resolución 740 de 2024":
             return _parse_table_annex(pdf, start, record, main.resolution)
         return _parse_manual_annex(pdf, start, record, main.resolution)
+
+
+def parse_reviewed_table_rows(
+    record: SourceRecord, root: Path, review_path: Path | None = None
+) -> AnnexRecord:
+    """Return source-checked table rows only for the exact reviewed PDF checksum."""
+    provisional = parse_annex(record, root)
+    if provisional.resolution != "Resolución 740 de 2024":
+        raise AnnexParseError("No reviewed table is configured for this resolution")
+    path = review_path or root / "data/reviews/resolution-740-annex.json"
+    try:
+        review = json.loads(path.read_text(encoding="utf-8"))
+        if review["source_sha256"] != record.sha256:
+            raise AnnexParseError("Table review does not match the source checksum")
+        pages = review["source_pages"]
+        counts = review["page_row_counts"]
+        if pages != [section.page_start for section in provisional.sections] or counts != [
+            section.row_count for section in provisional.sections
+        ]:
+            raise AnnexParseError("Table row layout differs from the reviewed source")
+        common = review["common_rows"]
+        reviewed_rows = [
+            {
+                "technology": technology,
+                "reason": review["common_reason"],
+                **entry,
+            }
+            for technology in review["common_technologies"]
+            for entry in common
+        ] + review["additional_rows"]
+        if len(reviewed_rows) != sum(counts):
+            raise AnnexParseError("Table review row count does not match the source")
+    except AnnexParseError:
+        raise
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        raise AnnexParseError("Table review file is unreadable or incomplete") from error
+
+    output: list[AnnexSectionRecord] = []
+    offset = 0
+    for page, count, provisional_section in zip(pages, counts, provisional.sections, strict=True):
+        raw_rows = provisional_section.text.splitlines()
+        for row_number, (raw, reviewed) in enumerate(
+            zip(raw_rows, reviewed_rows[offset : offset + count], strict=True), start=1
+        ):
+            try:
+                raw_code = raw.split("CIE-10: ", 1)[1].split(";", 1)[0]
+                code = reviewed["code"]
+                technology = reviewed["technology"].strip()
+                reason = reviewed["reason"].strip()
+                diagnosis = reviewed["diagnosis"].strip()
+                verified = reviewed["verified"]
+            except (IndexError, KeyError, AttributeError) as error:
+                raise AnnexParseError("Table review row is incomplete") from error
+            raw_digits = "".join(character for character in raw_code if character.isdigit())
+            code_digits = "".join(character for character in code if character.isdigit())
+            if (
+                re.fullmatch(r"[A-Z][0-9]{2,3}", code) is None
+                or not raw_digits.endswith(code_digits)
+                or not technology
+                or not reason
+                or not diagnosis
+                or not isinstance(verified, bool)
+            ):
+                raise AnnexParseError(f"Table review row {page}:{row_number} failed validation")
+            if not verified:
+                continue
+            output.append(
+                AnnexSectionRecord(
+                    section_id="Anexo técnico",
+                    heading=_TABLE_HEADING,
+                    text=(
+                        f"Tecnología: {technology}; motivo: {reason}; "
+                        f"CIE-10: {code}; diagnóstico: {diagnosis}"
+                    ),
+                    page_start=page,
+                    page_end=page,
+                    resolution=provisional.resolution,
+                    source_url=provisional_section.source_url,
+                    source_title=provisional_section.source_title,
+                    publication_date=provisional_section.publication_date,
+                    version=provisional_section.version,
+                    sha256=provisional_section.sha256,
+                    review_required=False,
+                    row_count=1,
+                    row_number=row_number,
+                )
+            )
+        offset += count
+    excluded = len(reviewed_rows) - len(output)
+    warnings = (f"{excluded} unverified table rows excluded",) if excluded else ()
+    return AnnexRecord(
+        provisional.resolution, provisional.source_url, provisional.sha256, tuple(output), warnings
+    )

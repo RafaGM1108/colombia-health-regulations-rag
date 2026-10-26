@@ -1,0 +1,462 @@
+{
+  "source_sha256": "d8f627565539d0340d04e653ddcbc8aa11c9eb2de23a9b3aefbad818ad997281",
+  "reviewed_on": "2026-10-26",
+  "source_pages": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+  ],
+  "page_row_counts": [
+    28,
+    28,
+    29,
+    31,
+    28,
+    31,
+    27,
+    10
+  ],
+  "common_rows": [
+    {
+      "code": "G379",
+      "diagnosis": "ENFERMEDAD DESMIELINIZANTE DEL SISTEMA NERVIOSO CENTRAL, NO ESPECIFICADA",
+      "verified": true
+    },
+    {
+      "code": "G518",
+      "diagnosis": "OTROS TRASTORNOS DEL NERVIO FACIAL",
+      "verified": true
+    },
+    {
+      "code": "G519",
+      "diagnosis": "TRASTORNOS DEL NERVIO FACIAL, NO ESPECIFICADO",
+      "verified": true
+    },
+    {
+      "code": "G520",
+      "diagnosis": "TRASTORNOS DEL NERVIO OLFATORIO",
+      "verified": true
+    },
+    {
+      "code": "G521",
+      "diagnosis": "TRASTORNOS DEL NERVIO GLOSOFARÍNGEO",
+      "verified": true
+    },
+    {
+      "code": "G522",
+      "diagnosis": "TRASTORNOS DEL NERVIO VAGO",
+      "verified": true
+    },
+    {
+      "code": "G523",
+      "diagnosis": "TRASTORNOS DEL NERVIO HIPOGLOSO",
+      "verified": true
+    },
+    {
+      "code": "G527",
+      "diagnosis": "TRASTORNOS DE MÚLTIPLES NERVIOS CRANEALES",
+      "verified": true
+    },
+    {
+      "code": "G528",
+      "diagnosis": "TRASTORNOS DE OTROS NERVIOS CRANEALES ESPECIFICADOS",
+      "verified": true
+    },
+    {
+      "code": "G529",
+      "diagnosis": "TRASTORNO DE NERVIO CRANEAL, NO ESPECIFICADO",
+      "verified": true
+    },
+    {
+      "code": "G531",
+      "diagnosis": "PARÁLISIS MÚLTIPLE DE LOS NERVIOS CRANEALES EN ENFERMEDADES INFECCIOSAS Y PARASITARIAS CLASIFICADAS EN OTRA PARTE (A00-B99)",
+      "verified": true
+    },
+    {
+      "code": "G532",
+      "diagnosis": "PARÁLISIS MÚLTIPLE DE LOS NERVIOS CRANEALES, EN LA SARCOIDOSIS (D86.8)",
+      "verified": true
+    },
+    {
+      "code": "G533",
+      "diagnosis": "PARÁLISIS MÚLTIPLE DE LOS NERVIOS CRANEALES, EN ENFERMEDADES NEOPLÁSICAS (C00-D48)",
+      "verified": true
+    },
+    {
+      "code": "G538",
+      "diagnosis": "OTROS TRASTORNOS DE LOS NERVIOS CRANEALES EN OTRAS ENFERMEDADES CLASIFICADAS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "G548",
+      "diagnosis": "OTROS TRASTORNOS DE LAS RAÍCES Y PLEXOS NERVIOSOS",
+      "verified": true
+    },
+    {
+      "code": "G549",
+      "diagnosis": "TRASTORNO DE LA RAÍZ Y PLEXOS NERVIOSOS, NO ESPECIFICADO",
+      "verified": true
+    },
+    {
+      "code": "G550",
+      "diagnosis": "COMPRESIONES DE LAS RAÍCES Y PLEXOS NERVIOSOS EN ENFERMEDADES NEOPLÁSICAS (C00-D48)",
+      "verified": true
+    },
+    {
+      "code": "G551",
+      "diagnosis": "COMPRESIONES DE LAS RAÍCES Y PLEXOS NERVIOSOS EN TRASTORNOS DE LOS DISCOS INTERVERTEBRALES (M50-M51)",
+      "verified": true
+    },
+    {
+      "code": "G552",
+      "diagnosis": "COMPRESIONES DE LAS RAÍCES Y PLEXOS NERVIOSOS EN LA ESPONDILOSIS (M47.-)",
+      "verified": true
+    },
+    {
+      "code": "G553",
+      "diagnosis": "COMPRESIONES DE LAS RAÍCES Y PLEXOS NERVIOSOS EN OTRAS DORSOPATÍAS (M45-M46, M48.-, M53-M54)",
+      "verified": true
+    },
+    {
+      "code": "G558",
+      "diagnosis": "COMPRESIONES DE LAS RAÍCES Y PLEXOS NERVIOSOS EN OTRAS ENFERMEDADES CLASIFICADAS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "G561",
+      "diagnosis": "OTRAS LESIONES DEL NERVIO MEDIANO",
+      "verified": true
+    },
+    {
+      "code": "G562",
+      "diagnosis": "LESIÓN DEL NERVIO CUBITAL",
+      "verified": true
+    },
+    {
+      "code": "G563",
+      "diagnosis": "LESIÓN DEL NERVIO RADIAL",
+      "verified": true
+    },
+    {
+      "code": "G570",
+      "diagnosis": "LESIÓN DEL NERVIO CIÁTICO",
+      "verified": true
+    },
+    {
+      "code": "G572",
+      "diagnosis": "LESIÓN DEL NERVIO CRURAL",
+      "verified": true
+    },
+    {
+      "code": "G573",
+      "diagnosis": "LESIÓN DEL NERVIO CIÁTICO POPLÍTEO EXTERNO",
+      "verified": true
+    },
+    {
+      "code": "G574",
+      "diagnosis": "LESIÓN DEL NERVIO CIÁTICO POPLÍTEO INTERNO",
+      "verified": true
+    },
+    {
+      "code": "G576",
+      "diagnosis": "LESIÓN DEL NERVIO PLANTAR",
+      "verified": true
+    },
+    {
+      "code": "G587",
+      "diagnosis": "MONONEURITIS MÚLTIPLE",
+      "verified": true
+    },
+    {
+      "code": "G588",
+      "diagnosis": "OTRAS MONONEUROPATÍAS ESPECIFICADAS",
+      "verified": true
+    },
+    {
+      "code": "G589",
+      "diagnosis": "MONONEUROPATÍA, NO ESPECIFICADA",
+      "verified": true
+    },
+    {
+      "code": "G64",
+      "diagnosis": "OTROS TRASTORNOS DEL SISTEMA NERVIOSO PERIFÉRICO",
+      "verified": true
+    },
+    {
+      "code": "G908",
+      "diagnosis": "OTROS TRASTORNOS DEL SISTEMA NERVIOSO AUTÓNOMO",
+      "verified": true
+    },
+    {
+      "code": "G909",
+      "diagnosis": "TRASTORNO DEL SISTEMA NERVIOSO AUTÓNOMO, NO ESPECIFICADO",
+      "verified": true
+    },
+    {
+      "code": "G968",
+      "diagnosis": "OTROS TRASTORNOS ESPECIFICADOS DEL SISTEMA NERVIOSO CENTRAL",
+      "verified": true
+    },
+    {
+      "code": "G969",
+      "diagnosis": "TRASTORNO DEL SISTEMA NERVIOSO CENTRAL, NO ESPECIFICADO",
+      "verified": true
+    },
+    {
+      "code": "G978",
+      "diagnosis": "OTROS TRASTORNOS DEL SISTEMA NERVIOSO CONSECUTIVOS A PROCEDIMIENTOS",
+      "verified": true
+    },
+    {
+      "code": "G979",
+      "diagnosis": "TRASTORNOS NO ESPECIFICADOS DEL SISTEMA NERVIOSO, CONSECUTIVOS A PROCEDIMIENTOS",
+      "verified": true
+    },
+    {
+      "code": "G98",
+      "diagnosis": "OTROS TRASTORNOS DEL SISTEMA NERVIOSO, NO CLASIFICADOS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "G991",
+      "diagnosis": "OTROS TRASTORNOS DEL SISTEMA NERVIOSO AUTÓNOMO EN OTRAS ENFERMEDADES CLASIFICADAS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "G998",
+      "diagnosis": "OTROS TRASTORNOS ESPECIFICADOS DEL SISTEMA NERVIOSO EN ENFERMEDADES CLASIFICADAS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "H46",
+      "diagnosis": "NEURITIS ÓPTICA",
+      "verified": true
+    },
+    {
+      "code": "H470",
+      "diagnosis": "TRASTORNOS DEL NERVIO ÓPTICO, NO CLASIFICADOS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "H481",
+      "diagnosis": "NEURITIS RETROBULBAR EN ENFERMEDADES CLASIFICADAS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "H488",
+      "diagnosis": "OTROS TRASTORNOS DEL NERVIO ÓPTICO Y DE LAS VÍAS ÓPTICAS EN ENFERMEDADES CLASIFICADAS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "H490",
+      "diagnosis": "PARÁLISIS DEL NERVIO MOTOR OCULAR COMÚN [III PAR]",
+      "verified": true
+    },
+    {
+      "code": "H491",
+      "diagnosis": "PARÁLISIS DEL NERVIO PATÉTICO [IV PAR]",
+      "verified": true
+    },
+    {
+      "code": "H492",
+      "diagnosis": "PARÁLISIS DEL NERVIO MOTOR OCULAR EXTERNO [VI PAR]",
+      "verified": true
+    },
+    {
+      "code": "H933",
+      "diagnosis": "TRASTORNOS DEL NERVIO AUDITIVO",
+      "verified": true
+    },
+    {
+      "code": "H940",
+      "diagnosis": "NEURITIS DEL NERVIO AUDITIVO EN ENFERMEDADES INFECCIOSAS Y PARASITARIAS CLASIFICADAS EN OTRA PARTE",
+      "verified": true
+    },
+    {
+      "code": "M792",
+      "diagnosis": "NEURALGIA Y NEURITIS, NO ESPECIFICADAS",
+      "verified": true
+    },
+    {
+      "code": "O292",
+      "diagnosis": "COMPLICACIONES DEL SISTEMA NERVIOSO CENTRAL DEBIDAS A LA ANESTESIA ADMINISTRADA DURANTE EL EMBARAZO",
+      "verified": true
+    },
+    {
+      "code": "O350",
+      "diagnosis": "ATENCIÓN MATERNA POR (PRESUNTA) MALFORMACIÓN DEL SISTEMA NERVIOSO CENTRAL EN EL FETO",
+      "verified": true
+    },
+    {
+      "code": "O743",
+      "diagnosis": "COMPLICACIONES DEL SISTEMA NERVIOSO CENTRAL POR LA ANESTESIA ADMINISTRADA DURANTE EL TRABAJO DE PARTO Y EL PARTO",
+      "verified": true
+    },
+    {
+      "code": "O892",
+      "diagnosis": "COMPLICACIONES DEL SISTEMA NERVIOSO CENTRAL DEBIDAS A LA ANESTESIA ADMINISTRADA DURANTE EL PUERPERIO",
+      "verified": true
+    },
+    {
+      "code": "O993",
+      "diagnosis": "TRASTORNOS MENTALES Y ENFERMEDADES DEL SISTEMA NERVIOSO QUE COMPLICAN EL EMBARAZO, EL PARTO Y EL PUERPERIO",
+      "verified": true
+    },
+    {
+      "code": "P113",
+      "diagnosis": "TRAUMATISMO DEL NACIMIENTO EN EL NERVIO FACIAL",
+      "verified": true
+    },
+    {
+      "code": "P114",
+      "diagnosis": "TRAUMATISMO DEL NACIMIENTO EN OTROS NERVIOS CRANEALES",
+      "verified": true
+    },
+    {
+      "code": "P119",
+      "diagnosis": "TRAUMATISMO DEL NACIMIENTO EN EL SISTEMA NERVIOSO CENTRAL, NO ESPECIFICADO",
+      "verified": true
+    },
+    {
+      "code": "P142",
+      "diagnosis": "PARÁLISIS DEL NERVIO FRÉNICO DEBIDA A TRAUMATISMO DEL NACIMIENTO",
+      "verified": true
+    },
+    {
+      "code": "P148",
+      "diagnosis": "TRAUMATISMO DURANTE EL NACIMIENTO EN OTRAS PARTES DEL SISTEMA NERVIOSO PERIFÉRICO",
+      "verified": true
+    },
+    {
+      "code": "P149",
+      "diagnosis": "TRAUMATISMO NO ESPECIFICADO DEL SISTEMA NERVIOSO PERIFÉRICO DURANTE EL NACIMIENTO",
+      "verified": true
+    },
+    {
+      "code": "Q078",
+      "diagnosis": "OTRAS MALFORMACIONES CONGÉNITAS DEL SISTEMA NERVIOSO, ESPECIFICADAS",
+      "verified": true
+    },
+    {
+      "code": "Q079",
+      "diagnosis": "MALFORMACIÓN CONGÉNITA DEL SISTEMA NERVIOSO, NO ESPECIFICADA",
+      "verified": true
+    },
+    {
+      "code": "R298",
+      "diagnosis": "OTROS SÍNTOMAS Y SIGNOS QUE INVOLUCRAN LOS SISTEMAS NERVIOSO Y OSTEOMUSCULAR Y LOS NO ESPECIFICADOS",
+      "verified": true
+    }
+  ],
+  "common_technologies": [
+    "ACETAMINOFÉN + CODEÍNA",
+    "ACETAMINOFÉN + HIDROCODONA",
+    "BUPRENORFINA"
+  ],
+  "common_reason": "DOLOR NEUROPÁTICO",
+  "additional_rows": [
+    {
+      "technology": "DIAZEPAM",
+      "reason": "ECLAMPSIA EN EL EMBARAZO",
+      "code": "O15",
+      "diagnosis": "ECLAMPSIA EN EL EMBARAZO",
+      "verified": true
+    },
+    {
+      "technology": "ERLOTINIB",
+      "reason": "EXCLUIDO EN CÁNCER PULMONAR NO MICROCÍTICO SIN EGFR EN",
+      "code": "C341",
+      "diagnosis": "TUMOR MALIGNO DEL LÓBULO SUPERIOR, BRONQUIO O PULMÓN",
+      "verified": true
+    },
+    {
+      "technology": "ERLOTINIB",
+      "reason": "EXCLUIDO EN CÁNCER PULMONAR NO MICROCÍTICO SIN EGFR EN",
+      "code": "C342",
+      "diagnosis": "TUMOR MALIGNO DEL LÓBULO MEDIO, BRONQUIO O PULMÓN",
+      "verified": true
+    },
+    {
+      "technology": "ERLOTINIB",
+      "reason": "EXCLUIDO EN CÁNCER PULMONAR NO MICROCÍTICO SIN EGFR EN",
+      "code": "C343",
+      "diagnosis": "TUMOR MALIGNO DEL LÓBULO INFERIOR, BRONQUIO O PULMÓN",
+      "verified": true
+    },
+    {
+      "technology": "ERLOTINIB",
+      "reason": "EXCLUIDO EN CÁNCER PULMONAR NO MICROCÍTICO SIN EGFR EN",
+      "code": "C349",
+      "diagnosis": "TUMOR MALIGNO DE LOS BRONQUIOS O DEL PULMÓN, PARTE NO ESPECIFICADA",
+      "verified": true
+    },
+    {
+      "technology": "INFLIXIMAB",
+      "reason": "EXCLUIDO EN ARTRITIS IDIOPÁTICA JUVENIL",
+      "code": "M080",
+      "diagnosis": "ARTRITIS REUMATOIDE JUVENIL",
+      "verified": true
+    },
+    {
+      "technology": "INFLIXIMAB",
+      "reason": "EXCLUIDO EN ARTRITIS IDIOPÁTICA JUVENIL",
+      "code": "M081",
+      "diagnosis": "ESPONDILITIS ANQUILOSANTE JUVENIL",
+      "verified": true
+    },
+    {
+      "technology": "INFLIXIMAB",
+      "reason": "EXCLUIDO EN ARTRITIS IDIOPÁTICA JUVENIL",
+      "code": "M082",
+      "diagnosis": "ARTRITIS JUVENIL DE COMIENZO GENERALIZADO",
+      "verified": true
+    },
+    {
+      "technology": "INFLIXIMAB",
+      "reason": "EXCLUIDO EN ARTRITIS IDIOPÁTICA JUVENIL",
+      "code": "M083",
+      "diagnosis": "POLIARTRITIS JUVENIL (SERONEGATIVA)",
+      "verified": true
+    },
+    {
+      "technology": "INFLIXIMAB",
+      "reason": "EXCLUIDO EN ARTRITIS IDIOPÁTICA JUVENIL",
+      "code": "M084",
+      "diagnosis": "ARTRITIS JUVENIL PAUCIARTICULAR",
+      "verified": true
+    },
+    {
+      "technology": "INFLIXIMAB",
+      "reason": "EXCLUIDO EN ARTRITIS IDIOPÁTICA JUVENIL",
+      "code": "M088",
+      "diagnosis": "OTRAS ARTRITIS JUVENILES",
+      "verified": true
+    },
+    {
+      "technology": "INFLIXIMAB",
+      "reason": "EXCLUIDO EN ARTRITIS IDIOPÁTICA JUVENIL",
+      "code": "M089",
+      "diagnosis": "ARTRITIS JUVENIL, NO ESPECIFICADA",
+      "verified": true
+    },
+    {
+      "technology": "INTERFERÓN BETA 1A (30 mcg)",
+      "reason": "EXCLUIDO EN ESCLEROSIS MÚLTIPLE TIPO SECUNDARIA PROGRESIVA",
+      "code": "G35",
+      "diagnosis": "ESCLEROSIS MÚLTIPLE",
+      "verified": true
+    },
+    {
+      "technology": "TEOFILINA",
+      "reason": "ENFERMEDAD PULMONAR OBSTRUCTIVA CRÓNICA COMO MONOTERAPIA",
+      "code": "J44",
+      "diagnosis": "ENFERMEDAD PULMONAR OBSTRUCTIVA CRÓNICA COMO MONOTERAPIA",
+      "verified": true
+    }
+  ]
+}
