@@ -14,7 +14,7 @@ Retrieval and article-level citation of public Colombian health regulations. The
 - Each document must have a recorded URL, title, publication date, version or revision, retrieval date, and SHA-256 checksum before indexing.
 - Patient records, private messages, and non-public documents are excluded. Original official PDFs may contain the names, roles, and signatures of officials in signing or approval blocks; this is the sole permitted personal-data exception. Those details are never indexed or reproduced in answers. See the [corpus policy](docs/data.md).
 - Answers must cite the resolution and article or section. When the indexed corpus cannot support an answer, the system must say so.
-- The initial source manifest contains four official resolutions. Article parsing is available for reviewed local PDFs; indexing and evaluation results are not yet available. The first release will report measured results from a reproducible evaluation run.
+- The initial source manifest contains four official resolutions. Article parsing and reviewed-layout annex section parsing are available for local PDFs; annex records require manual OCR review before indexing. Indexing and evaluation results are not yet available. The first release will report measured results from a reproducible evaluation run.
 
 ## Architecture
 
@@ -60,7 +60,7 @@ CI checks lockfile consistency, formatting, lint, types, tests with coverage, do
 
 `make corpus-check` downloads the current official PDFs and compares them with the manifest. It requires `curl` and network access. A changed PDF is saved as an ignored local candidate for manual review; [the refresh procedure](docs/data.md) explains how to record a new version without replacing the old one.
 
-The [article parsing procedure](docs/data.md#article-parsing) reads a checksum-verified local PDF and returns numbered articles with resolution, section, and page metadata. It keeps results in memory while the signing-block exclusion checks are completed.
+The [parsing procedure](docs/data.md#article-parsing) reads checksum-verified local PDFs and returns numbered articles or annex sections with resolution, section, and page metadata. Annex rows and headings remain flagged for manual review before any index build.
 
 ## Repository structure
 
