@@ -26,4 +26,5 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Changed
 
+- Updated the README to reflect the available local index and measured retrieval results.
 - Adapted the data-science template to article-level regulation retrieval and removed unrelated template content.
