@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- Annex section parsing for the reviewed MIPRES table and service-habilitation manual, with citation metadata and mandatory OCR review flags.
 - Synthetic and local-original layout checks for article headings, page breaks, running margins, and extraction failures.
 - Exclusion checks that stop article extraction at the signing boundary and flag early approval blocks for manual review.
 - PyMuPDF article parsing with resolution citations, page spans, section labels, and checksum verification.
