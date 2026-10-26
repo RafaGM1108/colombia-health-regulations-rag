@@ -1,7 +1,7 @@
 PACKAGE := colombia_health_rag
 export UV_CACHE_DIR := .uv-cache
 
-.PHONY: help install lint typecheck test coverage security corpus-check embeddings app api docs docs-check clean
+.PHONY: help install lint typecheck test coverage security corpus-check embeddings index app api docs docs-check clean
 
 help:  ## Show this help
 	@grep -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -34,6 +34,9 @@ corpus-check:  ## Compare official PDFs with the source manifest (requires curl 
 
 embeddings:  ## Build local embeddings from reviewed official passages
 	uv run --frozen --group embeddings python -m colombia_health_rag.indexing.embeddings
+
+index:  ## Build a local provenance-aware search index from embedding batches
+	uv run --frozen python -m colombia_health_rag.indexing.vector_index
 
 app:  ## Launch the Streamlit app
 	uv run --frozen streamlit run src/$(PACKAGE)/app/main.py

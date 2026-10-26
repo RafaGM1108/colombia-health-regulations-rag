@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- Persistent Chroma index with official-source provenance checks, versioned rebuilds, and metadata-filtered vector search.
 - Pinned multilingual passage embedding build with token-bounded article chunks, reviewed-annex inputs, and resumable local batches.
 - OCR-reviewed domiciliary consultation and therapy service excerpts from Resolution 3100, with distinct excerpt IDs and checked page boundaries.
 - OCR-reviewed home-care manual excerpts from Resolution 3100, with section/page citations and a checksum-bound indexing gate.
