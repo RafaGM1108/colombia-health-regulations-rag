@@ -36,3 +36,11 @@ uv run --frozen python -m colombia_health_rag.ingestion.refresh record \
 ```
 
 This copies the candidate to a new checksum-named raw path and appends a manifest entry. Existing snapshots stay unchanged. Commit only the manifest and related documentation after review; never commit the PDF or its signing details. A changed live URL cannot reconstruct an older PDF on a fresh clone if that older snapshot was not retained locally or made available through an official archive. Preserve local historical snapshots accordingly; a missing one is reported instead of silently substituted.
+
+## Article parsing
+
+`parse_resolution` in `colombia_health_rag.ingestion.articles` accepts a reviewed manifest record and the repository root. It verifies the local PDF checksum, then extracts numbered articles from the resolution text between `RESUELVE` and its closing formula. Each record carries the resolution and article number, section path when present, one-based page span, source URL, title, publication date, version, and checksum. A missing boundary, numbering gap, unreadable PDF, or changed local file raises `ArticleParseError` for manual review.
+
+The parser reads the main resolution articles only. It excludes the preamble, signature and approval blocks after the closing formula, and annexes that follow the resolution. Some source PDFs contain important annex material, so an article count alone is not proof of complete regulatory coverage. The four reviewed local originals currently yield 53, 60, 27, and 2 main-resolution articles in manifest order. These counts are a layout check, not a legal completeness claim.
+
+The extracted records are kept in memory; this stage does not save parsed text or build an index. Before any export or indexing, the signing-block exclusion checks and additional layout tests must be completed. Fixed page margins remove running headers in the reviewed layouts; a new layout requires review rather than assuming the same margins are safe.

@@ -14,7 +14,7 @@ Retrieval and article-level citation of public Colombian health regulations. The
 - Each document must have a recorded URL, title, publication date, version or revision, retrieval date, and SHA-256 checksum before indexing.
 - Patient records, private messages, and non-public documents are excluded. Original official PDFs may contain the names, roles, and signatures of officials in signing or approval blocks; this is the sole permitted personal-data exception. Those details are never indexed or reproduced in answers. See the [corpus policy](docs/data.md).
 - Answers must cite the resolution and article or section. When the indexed corpus cannot support an answer, the system must say so.
-- The initial source manifest contains four official resolutions. Parsing, indexing, and evaluation results are not yet available; the first release will report measured results from a reproducible evaluation run.
+- The initial source manifest contains four official resolutions. Article parsing is available for reviewed local PDFs; indexing and evaluation results are not yet available. The first release will report measured results from a reproducible evaluation run.
 
 ## Architecture
 
@@ -26,7 +26,7 @@ The FTI pattern is mapped to this retrieval system as follows:
 | Indexing | Validated chunks | Multilingual embeddings and vector index | Phases 3–4 |
 | Serving | Question, index, and cited passages | Grounded answer with resolution and article citations | Phases 5–6 |
 
-The planned stack is PyMuPDF, sentence-transformers, Chroma or DuckDB VSS, Anthropic API, FastAPI, and Streamlit. The current repository contains the project foundation, a health endpoint, and a UI landing page. Retrieval and answer generation will be added through the roadmap issues.
+The stack uses PyMuPDF for article parsing. Sentence-transformers, Chroma or DuckDB VSS, Anthropic API, FastAPI, and Streamlit cover the planned later stages. The current repository also contains a health endpoint and a UI landing page. Retrieval and answer generation will be added through the roadmap issues.
 
 ## Roadmap
 
@@ -59,6 +59,8 @@ The local API health endpoint is available with `make api`; the landing page wit
 CI checks lockfile consistency, formatting, lint, types, tests with coverage, documentation, static security issues, and committed-file secrets. The same core checks run locally with `make lint typecheck test`.
 
 `make corpus-check` downloads the current official PDFs and compares them with the manifest. It requires `curl` and network access. A changed PDF is saved as an ignored local candidate for manual review; [the refresh procedure](docs/data.md) explains how to record a new version without replacing the old one.
+
+The [article parsing procedure](docs/data.md#article-parsing) reads a checksum-verified local PDF and returns numbered articles with resolution, section, and page metadata. It keeps results in memory while the signing-block exclusion checks are completed.
 
 ## Repository structure
 
