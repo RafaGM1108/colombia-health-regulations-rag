@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- Synthetic and local-original layout checks for article headings, page breaks, running margins, and extraction failures.
 - Exclusion checks that stop article extraction at the signing boundary and flag early approval blocks for manual review.
 - PyMuPDF article parsing with resolution citations, page spans, section labels, and checksum verification.
 - Reproducible official PDF checks and a reviewed, append-only source refresh workflow.
