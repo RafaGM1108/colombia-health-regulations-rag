@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "r740": "d8f627565539d0340d04e653ddcbc8aa11c9eb2de23a9b3aefbad818ad997281",
+    "r1816": "1e0d6b50b0e11b62c62e13e216b49de615413cd6fb2323891641f64b7f76455a",
+    "r3100": "de742ffbb978ca19b848db19a95b6ff60b3038533eb25726bfdc756c37a369ac",
+    "r2080": "aece13737e29e25c2d76eec81a758c77e5590aee5b56bd0de100d0ea7a5d90c6"
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "question": "En el texto original de la Resolución 740 de 2024, ¿quién registra la prescripción en MIPRES y qué se genera al finalizar?",
+      "expected_answer": "El profesional de la salud tratante realiza la prescripción y MIPRES asigna un número de prescripción.",
+      "evidence": {"source": "r740", "kind": "article", "article_number": 5}
+    },
+    {
+      "id": "q02",
+      "question": "Según la Resolución 740 de 2024 original, ¿qué instrumento se usa si la falta de conectividad impide acceder a MIPRES?",
+      "expected_answer": "Se usa el formulario de contingencia del Ministerio, equivalente a la orden o fórmula médica.",
+      "evidence": {"source": "r740", "kind": "article", "article_number": 15}
+    },
+    {
+      "id": "q03",
+      "question": "En la Resolución 740 de 2024 original, ¿cuánto tiempo tiene la Junta de Profesionales para decidir sobre una prescripción de internación domiciliaria?",
+      "expected_answer": "Debe pronunciarse en un máximo de 72 horas desde la solicitud del profesional de salud.",
+      "evidence": {"source": "r740", "kind": "article", "article_number": 21}
+    },
+    {
+      "id": "q04",
+      "question": "¿Puede una IPS cobrar por la conformación y actuación de su Junta de Profesionales de la Salud según la Resolución 740 de 2024 original?",
+      "expected_answer": "No; la conformación y actuación de la Junta forman parte de la integralidad del servicio.",
+      "evidence": {"source": "r740", "kind": "article", "article_number": 25}
+    },
+    {
+      "id": "q05",
+      "question": "Según la Resolución 740 de 2024 original, ¿cuál es el plazo de suministro para un servicio ambulatorio priorizado?",
+      "expected_answer": "Dentro de las 24 horas siguientes a la fecha de la prescripción.",
+      "evidence": {"source": "r740", "kind": "article", "article_number": 30}
+    },
+    {
+      "id": "q06",
+      "question": "En el anexo original de la Resolución 740 de 2024, ¿qué tecnología figura en la fila asociada con EPOC como monoterapia?",
+      "expected_answer": "La tabla registra teofilina; es un dato del anexo, no una recomendación de uso.",
+      "evidence": {"source": "r740", "kind": "annex", "section_id": "Anexo técnico", "row_number": 10, "page_start": 37}
+    },
+    {
+      "id": "q07",
+      "question": "Según la Resolución 1816 de 2026 original, ¿qué servicios complementarios requieren aprobación de una Junta de Profesionales de la Salud?",
+      "expected_answer": "Los expresamente incluidos en las tablas de referencia de MIPRES, cuando no correspondan a una orden judicial.",
+      "evidence": {"source": "r1816", "kind": "article", "article_number": 10}
+    },
+    {
+      "id": "q08",
+      "question": "En la Resolución 1816 de 2026 original, ¿qué plazo tiene una IPS para remitir a la EPS un formulario de contingencia después de la atención?",
+      "expected_answer": "Debe enviarlo y asegurar su recepción dentro de los tres días calendario siguientes a la atención inicial.",
+      "evidence": {"source": "r1816", "kind": "article", "article_number": 15}
+    },
+    {
+      "id": "q09",
+      "question": "Según la Resolución 1816 de 2026 original, ¿cuál es el plazo para realizar las pruebas de confirmación diagnóstica ante la sospecha de enfermedad huérfana?",
+      "expected_answer": "La IPS debe realizarlas dentro de 60 días desde la prescripción registrada en MIPRES.",
+      "evidence": {"source": "r1816", "kind": "article", "article_number": 18}
+    },
+    {
+      "id": "q10",
+      "question": "¿Cómo se verifica la incapacidad económica de un afiliado al régimen subsidiado según la Resolución 1816 de 2026 original?",
+      "expected_answer": "Se presume la incapacidad económica; la EPS o entidad adaptada verifica solo la afiliación vigente y no exige pruebas adicionales.",
+      "evidence": {"source": "r1816", "kind": "article", "article_number": 39}
+    },
+    {
+      "id": "q11",
+      "question": "¿Cuánto dura el periodo de transición para ajustar MIPRES previsto por la Resolución 1816 de 2026 original?",
+      "expected_answer": "Tres meses contados desde la expedición de la resolución.",
+      "evidence": {"source": "r1816", "kind": "article", "article_number": 59}
+    },
+    {
+      "id": "q12",
+      "question": "¿Cuándo prevé la Resolución 1816 de 2026 original derogar las Resoluciones 740 y 2622 de 2024?",
+      "expected_answer": "Al finalizar el periodo de transición de tres meses previsto en su artículo 59.",
+      "evidence": {"source": "r1816", "kind": "article", "article_number": 60}
+    },
+    {
+      "id": "q13",
+      "question": "Según la Resolución 3100 de 2019 original, ¿qué debe registrar como mínimo un prestador para su inscripción y habilitación en el REPS?",
+      "expected_answer": "Al menos una sede y un servicio habilitado.",
+      "evidence": {"source": "r3100", "kind": "article", "article_number": 4}
+    },
+    {
+      "id": "q14",
+      "question": "En la Resolución 3100 de 2019 original, ¿qué debe hacer un prestador si su autoevaluación evidencia incumplimiento de una condición de habilitación?",
+      "expected_answer": "Debe abstenerse de registrar, ofertar y prestar el servicio.",
+      "evidence": {"source": "r3100", "kind": "article", "article_number": 5}
+    },
+    {
+      "id": "q15",
+      "question": "¿Qué nuevos servicios requieren visita de verificación previa según la Resolución 3100 de 2019 original?",
+      "expected_answer": "Servicios oncológicos, de urgencias, de atención del parto, de transporte asistencial y todos los de alta complejidad.",
+      "evidence": {"source": "r3100", "kind": "article", "article_number": 14}
+    },
+    {
+      "id": "q16",
+      "question": "¿Tienen costo la inscripción de prestadores y la habilitación de servicios en el REPS según la Resolución 3100 de 2019 original?",
+      "expected_answer": "No; ambos trámites son gratuitos.",
+      "evidence": {"source": "r3100", "kind": "article", "article_number": 22}
+    },
+    {
+      "id": "q17",
+      "question": "¿Cómo define el manual original de la Resolución 3100 de 2019 la modalidad domiciliaria?",
+      "expected_answer": "Es la prestación de un servicio de salud en el domicilio o residencia de quien lo recibe.",
+      "evidence": {"source": "r3100", "kind": "annex", "section_id": "1.3.2.2", "excerpt_id": "1.3.2.2"}
+    },
+    {
+      "id": "q18",
+      "question": "Según el manual original de la Resolución 3100 de 2019, ¿ante qué autoridad debe habilitarse un servicio extramural domiciliario?",
+      "expected_answer": "Ante cada secretaría de salud departamental o distrital, o entidad competente, donde se oferte; además debe inscribirse en el REPS.",
+      "evidence": {"source": "r3100", "kind": "annex", "section_id": "2.2", "excerpt_id": "2.2"}
+    },
+    {
+      "id": "q19",
+      "question": "¿Admite el manual original de la Resolución 3100 de 2019 la consulta externa general en modalidad domiciliaria?",
+      "expected_answer": "Sí; la incluye entre las modalidades extramurales del servicio de consulta externa general.",
+      "evidence": {"source": "r3100", "kind": "annex", "section_id": "11.2.1", "excerpt_id": "11.2.1-modalities"}
+    },
+    {
+      "id": "q20",
+      "question": "¿Qué tipos de terapia enumera el manual original de la Resolución 3100 de 2019 en la descripción del servicio de terapias?",
+      "expected_answer": "Fisioterapia, fonoaudiología, terapia ocupacional y terapia respiratoria.",
+      "evidence": {"source": "r3100", "kind": "annex", "section_id": "11.3.1", "excerpt_id": "11.3.1-modalities"}
+    },
+    {
+      "id": "q21",
+      "question": "¿Qué acto revoca íntegramente la Resolución 2080 de 2026 en su texto original?",
+      "expected_answer": "La Resolución 1732 del 5 de agosto de 2026.",
+      "evidence": {"source": "r2080", "kind": "article", "article_number": 1}
+    },
+    {
+      "id": "q22",
+      "question": "¿Desde cuándo rige la Resolución 2080 de 2026 según su texto original?",
+      "expected_answer": "Desde su publicación en el Diario Oficial.",
+      "evidence": {"source": "r2080", "kind": "article", "article_number": 2}
+    },
+    {
+      "id": "u01",
+      "question": "¿Cuántas prescripciones se registraron en MIPRES durante octubre de 2026?",
+      "expected_answer": null,
+      "evidence": null
+    },
+    {
+      "id": "u02",
+      "question": "¿Cuál es el horario actual de atención de la mesa de ayuda de MIPRES?",
+      "expected_answer": null,
+      "evidence": null
+    },
+    {
+      "id": "u03",
+      "question": "¿Cuántos prestadores habilitados ofrecen hoy terapia respiratoria domiciliaria en Antioquia?",
+      "expected_answer": null,
+      "evidence": null
+    },
+    {
+      "id": "u04",
+      "question": "¿Cuál es el precio vigente de una consulta domiciliaria privada en Bogotá?",
+      "expected_answer": null,
+      "evidence": null
+    }
+  ]
+}
