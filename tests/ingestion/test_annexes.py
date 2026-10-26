@@ -11,6 +11,7 @@ import pytest
 from colombia_health_rag.ingestion.annexes import (
     AnnexParseError,
     parse_annex,
+    parse_reviewed_manual_sections,
     parse_reviewed_table_rows,
 )
 from colombia_health_rag.ingestion.manifest import SourceRecord, load_manifest
@@ -315,3 +316,123 @@ def test_reviewed_local_table_rows_when_available() -> None:
     assert result.sections[198].text.startswith("Tecnología: DIAZEPAM")
     assert result.sections[-1].citation.endswith("fila 10, p. 37")
     assert not result.warnings
+
+
+def test_only_source_checked_manual_excerpts_are_indexable(tmp_path: Path) -> None:
+    source = _source(
+        tmp_path,
+        3100,
+        [
+            _main_page(),
+            [(72, 160, "ANEXO TECNICO")],
+            [
+                (72, 160, "INTRODUCCION"),
+                (72, 190, "1.3. MODALIDAD EXTRAMURAL"),
+                (72, 220, "1.3.2.2. Domiciliaria"),
+                (72, 250, "Es la forma de prestar el servicio en domicilio."),
+                (72, 280, "1.3.2.3. Jornada de Salud"),
+                (72, 310, "Otro servicio."),
+            ],
+            [
+                (72, 160, "Continuacion de la modalidad anterior."),
+                (72, 190, "2. ESPECIFICIDADES DE LA MODALIDAD EXTRAMURAL"),
+                (72, 220, "Intro de modalidad."),
+                (72, 250, "2.2. DOMICILIARIA"),
+                (72, 280, "REGISTRO ESPECIA! de servicios."),
+            ],
+        ],
+    )
+    review = {
+        "source_sha256": source.sha256,
+        "entries": [
+            {
+                "section_id": "1.3.2.2",
+                "parent_section": "1.3",
+                "page_start": 3,
+                "page_end": 3,
+                "start_anchor": "1.3.2.2. Domiciliaria",
+                "end_anchor": "1.3.2.3. Jornada de Salud",
+                "heading": "Domiciliaria",
+                "text": "1.3.2.2. Domiciliaria\nEs la forma de prestar el servicio en domicilio.",
+                "verified": True,
+            },
+            {
+                "section_id": "2",
+                "parent_section": "2",
+                "page_start": 4,
+                "page_end": 4,
+                "start_anchor": "2. ESPECIFICIDADES DE LA MODALIDAD EXTRAMURAL",
+                "end_anchor": None,
+                "heading": "Modalidad extramural",
+                "text": "2. ESPECIFICIDADES DE LA MODALIDAD EXTRAMURAL\nIntro de modalidad.",
+                "verified": False,
+            },
+            {
+                "section_id": "2.2",
+                "parent_section": "2.2",
+                "page_start": 4,
+                "page_end": 4,
+                "start_anchor": "2.2. DOMICILIARIA",
+                "end_anchor": None,
+                "heading": "Domiciliaria",
+                "text": "2.2. DOMICILIARIA\nREGISTRO ESPECIAL de servicios.",
+                "verified": True,
+            },
+        ],
+    }
+    review_path = tmp_path / "manual-review.json"
+    review_path.write_text(json.dumps(review))
+
+    provisional = parse_annex(source, tmp_path)
+    result = parse_reviewed_manual_sections(source, tmp_path, review_path)
+
+    assert all(section.review_required for section in provisional.sections)
+    assert [section.section_id for section in result.sections] == ["1.3.2.2", "2.2"]
+    assert all(not section.review_required for section in result.sections)
+    assert result.sections[0].citation.endswith("sección 1.3.2.2, p. 3")
+    assert "REGISTRO ESPECIAL" in result.sections[1].text
+    assert "REGISTRO ESPECIA!" not in result.sections[1].text
+    assert result.warnings == ("All other manual text remains unreviewed and excluded",)
+
+    review["source_sha256"] = "0" * 64
+    review_path.write_text(json.dumps(review))
+    with pytest.raises(AnnexParseError, match="source checksum"):
+        parse_reviewed_manual_sections(source, tmp_path, review_path)
+
+    review["source_sha256"] = source.sha256
+    cast(list[dict[str, object]], review["entries"])[0]["text"] = "FIRMA: SIGNATURE_SENTINEL"
+    review_path.write_text(json.dumps(review))
+    with pytest.raises(AnnexParseError, match="source or privacy validation"):
+        parse_reviewed_manual_sections(source, tmp_path, review_path)
+
+    first_entry = cast(list[dict[str, object]], review["entries"])[0]
+    first_entry["text"] = "1.3.2.2. Domiciliaria\nEs la forma de prestar el servicio en domicilio."
+    first_entry["page_start"] = 4
+    first_entry["page_end"] = 4
+    review_path.write_text(json.dumps(review))
+    with pytest.raises(AnnexParseError, match="source or privacy validation"):
+        parse_reviewed_manual_sections(source, tmp_path, review_path)
+
+
+def test_reviewed_local_home_care_sections_when_available() -> None:
+    root = Path(__file__).resolve().parents[2]
+    source = next(
+        source
+        for source in load_manifest(root / "data/manifest.json")
+        if "resolution-3100" in source.raw_path
+    )
+    if not (root / source.raw_path).is_file():
+        pytest.skip("Original official PDF is intentionally excluded from Git")
+
+    result = parse_reviewed_manual_sections(source, root)
+
+    assert [(section.section_id, section.page_start) for section in result.sections] == [
+        ("1.3.2.2", 19),
+        ("2", 21),
+        ("2.2", 22),
+    ]
+    assert all(not section.review_required for section in result.sections)
+    assert result.sections[-1].citation.endswith("sección 2.2, p. 22")
+    assert "Registro Especial de Prestadores" in result.sections[-1].text
+    assert "Especia!" not in result.sections[-1].text
+    assert result.warnings

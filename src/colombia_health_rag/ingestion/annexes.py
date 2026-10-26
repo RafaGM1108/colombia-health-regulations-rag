@@ -2,8 +2,10 @@
 
 import json
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from datetime import date
+from difflib import SequenceMatcher
 from itertools import pairwise
 from pathlib import Path
 
@@ -427,6 +429,104 @@ def parse_reviewed_table_rows(
         offset += count
     excluded = len(reviewed_rows) - len(output)
     warnings = (f"{excluded} unverified table rows excluded",) if excluded else ()
+    return AnnexRecord(
+        provisional.resolution, provisional.source_url, provisional.sha256, tuple(output), warnings
+    )
+
+
+def _review_text_key(value: str) -> str:
+    decomposed = unicodedata.normalize("NFKD", value)
+    plain = "".join(character for character in decomposed if not unicodedata.combining(character))
+    return " ".join(
+        "".join(character if character.isalnum() else " " for character in plain).split()
+    ).lower()
+
+
+def _anchor_on_page(path: Path, page_number: int, anchor: str) -> bool:
+    with pymupdf.open(str(path)) as pdf:  # type: ignore[no-untyped-call]
+        if not 1 <= page_number <= len(pdf):
+            return False
+        return anchor in pdf[page_number - 1].get_text("text")
+
+
+def parse_reviewed_manual_sections(
+    record: SourceRecord, root: Path, review_path: Path | None = None
+) -> AnnexRecord:
+    """Return only manually checked home-care excerpts from the exact manual PDF."""
+    provisional = parse_annex(record, root)
+    if provisional.resolution != "Resolución 3100 de 2019":
+        raise AnnexParseError("No reviewed manual is configured for this resolution")
+    path = review_path or root / "data/reviews/resolution-3100-home-care.json"
+    try:
+        review = json.loads(path.read_text(encoding="utf-8"))
+        if review["source_sha256"] != record.sha256:
+            raise AnnexParseError("Manual review does not match the source checksum")
+        entries = review["entries"]
+        if not isinstance(entries, list) or not entries:
+            raise AnnexParseError("Manual review has no entries")
+    except AnnexParseError:
+        raise
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        raise AnnexParseError("Manual review file is unreadable or incomplete") from error
+
+    parents = {section.section_id: section for section in provisional.sections}
+    output: list[AnnexSectionRecord] = []
+    seen: set[str] = set()
+    for entry in entries:
+        try:
+            identifier = entry["section_id"]
+            parent = parents[entry["parent_section"]]
+            page_start = entry["page_start"]
+            page_end = entry["page_end"]
+            start_anchor = entry["start_anchor"]
+            end_anchor = entry["end_anchor"]
+            heading = entry["heading"].strip()
+            reviewed_text = entry["text"].strip()
+            verified = entry["verified"]
+            start = parent.text.index(start_anchor)
+            end = parent.text.index(end_anchor, start) if end_anchor else len(parent.text)
+            source_fragment = parent.text[start:end].strip()
+        except (KeyError, ValueError, AttributeError, TypeError) as error:
+            raise AnnexParseError("Manual review entry does not match a source section") from error
+        if (
+            not isinstance(identifier, str)
+            or not isinstance(page_start, int)
+            or not isinstance(page_end, int)
+            or not isinstance(start_anchor, str)
+            or identifier in seen
+            or not parent.page_start <= page_start <= page_end <= parent.page_end
+            or not _anchor_on_page(root / record.raw_path, page_start, start_anchor)
+            or not heading
+            or not reviewed_text
+            or not isinstance(verified, bool)
+            or SequenceMatcher(
+                None, _review_text_key(reviewed_text), _review_text_key(source_fragment)
+            ).ratio()
+            < 0.9
+            or any(_SIGNING.match(_clean(line)) for line in reviewed_text.splitlines())
+            or re.search(r"\S+@\S+|\b\d{6,}\b", reviewed_text)
+        ):
+            raise AnnexParseError("Manual review entry failed source or privacy validation")
+        seen.add(identifier)
+        if not verified:
+            continue
+        output.append(
+            AnnexSectionRecord(
+                section_id=identifier,
+                heading=heading,
+                text=reviewed_text,
+                page_start=page_start,
+                page_end=page_end,
+                resolution=provisional.resolution,
+                source_url=parent.source_url,
+                source_title=parent.source_title,
+                publication_date=parent.publication_date,
+                version=parent.version,
+                sha256=parent.sha256,
+                review_required=False,
+            )
+        )
+    warnings = ("All other manual text remains unreviewed and excluded",)
     return AnnexRecord(
         provisional.resolution, provisional.source_url, provisional.sha256, tuple(output), warnings
     )
