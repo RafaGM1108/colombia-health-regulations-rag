@@ -65,8 +65,50 @@ def test_parses_articles_sections_page_spans_and_citation_without_footer(tmp_pat
     assert result.articles[0].section_path == ("Título I", "Capítulo I")
     assert result.articles[0].citation == "Resolución 99 de 2024, artículo 1"
     assert "Texto final del primer articulo." in result.articles[0].text
-    assert "SIGNATURE_PRIVATE_SENTINEL" not in repr(result)
-    assert "preambulo" not in repr(result)
+    assert "SIGNATURE_PRIVATE_SENTINEL" not in "\n".join(
+        article.text for article in result.articles
+    )
+    assert "preambulo" not in "\n".join(article.text for article in result.articles)
+
+
+def test_excludes_approval_details_on_the_next_page(tmp_path: Path) -> None:
+    source = _source(
+        tmp_path,
+        [
+            ["RESUELVE", "ARTICULO 1. Objeto.", "PUBUQUESE y CUMPLASE."],
+            ["APRO8O: OFFICIAL_NAME_SENTINEL", "FIRMA: OCR_SIGNATURE_SENTINEL"],
+        ],
+    )
+
+    result = parse_resolution(source, tmp_path)
+    derived = repr(result) + "\n".join(article.text for article in result.articles)
+
+    assert len(result.articles) == 1
+    assert result.articles[0].page_end == 1
+    assert "OFFICIAL_NAME_SENTINEL" not in derived
+    assert "OCR_SIGNATURE_SENTINEL" not in derived
+
+
+def test_rejects_approval_before_the_closing_formula(tmp_path: Path) -> None:
+    source = _source(
+        tmp_path,
+        [["RESUELVE", "ARTICULO 1. Objeto.", "APROBO: OFFICIAL_NAME_SENTINEL", "CUMPLASE"]],
+    )
+
+    with pytest.raises(ArticleParseError, match="Possible signing block") as error:
+        parse_resolution(source, tmp_path)
+    assert "OFFICIAL_NAME_SENTINEL" not in str(error.value)
+
+
+def test_inline_closing_word_is_not_an_exclusion_boundary(tmp_path: Path) -> None:
+    source = _source(
+        tmp_path,
+        [["RESUELVE", "ARTICULO 1. Objeto.", "La palabra CUMPLASE aparece aqui.", "CUMPLASE"]],
+    )
+
+    result = parse_resolution(source, tmp_path)
+
+    assert "La palabra CUMPLASE aparece aqui." in result.articles[0].text
 
 
 def test_rejects_a_gap_in_article_numbers(tmp_path: Path) -> None:
