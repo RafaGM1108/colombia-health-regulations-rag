@@ -45,6 +45,7 @@ class AnnexSectionRecord:
     review_required: bool
     row_count: int | None = None
     row_number: int | None = None
+    excerpt_id: str | None = None
 
     @property
     def citation(self) -> str:
@@ -475,6 +476,7 @@ def parse_reviewed_manual_sections(
     for entry in entries:
         try:
             identifier = entry["section_id"]
+            excerpt_id = entry.get("excerpt_id", identifier)
             parent = parents[entry["parent_section"]]
             page_start = entry["page_start"]
             page_end = entry["page_end"]
@@ -490,12 +492,22 @@ def parse_reviewed_manual_sections(
             raise AnnexParseError("Manual review entry does not match a source section") from error
         if (
             not isinstance(identifier, str)
+            or not isinstance(excerpt_id, str)
+            or not excerpt_id
             or not isinstance(page_start, int)
             or not isinstance(page_end, int)
             or not isinstance(start_anchor, str)
-            or identifier in seen
+            or not isinstance(end_anchor, (str, type(None)))
+            or excerpt_id in seen
+            or not (
+                identifier == parent.section_id or identifier.startswith(f"{parent.section_id}.")
+            )
             or not parent.page_start <= page_start <= page_end <= parent.page_end
             or not _anchor_on_page(root / record.raw_path, page_start, start_anchor)
+            or (
+                end_anchor is not None
+                and not _anchor_on_page(root / record.raw_path, page_end, end_anchor)
+            )
             or not heading
             or not reviewed_text
             or not isinstance(verified, bool)
@@ -507,7 +519,7 @@ def parse_reviewed_manual_sections(
             or re.search(r"\S+@\S+|\b\d{6,}\b", reviewed_text)
         ):
             raise AnnexParseError("Manual review entry failed source or privacy validation")
-        seen.add(identifier)
+        seen.add(excerpt_id)
         if not verified:
             continue
         output.append(
@@ -524,6 +536,7 @@ def parse_reviewed_manual_sections(
                 version=parent.version,
                 sha256=parent.sha256,
                 review_required=False,
+                excerpt_id=excerpt_id,
             )
         )
     warnings = ("All other manual text remains unreviewed and excluded",)
