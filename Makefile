@@ -1,7 +1,7 @@
 PACKAGE := colombia_health_rag
 export UV_CACHE_DIR := .uv-cache
 
-.PHONY: help install lint typecheck test coverage security app api docs docs-check clean
+.PHONY: help install lint typecheck test coverage security corpus-check app api docs docs-check clean
 
 help:  ## Show this help
 	@grep -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -28,6 +28,9 @@ coverage:  ## Run tests with a coverage report (terminal + htmlcov/)
 
 security:  ## Check committed files for secrets
 	uv run --frozen detect-secrets-hook --baseline .secrets.baseline $$(git ls-files | grep -v '^.secrets.baseline$$')
+
+corpus-check:  ## Compare official PDFs with the source manifest (requires curl and network)
+	uv run --frozen python -m colombia_health_rag.ingestion.refresh check
 
 app:  ## Launch the Streamlit app
 	uv run --frozen streamlit run src/$(PACKAGE)/app/main.py

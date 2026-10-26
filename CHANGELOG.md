@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- Reproducible official PDF checks and a reviewed, append-only source refresh workflow.
 - Four original official resolutions in the provenance manifest, with source and publication details.
 - Corpus screening and limited public-official attribution policy.
 - Official-source manifest schema and validation for public regulation provenance.

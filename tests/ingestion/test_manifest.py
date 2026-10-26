@@ -38,8 +38,8 @@ def test_valid_official_record_and_manifest(tmp_path: Path) -> None:
 def test_initial_manifest_covers_both_topics_with_distinct_sources() -> None:
     manifest = load_manifest(Path(__file__).parents[2] / "data/manifest.json")
     assert len(manifest) >= 2
-    assert len({str(source.source_url) for source in manifest}) == len(manifest)
-    assert len({source.sha256 for source in manifest}) == len(manifest)
+    assert len({(str(source.source_url), source.sha256) for source in manifest}) == len(manifest)
+    assert len({source.raw_path for source in manifest}) == len(manifest)
     assert any("resolucion-1816-de-2026.pdf" in str(source.source_url) for source in manifest)
     assert any("resolucion-3100-de-2019.pdf" in str(source.source_url) for source in manifest)
 

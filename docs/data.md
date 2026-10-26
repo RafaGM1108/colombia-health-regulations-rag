@@ -18,3 +18,21 @@ This narrow exception does not mean that the source files contain no personal da
 The dates above are Diario Oficial publication dates, distinct from issue dates. Extracted text from all four PDFs was scanned for email addresses, ID-like values, and phone-like values; none were found by those checks. Signing and approval sections contain public officials' attribution. This screening does not guarantee that every personal datum is detectable. The parsing stage must exclude attribution blocks and flag uncertain boundaries before indexing. The original PDF is authoritative for its text; the manifest identifies the exact file with SHA-256. These are original versions, so later changes and legal effect must be checked before serving answers.
 
 The [data layer guide](https://github.com/RafaGM1108/colombia-health-regulations-rag/blob/main/data/README.md) describes local outputs and validation.
+
+## Refresh and version checks
+
+Run `make corpus-check` from the repository root with `curl` and network access. The command validates every local snapshot that exists, downloads each current official URL once, and compares its SHA-256 with the manifest. It restores a missing local file only when the live bytes match a recorded checksum. It does not follow redirects or overwrite a changed raw file. Exit code `0` means the latest recorded bytes are still current; `1` means a new or reverted version or a missing historical snapshot; `2` means a download, format, or integrity error.
+
+If the official bytes are new, the command writes `data/01_raw/candidates/<sha256>.pdf` and a matching JSON download record. Both stay local and ignored by Git. Review the candidate against the official site: confirm its authority, exact title, publication date, version or correction status, reuse terms, and the narrow personal-data policy above. Do not copy metadata blindly from the older version. After that review, record it with:
+
+```bash
+uv run --frozen python -m colombia_health_rag.ingestion.refresh record \
+  data/01_raw/candidates/<sha256>.pdf \
+  --title "<official title>" \
+  --publication-date YYYY-MM-DD \
+  --version "<reviewed version description>" \
+  --reuse-terms "<reviewed terms or unknown status>" \
+  --public-document-reviewed --personal-data-reviewed
+```
+
+This copies the candidate to a new checksum-named raw path and appends a manifest entry. Existing snapshots stay unchanged. Commit only the manifest and related documentation after review; never commit the PDF or its signing details. A changed live URL cannot reconstruct an older PDF on a fresh clone if that older snapshot was not retained locally or made available through an official archive. Preserve local historical snapshots accordingly; a missing one is reported instead of silently substituted.
