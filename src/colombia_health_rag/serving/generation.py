@@ -5,6 +5,7 @@ import json
 import os
 import re
 from dataclasses import dataclass
+from importlib import import_module
 from pathlib import Path
 from typing import Protocol, cast
 from urllib.parse import urlparse
@@ -309,9 +310,8 @@ def main() -> None:
     report = json.loads((root / "data/07_reporting/retrieval-v1.json").read_bytes())
     build_id = report["results"]["article_aware"]["build_id"]
     index_dir = build_index(root, root / "data/04_embeddings" / build_id)
-    from sentence_transformers import SentenceTransformer
-
-    model = SentenceTransformer(
+    sentence_transformers = import_module("sentence_transformers")
+    model = sentence_transformers.SentenceTransformer(
         MODEL_ID, revision=MODEL_REVISION, device="cpu", trust_remote_code=False
     )
     result = answer_from_index(
