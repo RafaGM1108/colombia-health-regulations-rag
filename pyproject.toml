@@ -10,7 +10,7 @@ dependencies = [
     "anthropic>=2.3.0",
     "fastapi>=0.115",
     "pydantic>=2.9",
-    "pymupdf>=1.25,<2",
+    "pymupdf>=1.25,<3",
     "python-dotenv>=1.2.4",
     "pyyaml>=6.0",
     "uvicorn[standard]>=0.32",
@@ -30,7 +30,7 @@ dev = [
 ]
 app = ["streamlit>=1.40"]
 docs = ["mkdocs-material>=9.5"]
-embeddings = ["sentence-transformers>=5.1,<6", "torch>=2.6,<3"]
+embeddings = ["sentence-transformers>=5.1,<7", "torch>=2.6,<3"]
 index = [
     "chromadb>=1.1,<2",
 ]
