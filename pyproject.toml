@@ -7,9 +7,11 @@ license = "MIT"
 authors = [{ name = "Rafael E. Garcia" }]
 requires-python = ">=3.12,<3.13"
 dependencies = [
+    "anthropic>=2.3.0",
     "fastapi>=0.115",
     "pydantic>=2.9",
     "pymupdf>=1.25,<2",
+    "python-dotenv>=1.2.4",
     "pyyaml>=6.0",
     "uvicorn[standard]>=0.32",
 ]
