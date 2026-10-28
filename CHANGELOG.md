@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- Anthropic-backed cited generation from verified local retrieval, with source-quote checks and conservative refusals.
 - Reproducible retrieval evaluation with hit rate@k, MRR, per-question evidence ranks, and an overlapping fixed-window comparison on the official corpus.
 - Fixed Spanish retrieval evaluation set with official-source article and annex locators, expected answers, and unanswerable cases.
 - Persistent Chroma index with official-source provenance checks, versioned rebuilds, and metadata-filtered vector search.

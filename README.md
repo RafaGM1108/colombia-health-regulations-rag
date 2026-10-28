@@ -14,7 +14,7 @@ Retrieval and article-level citation of public Colombian health regulations. The
 - Each document must have a recorded URL, title, publication date, version or revision, retrieval date, and SHA-256 checksum before indexing.
 - Patient records, private messages, and non-public documents are excluded. Original official PDFs may contain the names, roles, and signatures of officials in signing or approval blocks; this is the sole permitted personal-data exception. Those details are never indexed or reproduced in answers. See the [corpus policy](docs/data.md).
 - Answers must cite the resolution and article or section. When the indexed corpus cannot support an answer, the system must say so.
-- The source manifest contains four official resolutions. Article parsing, reviewed annex excerpts, multilingual embeddings, and a provenance-aware local Chroma index are available. Retrieval has been measured on the fixed Q&A set; cited generation and abstention evaluation remain roadmap work.
+- The source manifest contains four official resolutions. Article parsing, reviewed annex excerpts, multilingual embeddings, and a provenance-aware local Chroma index are available. Retrieval has been measured on the fixed Q&A set. Citation-checked generation is available for fixed public questions; answer quality and abstention still require evaluation.
 
 ## Architecture
 
@@ -26,7 +26,7 @@ The FTI pattern is mapped to this retrieval system as follows:
 | Indexing | Validated chunks | Multilingual embeddings and vector index | Phases 3–4 |
 | Serving | Question, index, and cited passages | Grounded answer with resolution and article citations | Phases 5–6 |
 
-The implemented parsing and indexing stack uses PyMuPDF, sentence-transformers, and Chroma. Anthropic API, FastAPI, and Streamlit cover the planned cited generation and chat stages. The repository also contains an API health endpoint and a UI landing page.
+The implemented parsing and indexing stack uses PyMuPDF, sentence-transformers, and Chroma. Cited generation uses the Anthropic API. FastAPI and Streamlit chat integration remains planned; the repository currently has an API health endpoint and a UI landing page.
 
 ## Roadmap
 
@@ -54,7 +54,7 @@ make install
 make lint typecheck test
 ```
 
-The local API health endpoint is available with `make api`; the landing page with `make app`. A real Anthropic key belongs only in a local `.env` file, never in Git. Cited generation is planned for Phase 5.
+The local API health endpoint is available with `make api`; the landing page with `make app`. A real Anthropic key belongs only in a local `.env` file, never in Git.
 
 CI checks lockfile consistency, formatting, lint, types, tests with coverage, documentation, static security issues, and committed-file secrets. The same core checks run locally with `make lint typecheck test`.
 
@@ -69,6 +69,14 @@ make evaluate
 ```
 
 The [data-layer instructions](data/README.md) cover build IDs and local outputs. The [parsing procedure](docs/data.md#article-parsing) reads checksum-verified PDFs and returns numbered articles or annex sections with resolution, section, and page metadata. Only reviewed annex rows and excerpts enter the index; unreviewed text remains excluded.
+
+With the article-aware index built and `ANTHROPIC_API_KEY` set in local `.env`, run a fixed public question by ID:
+
+```bash
+uv run --frozen --group embeddings python -m colombia_health_rag.serving.generation q01
+```
+
+The command accepts IDs from the public evaluation set, not patient details. It prints a refusal if a response lacks a verified source quote. See [Methodology](docs/methodology.md) for the citation checks and their limits.
 
 ## Repository structure
 
