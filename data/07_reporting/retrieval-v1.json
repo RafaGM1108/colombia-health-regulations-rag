@@ -17,7 +17,7 @@
   "results": {
     "article_aware": {
       "answerable_count": 22,
-      "build_id": "c652d29b4e708444e65f",
+      "build_id": "21111bd19eadf33fd688",
       "hit_rate_at_k": {
         "1": 0.454545,
         "10": 0.863636,
@@ -274,7 +274,7 @@
     },
     "fixed_window": {
       "answerable_count": 22,
-      "build_id": "afb172385251ae0d6f99",
+      "build_id": "95285328dbb92e5d9803",
       "hit_rate_at_k": {
         "1": 0.590909,
         "10": 0.863636,
@@ -532,8 +532,8 @@
   },
   "schema_version": 1,
   "software_versions": {
-    "sentence-transformers": "5.7.0",
-    "torch": "2.14.1+cpu",
+    "sentence-transformers": "6.2.0",
+    "torch": "2.15.0+cpu",
     "transformers": "5.21.0"
   },
   "source_manifest_sha256": "8f73fcf418d6b64eeccb25bfe13b8fa3177503f6ab25694f3a8df23eae411a36",
