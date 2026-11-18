@@ -1,0 +1,208 @@
+{
+  "answers_report": "data/07_reporting/answers-claude-sonnet-4-6.json",
+  "answers_sha256": "26fae004f95aa30942a4288b9a855634711d3aa6bc92089763f7e9b76b6cdbd0",
+  "graded_on": "2026-11-18",
+  "grader": "Claude Opus 5.5 (claude-opus-5-5), reviewing each output against the gold answer and retrieved passage text",
+  "grades": [
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q01",
+      "rationale": "Refused (unverified_citation): the quote joined fragments with [...]. The rejected draft cited the gold article and its content was correct."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q02",
+      "rationale": "Refused (unverified_citation): the quote elided list items with [...]. The rejected draft cited the gold article and its content was correct."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q03",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q04",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q05",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q06",
+      "rationale": "Refused; the gold location was not among the five retrieved passages, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [
+        "supported",
+        "unsupported",
+        "supported",
+        "supported"
+      ],
+      "correctness": "incorrect",
+      "question_id": "q07",
+      "rationale": "Answered without the gold article: the claims describe the Junta's role and approval criteria (articles 3 and 24) but never say which services require approval. Claim 2 adds 'correlation with the clinical condition', which its quote does not contain."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q08",
+      "rationale": "Refused (unverified_citation): the official PDF reads 'síguientes' and the model's quote corrected it to 'siguientes'. The rejected draft cited the gold article and its content was correct."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q09",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q10",
+      "rationale": "Matches the expected presumption and affiliation-only check (article 39); the two article 40 claims are accurate, related context."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q11",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q12",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q13",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q14",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q15",
+      "rationale": "Lists all expected services; the two extra claims (new institution, complexity change) are other article 14 cases and are accurate."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q16",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q17",
+      "rationale": "Refused; the gold location was not among the five retrieved passages, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q18",
+      "rationale": "Names the departmental or district health secretariat where the service is offered; omits the secondary REPS registration."
+    },
+    {
+      "claim_support": [
+        "supported",
+        "unsupported",
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q19",
+      "rationale": "Correctly says the domiciliary modality is admitted. Claim 2 lists an oximeter, which its quote does not mention."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q20",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q21",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q22",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "u01",
+      "rationale": "Refused; the question is outside the corpus, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "u02",
+      "rationale": "Refused; the question is outside the corpus, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "u03",
+      "rationale": "Refused; the question is outside the corpus, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "u04",
+      "rationale": "Refused; the question is outside the corpus, so abstaining is appropriate."
+    }
+  ],
+  "schema_version": 1
+}
