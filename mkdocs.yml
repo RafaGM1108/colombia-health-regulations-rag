@@ -26,3 +26,4 @@ nav:
   - Home: index.md
   - Methodology: methodology.md
   - Data: data.md
+  - Input contract: interface.md
