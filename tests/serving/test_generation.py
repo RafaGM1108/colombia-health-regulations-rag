@@ -13,9 +13,11 @@ from anthropic import Anthropic
 from colombia_health_rag.indexing.embeddings import MODEL_DIMENSION
 from colombia_health_rag.indexing.vector_index import SearchHit
 from colombia_health_rag.serving.generation import (
+    GENERATION_EFFORT,
     GENERATION_MODEL,
     OUTPUT_SCHEMA,
     AnthropicGenerator,
+    ModelRefusalError,
     answer_from_hits,
     answer_from_index,
 )
@@ -82,26 +84,42 @@ def test_supported_claim_uses_only_verified_citation_metadata() -> None:
 
 
 @pytest.mark.parametrize(
-    "response",
+    ("response", "reason"),
     [
-        {"abstain": True, "claims": []},
-        _draft(evidence_id="E2"),
-        _draft(quote="Una frase inventada que no aparece en la norma."),
-        {"abstain": False, "claims": []},
-        "not json",
+        ({"abstain": True, "claims": []}, "abstained"),
+        (_draft(evidence_id="E2"), "unverified_citation"),
+        (_draft(quote="Una frase inventada que no aparece en la norma."), "unverified_citation"),
+        ({"abstain": False, "claims": []}, "invalid_output"),
+        ("not json", "invalid_output"),
     ],
 )
-def test_missing_or_invalid_support_is_refused(response: dict[str, object] | str) -> None:
+def test_missing_or_invalid_support_is_refused(
+    response: dict[str, object] | str, reason: str
+) -> None:
     result = answer_from_hits("¿Quién registra la prescripción?", [_hit()], FakeGenerator(response))
     assert result.refused
+    assert result.refusal_reason == reason
     assert result.claims == ()
     assert "No pude verificar" in result.text
+
+
+def test_whitespace_claim_text_is_invalid_output() -> None:
+    draft = _draft()
+    cast(list[dict[str, str]], draft["claims"])[0]["text"] = "   "
+    result = answer_from_hits("¿Quién registra la prescripción?", [_hit()], FakeGenerator(draft))
+    assert result.refusal_reason == "invalid_output"
+
+
+def test_supported_answer_has_no_refusal_reason() -> None:
+    result = answer_from_hits("¿Quién registra?", [_hit()], FakeGenerator(_draft()))
+    assert result.refusal_reason is None
 
 
 def test_no_hits_refuses_without_api_call() -> None:
     generator = FakeGenerator(_draft())
     result = answer_from_hits("¿Qué dice la norma?", [], generator)
     assert result.refused
+    assert result.refusal_reason == "no_evidence"
     assert generator.prompts == []
 
 
@@ -180,7 +198,10 @@ def test_retrieval_uses_query_prefix_and_normalized_vector(monkeypatch: pytest.M
 def test_anthropic_call_requests_json_schema_and_rejects_truncation() -> None:
     response = SimpleNamespace(
         stop_reason="end_turn",
-        content=[SimpleNamespace(type="text", text=json.dumps(_draft()))],
+        content=[
+            SimpleNamespace(type="thinking", thinking="", signature="sig"),
+            SimpleNamespace(type="text", text=json.dumps(_draft())),
+        ],
     )
     create = Mock(return_value=response)
     client = SimpleNamespace(messages=SimpleNamespace(create=create))
@@ -190,9 +211,29 @@ def test_anthropic_call_requests_json_schema_and_rejects_truncation() -> None:
     assert json.loads(generator.generate("public question")) == _draft()
     kwargs = create.call_args.kwargs
     assert kwargs["model"] == GENERATION_MODEL
+    assert kwargs["output_config"]["effort"] == GENERATION_EFFORT
     assert kwargs["output_config"]["format"]["schema"] == OUTPUT_SCHEMA
     assert kwargs["messages"] == [{"role": "user", "content": "public question"}]
+    assert not {"temperature", "top_p", "top_k", "thinking"} & kwargs.keys()
 
     response.stop_reason = "max_tokens"
     with pytest.raises(ValueError, match="complete"):
         generator.generate("public question")
+
+    response.stop_reason = "end_turn"
+    response.content = [SimpleNamespace(type="thinking", thinking="", signature="sig")]
+    with pytest.raises(ValueError, match="complete"):
+        generator.generate("public question")
+
+
+def test_model_refusal_is_recorded_separately() -> None:
+    response = SimpleNamespace(stop_reason="refusal", content=[])
+    client = SimpleNamespace(messages=SimpleNamespace(create=Mock(return_value=response)))
+    generator = AnthropicGenerator("local-test-key")
+    generator.client = cast(Anthropic, client)
+
+    with pytest.raises(ModelRefusalError):
+        generator.generate("public question")
+    result = answer_from_hits("¿Quién registra la prescripción?", [_hit()], generator)
+    assert result.refused
+    assert result.refusal_reason == "model_refusal"

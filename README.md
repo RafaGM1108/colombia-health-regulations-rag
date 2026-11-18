@@ -14,7 +14,8 @@ Retrieval and article-level citation of public Colombian health regulations. The
 - Each document must have a recorded URL, title, publication date, version or revision, retrieval date, and SHA-256 checksum before indexing.
 - Patient records, private messages, and non-public documents are excluded. Original official PDFs may contain the names, roles, and signatures of officials in signing or approval blocks; this is the sole permitted personal-data exception. Those details are never indexed or reproduced in answers. See the [corpus policy](docs/data.md).
 - Answers must cite the resolution and article or section. When the indexed corpus cannot support an answer, the system must say so.
-- The source manifest contains four official resolutions. Article parsing, reviewed annex excerpts, multilingual embeddings, and a provenance-aware local Chroma index are available. Retrieval has been measured on the fixed Q&A set. Citation-checked generation is available for fixed public questions; answer quality and abstention still require evaluation.
+- Generation accepts only reviewed public question IDs; free-form text is limited to local passage search and is never stored, logged, or sent to an external API. See the [input contract](docs/interface.md).
+- The source manifest contains four official resolutions. Article parsing, reviewed annex excerpts, multilingual embeddings, and a provenance-aware local Chroma index are available. Retrieval has been measured on the fixed Q&A set. Citation-checked generation is available for fixed public questions, and answer correctness, claim support, and abstention have been graded on the same set.
 
 ## Architecture
 
@@ -26,7 +27,7 @@ The FTI pattern is mapped to this retrieval system as follows:
 | Indexing | Validated chunks | Multilingual embeddings and vector index | Phases 3–4 |
 | Serving | Question, index, and cited passages | Grounded answer with resolution and article citations | Phases 5–6 |
 
-The implemented parsing and indexing stack uses PyMuPDF, sentence-transformers, and Chroma. Cited generation uses the Anthropic API. FastAPI and Streamlit chat integration remains planned; the repository currently has an API health endpoint and a UI landing page.
+The implemented parsing and indexing stack uses PyMuPDF, sentence-transformers, and Chroma. Cited generation uses Claude Haiku 5.5 through the Anthropic API. A FastAPI service exposes reviewed-question answers and local passage search; Streamlit chat integration remains planned.
 
 ## Roadmap
 
@@ -76,7 +77,7 @@ With the article-aware index built and `ANTHROPIC_API_KEY` set in local `.env`, 
 uv run --frozen --group embeddings python -m colombia_health_rag.serving.generation q01
 ```
 
-The command accepts IDs from the public evaluation set, not patient details. It prints a refusal if a response lacks a verified source quote. See [Methodology](docs/methodology.md) for the citation checks and their limits.
+The command accepts IDs from the public evaluation set, not patient details. `make api` serves the same operations over HTTP; the endpoints and input rules are in the [input contract](docs/interface.md#api). It prints a refusal if a response lacks a verified source quote. See [Methodology](docs/methodology.md) for the citation checks and their limits.
 
 ## Repository structure
 
@@ -99,7 +100,16 @@ Retrieval-only results on 22 answerable questions from the fixed set of original
 | Article-aware | 0.454545 | 0.863636 | 0.629270 |
 | Fixed-window | 0.590909 | 0.772727 | 0.674260 |
 
-The [reproducible report](data/07_reporting/retrieval-v1.json) includes hit@3, hit@10, input fingerprints, and per-question ranks. Four questions outside the corpus are excluded from these retrieval metrics. Answer correctness, citation faithfulness, and abstention have not yet been evaluated.
+The [reproducible report](data/07_reporting/retrieval-v1.json) includes hit@3, hit@10, input fingerprints, and per-question ranks. Four questions outside the corpus are excluded from these retrieval metrics.
+
+Cited answers on the same 26 questions, graded per the [answer rubric](docs/methodology.md#answer-evaluation):
+
+| Generation model | Correct of 22 answerable | Correct of answered | Claims supported | Abstained without evidence |
+|---|---:|---:|---:|---:|
+| Claude Sonnet 4.6 (baseline) | 16 | 16/17 | 24/26 | 6/7 |
+| Claude Haiku 5.5 (current) | 18 | 18/18 | 24/24 | 7/7 |
+
+Grades were assigned by Claude Opus 5.5 with a published rationale per question; see the [grades and metrics](data/07_reporting/answer-quality-v1.json) and the evaluation limits in [Methodology](docs/methodology.md#limits).
 
 ## Author
 

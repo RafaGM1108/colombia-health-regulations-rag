@@ -6,6 +6,9 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- FastAPI endpoints for reviewed public questions, local passage search, and cited answers with official PDF page links, typed errors, and an informational-only disclaimer.
+- Privacy-bounded service layer: cited answers only for reviewed public question IDs, local-only free-form passage search, and a documented input contract.
+- Graded answer evaluation on the fixed question set: per-run raw outputs, refusal reasons, a correctness and claim-support rubric, checksum-bound grade files, and answer-quality metrics comparing two generation models.
 - Anthropic-backed cited generation from verified local retrieval, with source-quote checks and conservative refusals.
 - Reproducible retrieval evaluation with hit rate@k, MRR, per-question evidence ranks, and an overlapping fixed-window comparison on the official corpus.
 - Fixed Spanish retrieval evaluation set with official-source article and annex locators, expected answers, and unanswerable cases.
@@ -27,5 +30,6 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Changed
 
+- Switched cited generation from Claude Sonnet 4.6 to Claude Haiku 5.5 at `high` effort, based on the graded comparison.
 - Updated the README to reflect the available local index and measured retrieval results.
 - Adapted the data-science template to article-level regulation retrieval and removed unrelated template content.
