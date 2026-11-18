@@ -82,26 +82,42 @@ def test_supported_claim_uses_only_verified_citation_metadata() -> None:
 
 
 @pytest.mark.parametrize(
-    "response",
+    ("response", "reason"),
     [
-        {"abstain": True, "claims": []},
-        _draft(evidence_id="E2"),
-        _draft(quote="Una frase inventada que no aparece en la norma."),
-        {"abstain": False, "claims": []},
-        "not json",
+        ({"abstain": True, "claims": []}, "abstained"),
+        (_draft(evidence_id="E2"), "unverified_citation"),
+        (_draft(quote="Una frase inventada que no aparece en la norma."), "unverified_citation"),
+        ({"abstain": False, "claims": []}, "invalid_output"),
+        ("not json", "invalid_output"),
     ],
 )
-def test_missing_or_invalid_support_is_refused(response: dict[str, object] | str) -> None:
+def test_missing_or_invalid_support_is_refused(
+    response: dict[str, object] | str, reason: str
+) -> None:
     result = answer_from_hits("¿Quién registra la prescripción?", [_hit()], FakeGenerator(response))
     assert result.refused
+    assert result.refusal_reason == reason
     assert result.claims == ()
     assert "No pude verificar" in result.text
+
+
+def test_whitespace_claim_text_is_invalid_output() -> None:
+    draft = _draft()
+    cast(list[dict[str, str]], draft["claims"])[0]["text"] = "   "
+    result = answer_from_hits("¿Quién registra la prescripción?", [_hit()], FakeGenerator(draft))
+    assert result.refusal_reason == "invalid_output"
+
+
+def test_supported_answer_has_no_refusal_reason() -> None:
+    result = answer_from_hits("¿Quién registra?", [_hit()], FakeGenerator(_draft()))
+    assert result.refusal_reason is None
 
 
 def test_no_hits_refuses_without_api_call() -> None:
     generator = FakeGenerator(_draft())
     result = answer_from_hits("¿Qué dice la norma?", [], generator)
     assert result.refused
+    assert result.refusal_reason == "no_evidence"
     assert generator.prompts == []
 
 

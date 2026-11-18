@@ -1,7 +1,7 @@
 PACKAGE := colombia_health_rag
 export UV_CACHE_DIR := .uv-cache
 
-.PHONY: help install lint typecheck test coverage security corpus-check embeddings index evaluate app api docs docs-check clean
+.PHONY: help install lint typecheck test coverage security corpus-check embeddings index evaluate evaluate-answers app api docs docs-check clean
 
 help:  ## Show this help
 	@grep -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -40,6 +40,9 @@ index:  ## Build a local provenance-aware search index from embedding batches
 
 evaluate:  ## Compare article-aware and fixed-window retrieval on the frozen Q&A set
 	uv run --frozen --group embeddings python -m colombia_health_rag.evaluation.retrieval
+
+evaluate-answers:  ## Generate cited answers for the frozen Q&A set (requires ANTHROPIC_API_KEY)
+	uv run --frozen --group embeddings python -m colombia_health_rag.evaluation.answers
 
 app:  ## Launch the Streamlit app
 	uv run --frozen streamlit run src/$(PACKAGE)/app/main.py

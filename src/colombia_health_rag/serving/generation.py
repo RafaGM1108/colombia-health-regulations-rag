@@ -7,7 +7,7 @@ import re
 from dataclasses import dataclass
 from importlib import import_module
 from pathlib import Path
-from typing import Protocol, cast
+from typing import Literal, Protocol, cast
 from urllib.parse import urlparse
 
 from anthropic import Anthropic
@@ -28,6 +28,8 @@ from colombia_health_rag.indexing.vector_index import SearchHit, build_index, se
 
 GENERATION_MODEL = "claude-sonnet-4-6"
 REFUSAL = "No pude verificar una respuesta respaldada por las fuentes oficiales revisadas."
+# Why an answer was refused; evaluation separates model abstention from failed checks.
+RefusalReason = Literal["no_evidence", "abstained", "invalid_output", "unverified_citation"]
 SYSTEM_PROMPT = (
     "Responde en español solo sobre el texto original de las normas incluidas en los extractos. "
     "No afirmes que una norma sigue vigente ni des consejo médico o jurídico. "
@@ -115,6 +117,7 @@ class Answer:
     text: str
     refused: bool
     claims: tuple[SupportedClaim, ...]
+    refusal_reason: RefusalReason | None = None
 
 
 class TextGenerator(Protocol):
@@ -213,8 +216,8 @@ def _citation(hit: SearchHit) -> Citation:
     )
 
 
-def _refuse() -> Answer:
-    return Answer(text=REFUSAL, refused=True, claims=())
+def _refuse(reason: RefusalReason) -> Answer:
+    return Answer(text=REFUSAL, refused=True, claims=(), refusal_reason=reason)
 
 
 def _public_question(question: str) -> str:
@@ -229,7 +232,7 @@ def answer_from_hits(question: str, hits: list[SearchHit], generator: TextGenera
     """Require a matching source quote and render citations from verified metadata."""
     question = _public_question(question)
     if not hits:
-        return _refuse()
+        return _refuse("no_evidence")
     selected = hits[:5]
     citations = {f"E{number}": _citation(hit) for number, hit in enumerate(selected, start=1)}
     evidence = [
@@ -244,18 +247,22 @@ def answer_from_hits(question: str, hits: list[SearchHit], generator: TextGenera
     try:
         draft = DraftAnswer.model_validate_json(generator.generate(prompt))
     except (ValueError, ValidationError):
-        return _refuse()
+        return _refuse("invalid_output")
     if draft.abstain:
-        return _refuse()
+        return _refuse("abstained")
     claims: list[SupportedClaim] = []
     for item in draft.claims:
         number = int(item.evidence_id[1:])
-        if number > len(selected):
-            return _refuse()
         quote = normalize_text(item.quote)
         claim_text = normalize_text(item.text)
-        if not claim_text or not quote or quote not in normalize_text(selected[number - 1].text):
-            return _refuse()
+        if not claim_text:
+            return _refuse("invalid_output")
+        if (
+            number > len(selected)
+            or not quote
+            or quote not in normalize_text(selected[number - 1].text)
+        ):
+            return _refuse("unverified_citation")
         claims.append(
             SupportedClaim(text=claim_text, quote=quote, citation=citations[item.evidence_id])
         )
@@ -267,15 +274,8 @@ def answer_from_hits(question: str, hits: list[SearchHit], generator: TextGenera
     return Answer(text="\n".join(lines), refused=False, claims=tuple(claims))
 
 
-def answer_from_index(
-    question: str,
-    index_dir: Path,
-    encoder: Encoder,
-    generator: TextGenerator,
-    *,
-    k: int = 5,
-) -> Answer:
-    """Retrieve from the local verified index and answer with cited evidence."""
+def retrieve(question: str, index_dir: Path, encoder: Encoder, *, k: int = 5) -> list[SearchHit]:
+    """Return up to five passages from the local verified index for one public question."""
     question = _public_question(question)
     if not 1 <= k <= 5:
         raise ValueError("Generation accepts between one and five passages")
@@ -285,7 +285,37 @@ def answer_from_index(
     vectors = [[float(value) for value in vector] for vector in encoded]
     if not _valid_vectors(vectors, 1, MODEL_DIMENSION):
         raise ValueError("Query encoder returned an invalid vector")
-    return answer_from_hits(question, search_index(index_dir, vectors[0], k=k), generator)
+    return search_index(index_dir, vectors[0], k=k)
+
+
+def answer_from_index(
+    question: str,
+    index_dir: Path,
+    encoder: Encoder,
+    generator: TextGenerator,
+    *,
+    k: int = 5,
+) -> Answer:
+    """Retrieve from the local verified index and answer with cited evidence."""
+    return answer_from_hits(question, retrieve(question, index_dir, encoder, k=k), generator)
+
+
+def open_article_index(root: Path) -> tuple[str, Path, Encoder]:
+    """Verify the article-aware index used in the retrieval report and load its encoder."""
+    report = json.loads((root / "data/07_reporting/retrieval-v1.json").read_bytes())
+    build_id = cast(str, report["results"]["article_aware"]["build_id"])
+    index_dir = build_index(root, root / "data/04_embeddings" / build_id)
+    sentence_transformers = import_module("sentence_transformers")
+    model = sentence_transformers.SentenceTransformer(
+        MODEL_ID, revision=MODEL_REVISION, device="cpu", trust_remote_code=False
+    )
+    return build_id, index_dir, cast(Encoder, model)
+
+
+def api_key_from_env(root: Path) -> str:
+    """Read the Anthropic key from the environment or the ignored local `.env` file."""
+    load_dotenv(root / ".env", override=False)
+    return os.getenv("ANTHROPIC_API_KEY", "")
 
 
 def main() -> None:
@@ -303,20 +333,11 @@ def main() -> None:
     )
     if question is None:
         parser.error("Unknown public evaluation question ID")
-    load_dotenv(root / ".env", override=False)
-    api_key = os.getenv("ANTHROPIC_API_KEY", "")
+    api_key = api_key_from_env(root)
     if not api_key:
         parser.error("Set ANTHROPIC_API_KEY in the local .env file or environment")
-    report = json.loads((root / "data/07_reporting/retrieval-v1.json").read_bytes())
-    build_id = report["results"]["article_aware"]["build_id"]
-    index_dir = build_index(root, root / "data/04_embeddings" / build_id)
-    sentence_transformers = import_module("sentence_transformers")
-    model = sentence_transformers.SentenceTransformer(
-        MODEL_ID, revision=MODEL_REVISION, device="cpu", trust_remote_code=False
-    )
-    result = answer_from_index(
-        question, index_dir, cast(Encoder, model), AnthropicGenerator(api_key)
-    )
+    _, index_dir, encoder = open_article_index(root)
+    result = answer_from_index(question, index_dir, encoder, AnthropicGenerator(api_key))
     print(result.text)
 
 
