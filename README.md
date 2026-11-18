@@ -4,7 +4,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-Retrieval and article-level citation of public Colombian health regulations. The planned system answers questions about topics such as MIPRES prescriptions and home healthcare using only official public documents.
+Retrieval and article-level citation of public Colombian health regulations. The system answers questions about topics such as MIPRES prescriptions and home healthcare using only official public documents.
 
 > Informational only; not legal or medical advice. Confirm current rules in the cited official document before acting.
 
@@ -27,7 +27,7 @@ The FTI pattern is mapped to this retrieval system as follows:
 | Indexing | Validated chunks | Multilingual embeddings and vector index | Phases 3–4 |
 | Serving | Question, index, and cited passages | Grounded answer with resolution and article citations | Phases 5–6 |
 
-The implemented parsing and indexing stack uses PyMuPDF, sentence-transformers, and Chroma. Cited generation uses Claude Haiku 5.5 through the Anthropic API. A FastAPI service exposes reviewed-question answers and local passage search; Streamlit chat integration remains planned.
+The implemented parsing and indexing stack uses PyMuPDF, sentence-transformers, and Chroma. Cited generation uses Claude Haiku 5.5 through the Anthropic API. A FastAPI service and a Streamlit chat expose reviewed-question answers and local passage search.
 
 ## Roadmap
 
@@ -55,7 +55,7 @@ make install
 make lint typecheck test
 ```
 
-The local API health endpoint is available with `make api`; the landing page with `make app`. A real Anthropic key belongs only in a local `.env` file, never in Git.
+The local API is available with `make api` and the chat UI with `make app`; both need the local index described below. A real Anthropic key belongs only in a local `.env` file, never in Git.
 
 CI checks lockfile consistency, formatting, lint, types, tests with coverage, documentation, static security issues, and committed-file secrets. The same core checks run locally with `make lint typecheck test`.
 
@@ -77,7 +77,7 @@ With the article-aware index built and `ANTHROPIC_API_KEY` set in local `.env`, 
 uv run --frozen --group embeddings python -m colombia_health_rag.serving.generation q01
 ```
 
-The command accepts IDs from the public evaluation set, not patient details. `make api` serves the same operations over HTTP; the endpoints and input rules are in the [input contract](docs/interface.md#api). It prints a refusal if a response lacks a verified source quote. See [Methodology](docs/methodology.md) for the citation checks and their limits.
+The command accepts IDs from the public evaluation set, not patient details. `make api` serves the same operations over HTTP and `make app` opens the Spanish chat UI; the endpoints and input rules are in the [input contract](docs/interface.md#api). It prints a refusal if a response lacks a verified source quote. See [Methodology](docs/methodology.md) for the citation checks and their limits.
 
 ## Repository structure
 
