@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- Spanish Streamlit chat for reviewed public questions and local passage search, with quotations, official PDF page links, refusal reasons, and a visible informational-only disclaimer.
 - FastAPI endpoints for reviewed public questions, local passage search, and cited answers with official PDF page links, typed errors, and an informational-only disclaimer.
 - Privacy-bounded service layer: cited answers only for reviewed public question IDs, local-only free-form passage search, and a documented input contract.
 - Graded answer evaluation on the fixed question set: per-run raw outputs, refusal reasons, a correctness and claim-support rubric, checksum-bound grade files, and answer-quality metrics comparing two generation models.

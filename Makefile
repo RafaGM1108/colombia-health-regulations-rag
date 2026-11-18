@@ -48,7 +48,7 @@ score-answers:  ## Validate graded runs against their reports and compute answer
 	uv run --frozen python -m colombia_health_rag.evaluation.grading
 
 app:  ## Launch the Streamlit app
-	uv run --frozen streamlit run src/$(PACKAGE)/app/main.py
+	uv run --frozen --group embeddings streamlit run src/$(PACKAGE)/app/main.py
 
 api:  ## Launch the FastAPI service with auto-reload
 	uv run --frozen --group embeddings uvicorn $(PACKAGE).api.main:app --reload

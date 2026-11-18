@@ -28,6 +28,15 @@ Search embeds the query with the pinned E5 model on the serving machine and rank
 
 Unknown fields are rejected, so free text cannot be passed to `/answers`. Errors: `404` for an unknown question ID, `422` for invalid input, `503` when the index or the API key is missing, and `502` when the generation service fails. Every search and answer response includes the informational-only disclaimer.
 
+## Chat UI
+
+`make app` opens the Streamlit interface in Spanish. It shows the informational-only disclaimer at the top and has two tabs:
+
+- **Preguntas revisadas**: choose a reviewed public question and press *Responder*. Each claim appears with its exact quotation and a link to the official PDF page; a refusal shows its reason. The conversation lives only in the browser session and is not saved.
+- **Buscar en la normativa**: type a regulation topic to list official passages with their citations and page links. The search runs locally and the text field warns against entering personal details.
+
+It uses the same service and rules as the API, so it needs the same local index and, for answers, the same API key.
+
 ## Limits
 
 - The answer set is fixed. New public questions require a reviewed change to the question set, not user input.
