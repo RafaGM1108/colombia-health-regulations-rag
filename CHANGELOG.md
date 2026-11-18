@@ -30,6 +30,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Changed
 
+- Updated locked Python dependencies, including PyMuPDF 2.1, sentence-transformers 6.2, and PyTorch 2.15. Parsed passages and retrieval metrics are unchanged; the retrieval report records the new embedding build IDs.
 - Switched cited generation from Claude Sonnet 4.6 to Claude Haiku 5.5 at `high` effort, based on the graded comparison.
 - Updated the README to reflect the available local index and measured retrieval results.
 - Adapted the data-science template to article-level regulation retrieval and removed unrelated template content.
