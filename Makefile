@@ -51,7 +51,7 @@ app:  ## Launch the Streamlit app
 	uv run --frozen streamlit run src/$(PACKAGE)/app/main.py
 
 api:  ## Launch the FastAPI service with auto-reload
-	uv run --frozen uvicorn $(PACKAGE).api.main:app --reload
+	uv run --frozen --group embeddings uvicorn $(PACKAGE).api.main:app --reload
 
 docs:  ## Serve the documentation locally
 	uv run --frozen mkdocs serve
