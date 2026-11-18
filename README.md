@@ -77,7 +77,7 @@ With the article-aware index built and `ANTHROPIC_API_KEY` set in local `.env`, 
 uv run --frozen --group embeddings python -m colombia_health_rag.serving.generation q01
 ```
 
-The command accepts IDs from the public evaluation set, not patient details. `make api` serves the same operations over HTTP and `make app` opens the Spanish chat UI; the endpoints and input rules are in the [input contract](docs/interface.md#api). It prints a refusal if a response lacks a verified source quote. See [Methodology](docs/methodology.md) for the citation checks and their limits.
+The command accepts IDs from the public evaluation set, not patient details, and prints a refusal if a response lacks a verified source quote. `make api` serves the same operations over HTTP and `make app` opens the Spanish chat UI; the endpoints and input rules are in the [input contract](docs/interface.md). See [Methodology](docs/methodology.md) for the citation checks and their limits.
 
 ## Repository structure
 
@@ -86,7 +86,7 @@ conf/base.yaml                 Paths and application name
 data/                          Local raw, parsed, chunk, embedding, index, evaluation, reporting layers
 docs/                          Source policy and methodology
 src/colombia_health_rag/       Ingestion, indexing, serving, API, UI, and shared utilities
-tests/                         Parsing, indexing, evaluation, and API checks
+tests/                         Parsing, indexing, evaluation, API, and UI checks
 ```
 
 The [data policy](data/README.md) explains the layer boundaries. [Methodology](docs/methodology.md) describes the retrieval evaluation and citation contract.
@@ -110,6 +110,31 @@ Cited answers on the same 26 questions, graded per the [answer rubric](docs/meth
 | Claude Haiku 5.5 (current) | 18 | 18/18 | 24/24 | 7/7 |
 
 Grades were assigned by Claude Opus 5.5 with a published rationale per question; see the [grades and metrics](data/07_reporting/answer-quality-v1.json) and the evaluation limits in [Methodology](docs/methodology.md#limits).
+
+### Reproducing the results
+
+Every figure above is read from a tracked file in `data/07_reporting/`, and a test checks that the README tables match those files.
+
+| Step | Command | Output | Deterministic |
+|---|---|---|---|
+| Official sources | `make corpus-check` | Four PDFs in `data/01_raw/`, verified by SHA-256 | Yes, while the published PDFs are unchanged |
+| Embeddings and index | `make embeddings`, `make index` | Local build named by the build ID in `retrieval-v1.json` | Yes on CPU with the locked dependencies; use `--build-id` when several builds exist |
+| Retrieval metrics | `make evaluate` | `retrieval-v1.json` | Yes |
+| Cited answers | `make evaluate-answers` | `answers-<model>.json` | No: needs `ANTHROPIC_API_KEY`, costs API usage, and model output can vary between runs |
+| Answer metrics | `make score-answers` | `answer-quality-v1.json` from the committed grades | Yes |
+
+A new answer run produces a new report, so its grades must be redone; `make score-answers` rejects grades whose report checksum no longer matches.
+
+### Known limits
+
+- The corpus holds four original, unconsolidated resolutions. Answers describe those texts, not the law currently in force.
+- The evaluation set is small and hand-written: 22 answerable and 4 out-of-corpus questions. Each generation model was run once.
+- Retrieval misses the gold location for 3 of 22 questions within the five passages sent to the model; those questions can only be refused.
+- Annex and manual text enters the index only after manual OCR review, so most of the Resolution 3100 manual is not searchable.
+- Answers were graded by a language model from the same family as the systems under test; per-question rationales are published for review.
+- Generation is limited to the reviewed public questions; free-form text is searched locally but not answered.
+
+The [v1.0.0 release checklist](docs/release.md) lists the checks to run before tagging.
 
 ## Author
 
