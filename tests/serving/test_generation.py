@@ -13,9 +13,11 @@ from anthropic import Anthropic
 from colombia_health_rag.indexing.embeddings import MODEL_DIMENSION
 from colombia_health_rag.indexing.vector_index import SearchHit
 from colombia_health_rag.serving.generation import (
+    GENERATION_EFFORT,
     GENERATION_MODEL,
     OUTPUT_SCHEMA,
     AnthropicGenerator,
+    ModelRefusalError,
     answer_from_hits,
     answer_from_index,
 )
@@ -196,7 +198,10 @@ def test_retrieval_uses_query_prefix_and_normalized_vector(monkeypatch: pytest.M
 def test_anthropic_call_requests_json_schema_and_rejects_truncation() -> None:
     response = SimpleNamespace(
         stop_reason="end_turn",
-        content=[SimpleNamespace(type="text", text=json.dumps(_draft()))],
+        content=[
+            SimpleNamespace(type="thinking", thinking="", signature="sig"),
+            SimpleNamespace(type="text", text=json.dumps(_draft())),
+        ],
     )
     create = Mock(return_value=response)
     client = SimpleNamespace(messages=SimpleNamespace(create=create))
@@ -206,9 +211,29 @@ def test_anthropic_call_requests_json_schema_and_rejects_truncation() -> None:
     assert json.loads(generator.generate("public question")) == _draft()
     kwargs = create.call_args.kwargs
     assert kwargs["model"] == GENERATION_MODEL
+    assert kwargs["output_config"]["effort"] == GENERATION_EFFORT
     assert kwargs["output_config"]["format"]["schema"] == OUTPUT_SCHEMA
     assert kwargs["messages"] == [{"role": "user", "content": "public question"}]
+    assert not {"temperature", "top_p", "top_k", "thinking"} & kwargs.keys()
 
     response.stop_reason = "max_tokens"
     with pytest.raises(ValueError, match="complete"):
         generator.generate("public question")
+
+    response.stop_reason = "end_turn"
+    response.content = [SimpleNamespace(type="thinking", thinking="", signature="sig")]
+    with pytest.raises(ValueError, match="complete"):
+        generator.generate("public question")
+
+
+def test_model_refusal_is_recorded_separately() -> None:
+    response = SimpleNamespace(stop_reason="refusal", content=[])
+    client = SimpleNamespace(messages=SimpleNamespace(create=Mock(return_value=response)))
+    generator = AnthropicGenerator("local-test-key")
+    generator.client = cast(Anthropic, client)
+
+    with pytest.raises(ModelRefusalError):
+        generator.generate("public question")
+    result = answer_from_hits("¿Quién registra la prescripción?", [_hit()], generator)
+    assert result.refused
+    assert result.refusal_reason == "model_refusal"

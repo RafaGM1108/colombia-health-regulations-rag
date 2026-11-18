@@ -1,0 +1,1242 @@
+{
+  "generated_at": "2026-11-18T23:22:43+00:00",
+  "generation_model": "claude-sonnet-4-6",
+  "generator_config_sha256": "2716d9802c52c3626353d99ffb855e89ed95cc2de96d5f7cb7e5a764dad2c655",
+  "index_build_id": "c652d29b4e708444e65f",
+  "question_set_sha256": "ccf7b3b22e59d0a6f82bf3f64e8ac33b32c0af4d55bc3ac84ce675aee42c36a0",
+  "results": [
+    {
+      "answerable": true,
+      "claims": [],
+      "gold_retrieved": true,
+      "question_id": "q01",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"La prescripción en MIPRES es realizada por el profesional de la salud tratante, y al finalizar el diligenciamiento MIPRES asigna un número de prescripción.\",\"evidence_id\":\"E5\",\"quote\":\"La prescripción de las tecnologías en salud o servicios complementarios de que trata este acto administrativo, será realizada por el profesional de la salud tratante [...] a través de MIPRES [...] Una vez finalice el diligenciamiento de la prescripción, MIPRES asignará un número de prescripción.\"}]}",
+      "refusal_reason": "unverified_citation",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 10",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "e94cd6b6ff780b36e2e3879f513aa0fb197fec711cc4e79a19ea47b2bbc1ac48"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 10",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "24cde1afdb33badc0a2d84bf5904150ed81c62d2b0e803d7fac57d9d92d73f0e"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 6",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "011b59931a7d3346abeab4523a31e1743edc9a75e96404d2ce195df811890f8e"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 14",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "9ad6ce56b3f4b29d89fc624da61753a129111e70c5e9b4ef5d31bd6306fe3139"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 5",
+          "evidence_id": "E5",
+          "is_gold": true,
+          "passage_id": "7e55487b86ea4ec66f9793ac3c487c1fb856d974312b680ed30b38afa93f245e"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [],
+      "gold_retrieved": true,
+      "question_id": "q02",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Cuando la falta de conectividad impide acceder a MIPRES, el profesional de la salud debe realizar la prescripción mediante el formulario de contingencia establecido por el Ministerio.\",\"evidence_id\":\"E2\",\"quote\":\"El profesional de la salud deberá realizar la prescripción mediante el formulario de contingencia establecido por este Ministerio cuando se presenten las siguientes circunstancias que imposibilitan el acceso a la herramienta tecnológica: [...] 15.3. Falta de conectividad.\"}]}",
+      "refusal_reason": "unverified_citation",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 6",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "011b59931a7d3346abeab4523a31e1743edc9a75e96404d2ce195df811890f8e"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 15",
+          "evidence_id": "E2",
+          "is_gold": true,
+          "passage_id": "dfafb3a8321410b12f048e3625cb094a5e76fb221cf518bd8c0dfdb4dfa1ebb9"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 15",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "0737bf5166440afb17e23e641deb8aecc450343e3c8ed8278928c859cc3a68ef"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 45",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "3efc4695ab61a60ddddaea1838f138f76de969d64ebc894fa120c8785b915d5d"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 10",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "24cde1afdb33badc0a2d84bf5904150ed81c62d2b0e803d7fac57d9d92d73f0e"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 21",
+          "quote": "Si la prescripción se genera como ambulatoria priorizada, urgencias o en internación institucional o domiciliaria, deberá pronunciarse en un término no mayor a setenta y dos (72) horas siguientes a la solicitud del profesional de la salud.",
+          "text": "Para prescripciones generadas como internación domiciliaria, la Junta de Profesionales de la Salud debe pronunciarse en un término no mayor a setenta y dos (72) horas siguientes a la solicitud del profesional de la salud."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q03",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Para prescripciones generadas como internación domiciliaria, la Junta de Profesionales de la Salud debe pronunciarse en un término no mayor a setenta y dos (72) horas siguientes a la solicitud del profesional de la salud.\",\"evidence_id\":\"E2\",\"quote\":\"Si la prescripción se genera como ambulatoria priorizada, urgencias o en internación institucional o domiciliaria, deberá pronunciarse en un término no mayor a setenta y dos (72) horas siguientes a la solicitud del profesional de la salud.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 24",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "705d9099cbf90ca2b7a43a4bc166a46eb3b0023283b6fbca224ac66b3dcafefd"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 21",
+          "evidence_id": "E2",
+          "is_gold": true,
+          "passage_id": "31d1eb2e7b74f9d4b41767f223bd7128c29e8f638cabb9d34a0713dd61aa2afc"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 28",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "fd4a79181f6f931e5df6dd236f039916b738dbdbabc38a87d331dbdad1119c43"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 13",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "11e72e0fcc53a5f9974bba6c25f37ddb31487b58b10516ea1eac9d469560849c"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 17",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "741cc165d882145d26258bb68dcf83059b4a7390ed3b774986be872e6462f943"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 25",
+          "quote": "La IPS no podrá cobrar por la conformación y actuación de sus juntas de profesionales de la salud, por hacer parte de la integralidad de la prestación del servicio.",
+          "text": "Según la Resolución 740 de 2024, una IPS no puede cobrar por la conformación y actuación de su Junta de Profesionales de la Salud, ya que dicha actividad hace parte de la integralidad de la prestación del servicio."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q04",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Según la Resolución 740 de 2024, una IPS no puede cobrar por la conformación y actuación de su Junta de Profesionales de la Salud, ya que dicha actividad hace parte de la integralidad de la prestación del servicio.\",\"evidence_id\":\"E1\",\"quote\":\"La IPS no podrá cobrar por la conformación y actuación de sus juntas de profesionales de la salud, por hacer parte de la integralidad de la prestación del servicio.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 25",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "a46da5d7d2fa023abb6811289f82469c57853a3367ac3c946359b3e1351adb36"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 29",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "29c25a6b8a8bba5e367b22e6f8a51ef5bd5f6efad74e609399b086a6419ae5af"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 19",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "1adea80dd4b4c4dc7c81de09951d422cabc9b9190b5ef9ae57c74a79657085a2"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 17",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "741cc165d882145d26258bb68dcf83059b4a7390ed3b774986be872e6462f943"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 22",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "25c2697e9c2acb857e885b42ae02bf6c0504d72b081a58b3978aba5c1d6e2142"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 30",
+          "quote": "Servicio ambulatorio priorizado: dentro de las veinticuatro (24) horas a partir de la fecha de la prescripción.",
+          "text": "Según la Resolución 740 de 2024, el plazo de suministro para un servicio ambulatorio priorizado es de veinticuatro (24) horas a partir de la fecha de la prescripción."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q05",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Según la Resolución 740 de 2024, el plazo de suministro para un servicio ambulatorio priorizado es de veinticuatro (24) horas a partir de la fecha de la prescripción.\",\"evidence_id\":\"E1\",\"quote\":\"Servicio ambulatorio priorizado: dentro de las veinticuatro (24) horas a partir de la fecha de la prescripción.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 30",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "5f8f7e8a5a4e39c9aa8abda7109fe9005fc5d73817fdd6b41d9d45378b0b1cca"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 21",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "31d1eb2e7b74f9d4b41767f223bd7128c29e8f638cabb9d34a0713dd61aa2afc"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 12",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "fb7388bb2ba1ec72217dc0f57257fe69448c9aaf6baa9a6b92f0402ee8b2f821"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 34",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "ad8ed84a4012d31d95830ebd07b68fc1229e7632c5aefc233c8d24e056bb9309"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 25",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "717036241d907d17d402f4e18d132dc2ff305cb8544c72d4ae56033ede0d81f1"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [],
+      "gold_retrieved": false,
+      "question_id": "q06",
+      "raw_output": "{\"abstain\":true,\"claims\":[]}",
+      "refusal_reason": "abstained",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 6",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "2788a6a2de99ad89000dcdc37e19dfbe58301211014d0236ae3b847dd8dcc69b"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 3",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "940735aa2d84a8d4f1f08a1a82a173664b13d8c4365eab26f406689d0262b0ac"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 1",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "e471021d6a50b922ca658e9977d722a80cd29984dda1eff0cd2a92d6d2aaeebf"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 8",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "848a1ca22e453db49288611a5835d1dabe3e63fae680a2ff6359071ed4bccb96"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 3",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "8a93f9ba8b666a3bc0fba110dfd66a352a68739167260ba8f98d76a70548e0ce"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 3",
+          "quote": "Junta de Profesionales de la Salud: Grupo de profesionales de la salud, los cuales se reunen para analizar la pertinencia y la necesidad de",
+          "text": "Según la Resolución 1816 de 2026, la Junta de Profesionales de la Salud es responsable de analizar la pertinencia y necesidad de las prescripciones, conforme a lo establecido en su definición en dicha resolución."
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 24",
+          "quote": "Para la aprobación de la prescripción de servicios y tecnologías a las que refiere el artículo 17 de la presente resolución, corresponde a la Junta de Profesionales de la Salud tener en cuenta los siguientes criterios: complementarios no financiados COIl recursos de la Unidad de Pago por Capitación (UPC)",
+          "text": "La Resolución 1816 de 2026 establece que la Junta de Profesionales de la Salud aprueba la prescripción de servicios y tecnologías referidas en el artículo 17 de esa misma resolución, teniendo en cuenta criterios como la correlación entre la prescripción y la condición clínica del paciente."
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 24",
+          "quote": "Que la prestación solicitada no cumpla con alguno de los criterios señalados en el artículo 15 de la Ley 1751 de 2015 ni hacer parte del listado de exclusiones de la Resolución 695 de 2026 o la norma que la modifique o sustituya, salvo de algunas tecnologías en salud excluidas explícitamente, que excepcionalmente, podrán ser prescritas por el médico tratante",
+          "text": "Uno de los criterios de análisis de la Junta de Profesionales de la Salud según la Resolución 1816 de 2026 es que la prestación solicitada no cumpla con los criterios del artículo 15 de la Ley 1751 de 2015 ni haga parte del listado de exclusiones de la Resolución 695 de 2026, salvo tecnologías excluidas explícitamente que excepcionalmente puedan ser prescritas por el médico tratante."
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 24",
+          "quote": "Tratándose de las tecnologías excluidas explícitamente que, excepcionalmente, podrán ser prescritas por el médico tratante, señaladas en las tablas de referencia de la herramienta tecnológica MIPRES, se verificará que se haya otorgado el consentimiento infol\"mado firmado por parte del paciente o su representante",
+          "text": "Para las tecnologías excluidas explícitamente que excepcionalmente puedan ser prescritas, la Junta de Profesionales de la Salud verificará que se haya otorgado el consentimiento informado firmado por el paciente o su representante."
+        }
+      ],
+      "gold_retrieved": false,
+      "question_id": "q07",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Según la Resolución 1816 de 2026, la Junta de Profesionales de la Salud es responsable de analizar la pertinencia y necesidad de las prescripciones, conforme a lo establecido en su definición en dicha resolución.\",\"evidence_id\":\"E4\",\"quote\":\"Junta de Profesionales de la Salud: Grupo de profesionales de la salud, los cuales se reunen para analizar la pertinencia y la necesidad de\"},{\"text\":\"La Resolución 1816 de 2026 establece que la Junta de Profesionales de la Salud aprueba la prescripción de servicios y tecnologías referidas en el artículo 17 de esa misma resolución, teniendo en cuenta criterios como la correlación entre la prescripción y la condición clínica del paciente.\",\"evidence_id\":\"E2\",\"quote\":\"Para la aprobación de la prescripción de servicios y tecnologías a las que refiere el artículo 17 de la presente resolución, corresponde a la Junta de Profesionales de la Salud tener en cuenta los siguientes criterios: complementarios no financiados COIl recursos de la Unidad de Pago por Capitación (UPC)\"},{\"text\":\"Uno de los criterios de análisis de la Junta de Profesionales de la Salud según la Resolución 1816 de 2026 es que la prestación solicitada no cumpla con los criterios del artículo 15 de la Ley 1751 de 2015 ni haga parte del listado de exclusiones de la Resolución 695 de 2026, salvo tecnologías excluidas explícitamente que excepcionalmente puedan ser prescritas por el médico tratante.\",\"evidence_id\":\"E2\",\"quote\":\"Que la prestación solicitada no cumpla con alguno de los criterios señalados en el artículo 15 de la Ley 1751 de 2015 ni hacer parte del listado de exclusiones de la Resolución 695 de 2026 o la norma que la modifique o sustituya, salvo de algunas tecnologías en salud excluidas explícitamente, que excepcionalmente, podrán ser prescritas por el médico tratante\"},{\"text\":\"Para las tecnologías excluidas explícitamente que excepcionalmente puedan ser prescritas, la Junta de Profesionales de la Salud verificará que se haya otorgado el consentimiento informado firmado por el paciente o su representante.\",\"evidence_id\":\"E2\",\"quote\":\"Tratándose de las tecnologías excluidas explícitamente que, excepcionalmente, podrán ser prescritas por el médico tratante, señaladas en las tablas de referencia de la herramienta tecnológica MIPRES, se verificará que se haya otorgado el consentimiento infol\\\"mado firmado por parte del paciente o su representante\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 10",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "e94cd6b6ff780b36e2e3879f513aa0fb197fec711cc4e79a19ea47b2bbc1ac48"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 24",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "70b6e7f9337ea0e189e1f5bcba1c3e97bb98f65efceab72b7aedee691f8b0858"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 20",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "d69456217bc9a50c62958a1459593bfcf87faacb49e0bb94b61979349473bce1"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 3",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "dc436d526baadd649acac82eef0decffd4c87812a9f416fee3c02bae976a2712"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 17",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "741cc165d882145d26258bb68dcf83059b4a7390ed3b774986be872e6462f943"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [],
+      "gold_retrieved": true,
+      "question_id": "q08",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Según la Resolución 1816 de 2026, una IPS tiene tres (3) días calendario siguientes a la atención médica inicial para garantizar que la prescripción realizada mediante formulario de contingencia sea enviada y recibida por la EPS o entidad adaptada.\",\"evidence_id\":\"E2\",\"quote\":\"esta deberá garantizar que dicha prescripción sea enviada y recibida oportunamente por la entidad promotora de salud (EPS) o entidad adaptada (EA) a través del medio más expedito, dentro de los tres (3) días calendario siguientes, contadas a partir de la atención médica inicial.\"}]}",
+      "refusal_reason": "unverified_citation",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 15",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "dfafb3a8321410b12f048e3625cb094a5e76fb221cf518bd8c0dfdb4dfa1ebb9"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 15",
+          "evidence_id": "E2",
+          "is_gold": true,
+          "passage_id": "0737bf5166440afb17e23e641deb8aecc450343e3c8ed8278928c859cc3a68ef"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 8",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "b60052b14bac44d1de5c43a3b402e1d09631b26616fc4c1d64a9fda4351aa6b9"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 21",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "31d1eb2e7b74f9d4b41767f223bd7128c29e8f638cabb9d34a0713dd61aa2afc"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 16",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "158d957f1e3ed45704fa4633727361faffebef1fa8dbc7e02ca77b41e4a7652f"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 18",
+          "quote": "la institución prestadora de servicios de salud (IPS) deberá efectuar la prueba o las pruebas de confirmación diagnóstica dentro de un plazo máximo de sesenta (60) días, contado a partir de la fecha de la prescripción registrada en la herramienta tecnológica MIPRES",
+          "text": "El plazo máximo para realizar la prueba o pruebas de confirmación diagnóstica ante la sospecha de enfermedad huérfana es de sesenta (60) días, contado a partir de la fecha de la prescripción registrada en la herramienta tecnológica MIPRES."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q09",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"El plazo máximo para realizar la prueba o pruebas de confirmación diagnóstica ante la sospecha de enfermedad huérfana es de sesenta (60) días, contado a partir de la fecha de la prescripción registrada en la herramienta tecnológica MIPRES.\",\"evidence_id\":\"E1\",\"quote\":\"la institución prestadora de servicios de salud (IPS) deberá efectuar la prueba o las pruebas de confirmación diagnóstica dentro de un plazo máximo de sesenta (60) días, contado a partir de la fecha de la prescripción registrada en la herramienta tecnológica MIPRES\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 18",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "a3eb4e4f852834a949d3e595fa323b784628a4a47dd902d3d16b2b3f3ebfa19f"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 17",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "741cc165d882145d26258bb68dcf83059b4a7390ed3b774986be872e6462f943"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 17",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "174d94bf42186cb305bd53bce9164c8bea31df7a7cac7d8fb04064461cc5c3b3"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 3",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "dc436d526baadd649acac82eef0decffd4c87812a9f416fee3c02bae976a2712"
+        },
+        {
+          "citation": "Resolución 2080 de 2026, artículo 1",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "37d9463d1b6ac7aedb81aca44adf2d96d84da48ba8d0b832de359eba0d55af70"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 39",
+          "quote": "La incapacidad económica del afiliado al Régimen Subsidiado se presumirá, de conformidad con lo dispuesto en el artículo 157 de la Ley 100 de 1993. En consecuencia, la entidad promotora de salud (EPS) o entidad adaptada (EA) únicamente verificará la afiliación vigente, sin exigir pruebas adicionales al afiliado.",
+          "text": "Para los afiliados al Régimen Subsidiado, la incapacidad económica se presume de conformidad con el artículo 157 de la Ley 100 de 1993, por lo que la EPS o EA únicamente verifica la afiliación vigente sin exigir pruebas adicionales al afiliado."
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 40",
+          "quote": "La responsabilidad principal de la verificación de la incapacidad económica recaerá en la entidad promotora de salud (EPS) o entidad adaptada (EA), la cual deberá: 1. Realizar la verificación sin imponer cargas probatorias desproporcionadas al afiliado. 2. Abstenerse de establecer requisitos documentales no previstos en la ley.",
+          "text": "La responsabilidad principal de la verificación recae en la EPS o EA, la cual debe realizarla sin imponer cargas probatorias desproporcionadas al afiliado y absteniéndose de establecer requisitos documentales no previstos en la ley."
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 40",
+          "quote": "La verificación de la incapacidad económica deberá realizarse dentro del término máximo de tres (3) días, contados a partir del registro de la prescripción en la herramienta tecnológica MIPRES. La inactividad o falta de pronunciamiento de la EPS dentro de dicho término se entenderá como incumplimiento.",
+          "text": "La verificación de la incapacidad económica debe realizarse dentro de un término máximo de tres días contados a partir del registro de la prescripción en la herramienta tecnológica MIPRES, y la inactividad de la EPS dentro de dicho término se entenderá como incumplimiento."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q10",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Para los afiliados al Régimen Subsidiado, la incapacidad económica se presume de conformidad con el artículo 157 de la Ley 100 de 1993, por lo que la EPS o EA únicamente verifica la afiliación vigente sin exigir pruebas adicionales al afiliado.\",\"evidence_id\":\"E1\",\"quote\":\"La incapacidad económica del afiliado al Régimen Subsidiado se presumirá, de conformidad con lo dispuesto en el artículo 157 de la Ley 100 de 1993. En consecuencia, la entidad promotora de salud (EPS) o entidad adaptada (EA) únicamente verificará la afiliación vigente, sin exigir pruebas adicionales al afiliado.\"},{\"text\":\"La responsabilidad principal de la verificación recae en la EPS o EA, la cual debe realizarla sin imponer cargas probatorias desproporcionadas al afiliado y absteniéndose de establecer requisitos documentales no previstos en la ley.\",\"evidence_id\":\"E2\",\"quote\":\"La responsabilidad principal de la verificación de la incapacidad económica recaerá en la entidad promotora de salud (EPS) o entidad adaptada (EA), la cual deberá: 1. Realizar la verificación sin imponer cargas probatorias desproporcionadas al afiliado. 2. Abstenerse de establecer requisitos documentales no previstos en la ley.\"},{\"text\":\"La verificación de la incapacidad económica debe realizarse dentro de un término máximo de tres días contados a partir del registro de la prescripción en la herramienta tecnológica MIPRES, y la inactividad de la EPS dentro de dicho término se entenderá como incumplimiento.\",\"evidence_id\":\"E2\",\"quote\":\"La verificación de la incapacidad económica deberá realizarse dentro del término máximo de tres (3) días, contados a partir del registro de la prescripción en la herramienta tecnológica MIPRES. La inactividad o falta de pronunciamiento de la EPS dentro de dicho término se entenderá como incumplimiento.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 39",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "f347d1ba83789fc884f02bfc51a19d3797109d449aece17cbf7d68ce9b7ddad5"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 40",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "5a4556d1cdda80664ee366ff25b05a277a717de55e5bd2c161b61d90c5e5e3a9"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 3",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "dc436d526baadd649acac82eef0decffd4c87812a9f416fee3c02bae976a2712"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 18",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "a3eb4e4f852834a949d3e595fa323b784628a4a47dd902d3d16b2b3f3ebfa19f"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 3",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "8a93f9ba8b666a3bc0fba110dfd66a352a68739167260ba8f98d76a70548e0ce"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 59",
+          "quote": "Establézcase un periodo de transición de tres (3) meses, contados a partir de la expedición de la presente resolución, con el fin de garantizar el ajuste operativo de la herramienta tecnológica MIPRES y la adecuada preparación de los responsables contemplados en el presente acto administrativo.",
+          "text": "El periodo de transición para el ajuste operativo de la herramienta tecnológica MIPRES previsto por la Resolución 1816 de 2026 es de tres (3) meses, contados a partir de la expedición de dicha resolución."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q11",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"El periodo de transición para el ajuste operativo de la herramienta tecnológica MIPRES previsto por la Resolución 1816 de 2026 es de tres (3) meses, contados a partir de la expedición de dicha resolución.\",\"evidence_id\":\"E1\",\"quote\":\"Establézcase un periodo de transición de tres (3) meses, contados a partir de la expedición de la presente resolución, con el fin de garantizar el ajuste operativo de la herramienta tecnológica MIPRES y la adecuada preparación de los responsables contemplados en el presente acto administrativo.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 59",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "f8e2dee4d5884ad68933f8e285cc5713ca11ec9cead3262f3dcf8977cf2199cf"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 6",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "011b59931a7d3346abeab4523a31e1743edc9a75e96404d2ce195df811890f8e"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 24",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "70b6e7f9337ea0e189e1f5bcba1c3e97bb98f65efceab72b7aedee691f8b0858"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 35",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "3bb794fa4cbe3de2ad3765af3148cb88e9c88246bf1137f8ea8ab0f93342bf93"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 21",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "31d1eb2e7b74f9d4b41767f223bd7128c29e8f638cabb9d34a0713dd61aa2afc"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 60",
+          "quote": "derogará las Resoluciones 740 de 2024 y 2622 de 2024 una vez finalice el periodo de los tres (3) meses de transición establecidos en el artículo 59 de la presente resolución",
+          "text": "La Resolución 1816 de 2026 prevé derogar las Resoluciones 740 de 2024 y 2622 de 2024 una vez finalice el periodo de tres (3) meses de transición establecido en su artículo 59."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q12",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"La Resolución 1816 de 2026 prevé derogar las Resoluciones 740 de 2024 y 2622 de 2024 una vez finalice el periodo de tres (3) meses de transición establecido en su artículo 59.\",\"evidence_id\":\"E1\",\"quote\":\"derogará las Resoluciones 740 de 2024 y 2622 de 2024 una vez finalice el periodo de los tres (3) meses de transición establecidos en el artículo 59 de la presente resolución\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 1816 de 2026, artículo 60",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "5b4534a66fd565fbf18276f9a8e0674deb5051ca2b23abc34e9c43c898393773"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 27",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "3ad87b71fa1aa6e5e8a0c89a67264fe087ac359d50115252731a1016d0224e1b"
+        },
+        {
+          "citation": "Resolución 2080 de 2026, artículo 1",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "37d9463d1b6ac7aedb81aca44adf2d96d84da48ba8d0b832de359eba0d55af70"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 3",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "dc436d526baadd649acac82eef0decffd4c87812a9f416fee3c02bae976a2712"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 53",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "cbd5d80dfcf7a98b136e49fb477a53c229db85804bec4fc20bcc3c6e3bc09c96"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 4",
+          "quote": "Todo prestador de servicios de salud debe estar inscrito en el Registro Especial de Prestadores de Servicios de Salud -REPS, registrando como mínimo una sede y por lo menos un servicio habilitado.",
+          "text": "Todo prestador de servicios de salud debe registrar como mínimo una sede y por lo menos un servicio habilitado para su inscripción en el REPS."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q13",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Todo prestador de servicios de salud debe registrar como mínimo una sede y por lo menos un servicio habilitado para su inscripción en el REPS.\",\"evidence_id\":\"E2\",\"quote\":\"Todo prestador de servicios de salud debe estar inscrito en el Registro Especial de Prestadores de Servicios de Salud -REPS, registrando como mínimo una sede y por lo menos un servicio habilitado.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 8",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "df6272405a880dd94e4be74630a2fab6280426a9e49a09c2391bcf0c02ef3aea"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 4",
+          "evidence_id": "E2",
+          "is_gold": true,
+          "passage_id": "0467bd1f13c45f4ef5ac965908052476cb95b737b030401bdf8e0b0d69f68996"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 7",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "0de5866005b92d7b2a8fd52d953cdec7062795fb555cf561b2e29d58f0695ebb"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 17",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "174d94bf42186cb305bd53bce9164c8bea31df7a7cac7d8fb04064461cc5c3b3"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 22",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "0d41730ee34206eabfe84e06fa351a41a452b18862b6b538609611faa065049c"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 5",
+          "quote": "Cuando el prestador de servicios de salud realice la autoevaluación a los servicios y evidencie el incumplimiento de una o más condiciones de habilitación, deberá abstenerse de registrar, ofertar y prestar el servicio.",
+          "text": "Cuando el prestador evidencie incumplimiento de una o más condiciones de habilitación en su autoevaluación, deberá abstenerse de registrar, ofertar y prestar el servicio."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q14",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Cuando el prestador evidencie incumplimiento de una o más condiciones de habilitación en su autoevaluación, deberá abstenerse de registrar, ofertar y prestar el servicio.\",\"evidence_id\":\"E1\",\"quote\":\"Cuando el prestador de servicios de salud realice la autoevaluación a los servicios y evidencie el incumplimiento de una o más condiciones de habilitación, deberá abstenerse de registrar, ofertar y prestar el servicio.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 5",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "30646486b1ad398c05f1a8085216ea55cc82a3a09bc6661003c951ce14cb8c66"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 26",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "661b2b3f2a862b68d5d63cea4c480f70a7c2f8cf1c25fde739b422181a5db46a"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 3",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "39919e044f8b78efe6178998f93b967e0d1f1c0c80eecd8499d12e4401f1885b"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 11",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "387df3c22914191591d639623c1157567cddcfe29013b68961870f86b3301036"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 16",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "34af89fbaf10d77c804bc92a5b64f0c504981cd02110e1fcf1386ebcf8937c38"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 14",
+          "quote": "Para habilitar nuevos servicios oncológicos, de urgencias, atención del parto, transporte asistencial y todos los servicios de alta complejidad, esta visita se realiza por parte de la secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias.",
+          "text": "Se requiere visita de verificación previa para habilitar nuevos servicios oncológicos, de urgencias, atención del parto, transporte asistencial y todos los servicios de alta complejidad."
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 14",
+          "quote": "Para inscribir una nueva institución prestadora de servicios de salud; esta visita se realiza por parte de la secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias, dentro de los seis (6) meses siguientes al cumplimiento de las condiciones definidas en el numeral 8.4 del artículo 8 de la presente resolución.",
+          "text": "También se requiere visita de verificación previa para inscribir una nueva institución prestadora de servicios de salud."
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 14",
+          "quote": "Para cambiar la complejidad de un servicio de baja o mediana complejidad a alta complejidad; esta visita se realizará por parte de la secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias.",
+          "text": "Igualmente se requiere visita de verificación previa para cambiar la complejidad de un servicio de baja o mediana complejidad a alta complejidad."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q15",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"Se requiere visita de verificación previa para habilitar nuevos servicios oncológicos, de urgencias, atención del parto, transporte asistencial y todos los servicios de alta complejidad.\",\"evidence_id\":\"E2\",\"quote\":\"Para habilitar nuevos servicios oncológicos, de urgencias, atención del parto, transporte asistencial y todos los servicios de alta complejidad, esta visita se realiza por parte de la secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias.\"},{\"text\":\"También se requiere visita de verificación previa para inscribir una nueva institución prestadora de servicios de salud.\",\"evidence_id\":\"E2\",\"quote\":\"Para inscribir una nueva institución prestadora de servicios de salud; esta visita se realiza por parte de la secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias, dentro de los seis (6) meses siguientes al cumplimiento de las condiciones definidas en el numeral 8.4 del artículo 8 de la presente resolución.\"},{\"text\":\"Igualmente se requiere visita de verificación previa para cambiar la complejidad de un servicio de baja o mediana complejidad a alta complejidad.\",\"evidence_id\":\"E2\",\"quote\":\"Para cambiar la complejidad de un servicio de baja o mediana complejidad a alta complejidad; esta visita se realizará por parte de la secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 17",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "174d94bf42186cb305bd53bce9164c8bea31df7a7cac7d8fb04064461cc5c3b3"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 14",
+          "evidence_id": "E2",
+          "is_gold": true,
+          "passage_id": "9b9193e3c467e418a79fdc8c379fa3991109a89bc8290b7d3aea911cedeea806"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 26",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "661b2b3f2a862b68d5d63cea4c480f70a7c2f8cf1c25fde739b422181a5db46a"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 17",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "74c85cfc806709d7686f78da9204161c3b8303832cbec53233ae4dae6919ef4c"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 16",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "34af89fbaf10d77c804bc92a5b64f0c504981cd02110e1fcf1386ebcf8937c38"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 22",
+          "quote": "La inscripción de los prestadores de servicios de salud y la habilitación de servicios de salud en el REPS son trámites gratuitos.",
+          "text": "La inscripción de los prestadores de servicios de salud y la habilitación de servicios de salud en el REPS son trámites gratuitos, es decir, no tienen costo alguno."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q16",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"La inscripción de los prestadores de servicios de salud y la habilitación de servicios de salud en el REPS son trámites gratuitos, es decir, no tienen costo alguno.\",\"evidence_id\":\"E2\",\"quote\":\"La inscripción de los prestadores de servicios de salud y la habilitación de servicios de salud en el REPS son trámites gratuitos.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 8",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "df6272405a880dd94e4be74630a2fab6280426a9e49a09c2391bcf0c02ef3aea"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 22",
+          "evidence_id": "E2",
+          "is_gold": true,
+          "passage_id": "0d41730ee34206eabfe84e06fa351a41a452b18862b6b538609611faa065049c"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 17",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "174d94bf42186cb305bd53bce9164c8bea31df7a7cac7d8fb04064461cc5c3b3"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 7",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "0de5866005b92d7b2a8fd52d953cdec7062795fb555cf561b2e29d58f0695ebb"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 4",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "0467bd1f13c45f4ef5ac965908052476cb95b737b030401bdf8e0b0d69f68996"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [],
+      "gold_retrieved": false,
+      "question_id": "q17",
+      "raw_output": "{\"abstain\":true,\"claims\":[]}",
+      "refusal_reason": "abstained",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "a2e025095334295cf5579d372444349efa576d0f6e00cd94f96b0ee2e4488f12"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 81",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "8f6a7b23a638dbeb7cfa391e377450968620d4e97d163afec237876a48c037f4"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 95",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "faafa96409f80b2317631e7ae13bddeb91ea74d9023293411c849a9b68fae808"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 96",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "31515ae613f3375c3867dd5a5e839142ea1ca552d5543f044c1610946ca32265"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "541c4b8c7f66ca742a2f54639ce763370044a5debc63035d11b32c643195c954"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 2.2, p. 22",
+          "quote": "habilitar los servicios de salud en esta modalidad ante cada secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias, donde los oferte",
+          "text": "El servicio extramural domiciliario debe habilitarse ante cada secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias, en cada lugar donde se oferte."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q18",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"El servicio extramural domiciliario debe habilitarse ante cada secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias, en cada lugar donde se oferte.\",\"evidence_id\":\"E1\",\"quote\":\"habilitar los servicios de salud en esta modalidad ante cada secretaría de salud departamental o distrital, o la entidad que tenga a cargo dichas competencias, donde los oferte\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 2.2, p. 22",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "9315efbca8334530e989def2b675a1c6d12901190662004ef125718221bf84f1"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 81",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "8f6a7b23a638dbeb7cfa391e377450968620d4e97d163afec237876a48c037f4"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 95",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "faafa96409f80b2317631e7ae13bddeb91ea74d9023293411c849a9b68fae808"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "a2e025095334295cf5579d372444349efa576d0f6e00cd94f96b0ee2e4488f12"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 96",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "31515ae613f3375c3867dd5a5e839142ea1ca552d5543f044c1610946ca32265"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 80",
+          "quote": "Modalidades de prestación: Intramural Extramural: Unidad móvil, Jornada de Salud y Domiciliaria",
+          "text": "El manual original de la Resolución 3100 de 2019 admite expresamente la modalidad domiciliaria para el servicio de consulta externa general, listándola como una de las modalidades extramurales permitidas."
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 82-83",
+          "quote": "Modalidad extramural unidad móvil, jornada de salud y domiciliaria 24. Para la consulta externa de medicina general, cuenta con: 24.1. Fonendoscopio para adulto o pediátrico según la oferta del servicio 24.2. Tensiómetro para adulto o pediátrico según la oferta del servicio",
+          "text": "El anexo técnico de la Resolución 3100 de 2019 establece requisitos de dotación específicos aplicables a la modalidad domiciliaria de la consulta externa, incluyendo fonendoscopio, tensiómetro y oxímetro, entre otros."
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 83-84",
+          "quote": "Estándar de procesos prioritarios Complejidad baja Modalidades intramural, extramural unidad móvil, jornada de salud y domiciliaria",
+          "text": "El estándar de procesos prioritarios de la Resolución 3100 de 2019 aplica de manera conjunta a las modalidades intramural, extramural unidad móvil, jornada de salud y domiciliaria para complejidad baja."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q19",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"El manual original de la Resolución 3100 de 2019 admite expresamente la modalidad domiciliaria para el servicio de consulta externa general, listándola como una de las modalidades extramurales permitidas.\",\"evidence_id\":\"E1\",\"quote\":\"Modalidades de prestación: Intramural Extramural: Unidad móvil, Jornada de Salud y Domiciliaria\"},{\"text\":\"El anexo técnico de la Resolución 3100 de 2019 establece requisitos de dotación específicos aplicables a la modalidad domiciliaria de la consulta externa, incluyendo fonendoscopio, tensiómetro y oxímetro, entre otros.\",\"evidence_id\":\"E2\",\"quote\":\"Modalidad extramural unidad móvil, jornada de salud y domiciliaria 24. Para la consulta externa de medicina general, cuenta con: 24.1. Fonendoscopio para adulto o pediátrico según la oferta del servicio 24.2. Tensiómetro para adulto o pediátrico según la oferta del servicio\"},{\"text\":\"El estándar de procesos prioritarios de la Resolución 3100 de 2019 aplica de manera conjunta a las modalidades intramural, extramural unidad móvil, jornada de salud y domiciliaria para complejidad baja.\",\"evidence_id\":\"E5\",\"quote\":\"Estándar de procesos prioritarios Complejidad baja Modalidades intramural, extramural unidad móvil, jornada de salud y domiciliaria\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 80",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "cad4398a1abbeb5aab904d89afcea75c3ec8e08d2fdc7ba246e66db30f66c4e2"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 82-83",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "085ec704a830a17c6dddacab8352ce6f1650459ef9d2202175cd65b2b43c07cb"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 13",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "11e72e0fcc53a5f9974bba6c25f37ddb31487b58b10516ea1eac9d469560849c"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 13",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "6b5c309f7a6e5b022ef5731350420553b558f412df038ece175ed1b51c0447c9"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 83-84",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "0bea6b37b05ea1a2b2e100d4a070b8a0ca6b6945751c15c172cb137c9268e2e0"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 94",
+          "quote": "Incluye: Fisioterapia o terapia física, fonoaudiología o terapia del lenguaje, terapia ocupacional y terapia respiratoria.",
+          "text": "El servicio de terapias incluye fisioterapia o terapia física, fonoaudiología o terapia del lenguaje, terapia ocupacional y terapia respiratoria."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q20",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"El servicio de terapias incluye fisioterapia o terapia física, fonoaudiología o terapia del lenguaje, terapia ocupacional y terapia respiratoria.\",\"evidence_id\":\"E4\",\"quote\":\"Incluye: Fisioterapia o terapia física, fonoaudiología o terapia del lenguaje, terapia ocupacional y terapia respiratoria.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, artículo 26",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "661b2b3f2a862b68d5d63cea4c480f70a7c2f8cf1c25fde739b422181a5db46a"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 3",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "83cbcca66df1088311f9a11983a370031e84e93b083b8a8020e4b0716b1de00f"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 33",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "484d27995f71644adabe2c2baff3c6e660317a10db3ec886c32e90b85d43300f"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.3.1, p. 94",
+          "evidence_id": "E4",
+          "is_gold": true,
+          "passage_id": "756c7a705ad21576bd5ca82bfccfafb056eb395a18a8cc057888198417b948f1"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 13",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "11e72e0fcc53a5f9974bba6c25f37ddb31487b58b10516ea1eac9d469560849c"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 2080 de 2026, artículo 1",
+          "quote": "Revocar en su integridad la Resolución 1732 del 5 de agosto de 2026, \"por la cual se establece el procedimiento para la inscripción de los prestadores de servicios de salud y las condiciones para la habilitación de los servicios dé salud y se dictan otras disposiciones\".",
+          "text": "La Resolución 2080 de 2026, en su artículo 1°, revoca íntegramente la Resolución 1732 del 5 de agosto de 2026."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q21",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"La Resolución 2080 de 2026, en su artículo 1°, revoca íntegramente la Resolución 1732 del 5 de agosto de 2026.\",\"evidence_id\":\"E1\",\"quote\":\"Revocar en su integridad la Resolución 1732 del 5 de agosto de 2026, \\\"por la cual se establece el procedimiento para la inscripción de los prestadores de servicios de salud y las condiciones para la habilitación de los servicios dé salud y se dictan otras disposiciones\\\".\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 2080 de 2026, artículo 1",
+          "evidence_id": "E1",
+          "is_gold": true,
+          "passage_id": "37d9463d1b6ac7aedb81aca44adf2d96d84da48ba8d0b832de359eba0d55af70"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 60",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "5b4534a66fd565fbf18276f9a8e0674deb5051ca2b23abc34e9c43c898393773"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 53",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "cbd5d80dfcf7a98b136e49fb477a53c229db85804bec4fc20bcc3c6e3bc09c96"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 40",
+          "evidence_id": "E4",
+          "is_gold": false,
+          "passage_id": "a98b12cb6e8d95fcc23af01ddb1329a5c9acacd52403c4fa0c44f642799a294b"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 3",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "dc436d526baadd649acac82eef0decffd4c87812a9f416fee3c02bae976a2712"
+        }
+      ]
+    },
+    {
+      "answerable": true,
+      "claims": [
+        {
+          "citation": "Resolución 2080 de 2026, artículo 2",
+          "quote": "La presente resolución rige a partir de la fecha de su publicación en el Diario Oficial.",
+          "text": "La Resolución 2080 de 2026 rige a partir de la fecha de su publicación en el Diario Oficial, según lo establece su artículo 2°."
+        }
+      ],
+      "gold_retrieved": true,
+      "question_id": "q22",
+      "raw_output": "{\"abstain\":false,\"claims\":[{\"text\":\"La Resolución 2080 de 2026 rige a partir de la fecha de su publicación en el Diario Oficial, según lo establece su artículo 2°.\",\"evidence_id\":\"E4\",\"quote\":\"La presente resolución rige a partir de la fecha de su publicación en el Diario Oficial.\"}]}",
+      "refusal_reason": null,
+      "refused": false,
+      "retrieved": [
+        {
+          "citation": "Resolución 2080 de 2026, artículo 1",
+          "evidence_id": "E1",
+          "is_gold": false,
+          "passage_id": "37d9463d1b6ac7aedb81aca44adf2d96d84da48ba8d0b832de359eba0d55af70"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 60",
+          "evidence_id": "E2",
+          "is_gold": false,
+          "passage_id": "5b4534a66fd565fbf18276f9a8e0674deb5051ca2b23abc34e9c43c898393773"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 27",
+          "evidence_id": "E3",
+          "is_gold": false,
+          "passage_id": "3ad87b71fa1aa6e5e8a0c89a67264fe087ac359d50115252731a1016d0224e1b"
+        },
+        {
+          "citation": "Resolución 2080 de 2026, artículo 2",
+          "evidence_id": "E4",
+          "is_gold": true,
+          "passage_id": "34e507bf144689738945a05cebf415d94c196c410cdd56e3bd72ff8af76086fd"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 53",
+          "evidence_id": "E5",
+          "is_gold": false,
+          "passage_id": "cbd5d80dfcf7a98b136e49fb477a53c229db85804bec4fc20bcc3c6e3bc09c96"
+        }
+      ]
+    },
+    {
+      "answerable": false,
+      "claims": [],
+      "gold_retrieved": null,
+      "question_id": "u01",
+      "raw_output": "{\"abstain\":true,\"claims\":[]}",
+      "refusal_reason": "abstained",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 6",
+          "evidence_id": "E1",
+          "is_gold": null,
+          "passage_id": "011b59931a7d3346abeab4523a31e1743edc9a75e96404d2ce195df811890f8e"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 5",
+          "evidence_id": "E2",
+          "is_gold": null,
+          "passage_id": "7e55487b86ea4ec66f9793ac3c487c1fb856d974312b680ed30b38afa93f245e"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 6",
+          "evidence_id": "E3",
+          "is_gold": null,
+          "passage_id": "567f7233e778716b8f68c55e9d934e093161a1773506b7decfb56c3e36ecb5ae"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 15",
+          "evidence_id": "E4",
+          "is_gold": null,
+          "passage_id": "dfafb3a8321410b12f048e3625cb094a5e76fb221cf518bd8c0dfdb4dfa1ebb9"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 8",
+          "evidence_id": "E5",
+          "is_gold": null,
+          "passage_id": "848a1ca22e453db49288611a5835d1dabe3e63fae680a2ff6359071ed4bccb96"
+        }
+      ]
+    },
+    {
+      "answerable": false,
+      "claims": [],
+      "gold_retrieved": null,
+      "question_id": "u02",
+      "raw_output": "{\"abstain\":true,\"claims\":[]}",
+      "refusal_reason": "abstained",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 740 de 2024, artículo 52",
+          "evidence_id": "E1",
+          "is_gold": null,
+          "passage_id": "07f0f12c348acb3b9464a2f57fc6e70a6353129f2f41b264641ff09d03db269c"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 35",
+          "evidence_id": "E2",
+          "is_gold": null,
+          "passage_id": "3bb794fa4cbe3de2ad3765af3148cb88e9c88246bf1137f8ea8ab0f93342bf93"
+        },
+        {
+          "citation": "Resolución 1816 de 2026, artículo 58",
+          "evidence_id": "E3",
+          "is_gold": null,
+          "passage_id": "6f686714fff0b85bfae9e0a9807db3aaa674564aab1fa89abcc284b968262cf5"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 15",
+          "evidence_id": "E4",
+          "is_gold": null,
+          "passage_id": "dfafb3a8321410b12f048e3625cb094a5e76fb221cf518bd8c0dfdb4dfa1ebb9"
+        },
+        {
+          "citation": "Resolución 740 de 2024, artículo 6",
+          "evidence_id": "E5",
+          "is_gold": null,
+          "passage_id": "011b59931a7d3346abeab4523a31e1743edc9a75e96404d2ce195df811890f8e"
+        }
+      ]
+    },
+    {
+      "answerable": false,
+      "claims": [],
+      "gold_retrieved": null,
+      "question_id": "u03",
+      "raw_output": "{\"abstain\":true,\"claims\":[]}",
+      "refusal_reason": "abstained",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 80",
+          "evidence_id": "E1",
+          "is_gold": null,
+          "passage_id": "2257fa24dc9eb6a8a280945e24276f3fb9a59517590ee053545b54808b508ea7"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 2.2, p. 22",
+          "evidence_id": "E2",
+          "is_gold": null,
+          "passage_id": "9315efbca8334530e989def2b675a1c6d12901190662004ef125718221bf84f1"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, artículo 26",
+          "evidence_id": "E3",
+          "is_gold": null,
+          "passage_id": "661b2b3f2a862b68d5d63cea4c480f70a7c2f8cf1c25fde739b422181a5db46a"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 83",
+          "evidence_id": "E4",
+          "is_gold": null,
+          "passage_id": "dcd50fd0ddcb232e50737b5e49ae92536d1256b1bfc08b4c0c6b320949807fae"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 83-84",
+          "evidence_id": "E5",
+          "is_gold": null,
+          "passage_id": "0bea6b37b05ea1a2b2e100d4a070b8a0ca6b6945751c15c172cb137c9268e2e0"
+        }
+      ]
+    },
+    {
+      "answerable": false,
+      "claims": [],
+      "gold_retrieved": null,
+      "question_id": "u04",
+      "raw_output": "{\"abstain\":true,\"claims\":[]}",
+      "refusal_reason": "abstained",
+      "refused": true,
+      "retrieved": [
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 80",
+          "evidence_id": "E1",
+          "is_gold": null,
+          "passage_id": "cad4398a1abbeb5aab904d89afcea75c3ec8e08d2fdc7ba246e66db30f66c4e2"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 1.3.2.2, p. 19",
+          "evidence_id": "E2",
+          "is_gold": null,
+          "passage_id": "7cbfc41db274f7d4f9da1e342aa9ab1f1994ffb4eebffa76cfce8c0b97ac85ea"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, pp. 82-83",
+          "evidence_id": "E3",
+          "is_gold": null,
+          "passage_id": "085ec704a830a17c6dddacab8352ce6f1650459ef9d2202175cd65b2b43c07cb"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 81",
+          "evidence_id": "E4",
+          "is_gold": null,
+          "passage_id": "8f6a7b23a638dbeb7cfa391e377450968620d4e97d163afec237876a48c037f4"
+        },
+        {
+          "citation": "Resolución 3100 de 2019, anexo técnico, sección 11.2.1, p. 84",
+          "evidence_id": "E5",
+          "is_gold": null,
+          "passage_id": "a2e025095334295cf5579d372444349efa576d0f6e00cd94f96b0ee2e4488f12"
+        }
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "source_manifest_sha256": "8f73fcf418d6b64eeccb25bfe13b8fa3177503f6ab25694f3a8df23eae411a36",
+  "summary": {
+    "answerable": {
+      "count": 22,
+      "gold_retrieved": 19,
+      "outcomes": {
+        "abstained": 2,
+        "answered": 17,
+        "unverified_citation": 3
+      }
+    },
+    "unanswerable": {
+      "count": 4,
+      "outcomes": {
+        "abstained": 4
+      }
+    }
+  },
+  "top_k": 5
+}

@@ -7,7 +7,7 @@ import re
 from dataclasses import dataclass
 from importlib import import_module
 from pathlib import Path
-from typing import Literal, Protocol, cast
+from typing import Final, Literal, Protocol, cast
 from urllib.parse import urlparse
 
 from anthropic import Anthropic
@@ -26,10 +26,14 @@ from colombia_health_rag.indexing.embeddings import (
 )
 from colombia_health_rag.indexing.vector_index import SearchHit, build_index, search_index
 
-GENERATION_MODEL = "claude-sonnet-4-6"
+GENERATION_MODEL = "claude-haiku-5-5"
+# Exact quotations need strict instruction following; the model's default is "medium".
+GENERATION_EFFORT: Final = "high"
 REFUSAL = "No pude verificar una respuesta respaldada por las fuentes oficiales revisadas."
 # Why an answer was refused; evaluation separates model abstention from failed checks.
-RefusalReason = Literal["no_evidence", "abstained", "invalid_output", "unverified_citation"]
+RefusalReason = Literal[
+    "no_evidence", "abstained", "invalid_output", "unverified_citation", "model_refusal"
+]
 SYSTEM_PROMPT = (
     "Responde en español solo sobre el texto original de las normas incluidas en los extractos. "
     "No afirmes que una norma sigue vigente ni des consejo médico o jurídico. "
@@ -128,6 +132,10 @@ class TextGenerator(Protocol):
         ...
 
 
+class ModelRefusalError(ValueError):
+    """The model's safety classifier declined the request (`stop_reason: refusal`)."""
+
+
 class AnthropicGenerator:
     """Call the Anthropic Messages API with a constrained output schema."""
 
@@ -135,24 +143,28 @@ class AnthropicGenerator:
         """Create a short-lived API client without exposing the credential."""
         if not api_key.strip():
             raise ValueError("ANTHROPIC_API_KEY is required")
-        self.client = Anthropic(api_key=api_key, timeout=30.0, max_retries=1)
+        self.client = Anthropic(api_key=api_key, timeout=60.0, max_retries=1)
 
     def generate(self, prompt: str) -> str:
         """Return only a complete JSON text block from the pinned model."""
         message = self.client.messages.create(
             model=GENERATION_MODEL,
-            max_tokens=1024,
+            # Adaptive thinking is on by default and counts toward this limit.
+            max_tokens=16000,
             system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": prompt}],
-            output_config={"format": {"type": "json_schema", "schema": OUTPUT_SCHEMA}},
+            output_config={
+                "effort": GENERATION_EFFORT,
+                "format": {"type": "json_schema", "schema": OUTPUT_SCHEMA},
+            },
         )
-        if (
-            message.stop_reason != "end_turn"
-            or len(message.content) != 1
-            or message.content[0].type != "text"
-        ):
+        if message.stop_reason == "refusal":
+            raise ModelRefusalError("The model declined to answer")
+        # Thinking blocks may precede the answer; read the answer by block type.
+        texts = [block.text for block in message.content if block.type == "text"]
+        if message.stop_reason != "end_turn" or len(texts) != 1:
             raise ValueError("Generation did not return one complete text response")
-        return message.content[0].text
+        return texts[0]
 
 
 def _citation(hit: SearchHit) -> Citation:
@@ -246,6 +258,8 @@ def answer_from_hits(question: str, hits: list[SearchHit], generator: TextGenera
     prompt = json.dumps({"question": question, "evidence": evidence}, ensure_ascii=False)
     try:
         draft = DraftAnswer.model_validate_json(generator.generate(prompt))
+    except ModelRefusalError:
+        return _refuse("model_refusal")
     except (ValueError, ValidationError):
         return _refuse("invalid_output")
     if draft.abstain:

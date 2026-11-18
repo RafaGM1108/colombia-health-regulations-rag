@@ -10,6 +10,7 @@ from colombia_health_rag.evaluation import answers
 from colombia_health_rag.evaluation.answers import evaluate_answers, summarize
 from colombia_health_rag.evaluation.questions import Evidence, Question, QuestionSet
 from colombia_health_rag.indexing.vector_index import SearchHit
+from colombia_health_rag.serving.generation import GENERATION_MODEL
 
 SHA = "b" * 64
 TEXT = "El profesional de la salud tratante registra la prescripción en MIPRES."
@@ -153,7 +154,8 @@ def test_run_saves_fingerprinted_report(tmp_path: Path, monkeypatch: pytest.Monk
 
     saved = json.loads(report_path.read_text(encoding="utf-8"))
     assert saved["index_build_id"] == "build"
-    assert saved["generation_model"] == "claude-sonnet-4-6"
+    assert saved["generation_model"] == GENERATION_MODEL
+    assert saved["generation_effort"] == "high"
     assert len(saved["generator_config_sha256"]) == 64
     assert len(saved["results"]) == 26
     assert saved["summary"] == report["summary"]

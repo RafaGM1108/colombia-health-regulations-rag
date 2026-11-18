@@ -15,6 +15,7 @@ from colombia_health_rag.evaluation.retrieval import _sha256_file
 from colombia_health_rag.indexing.embeddings import Passage, _write_atomic
 from colombia_health_rag.indexing.vector_index import SearchHit
 from colombia_health_rag.serving.generation import (
+    GENERATION_EFFORT,
     GENERATION_MODEL,
     OUTPUT_SCHEMA,
     SYSTEM_PROMPT,
@@ -126,7 +127,12 @@ def run(root: Path, report_path: Path, generator: TextGenerator) -> dict[str, ob
         questions, lambda question: retrieve(question, index_dir, encoder, k=TOP_K), generator
     )
     generator_config = json.dumps(
-        {"model": GENERATION_MODEL, "system": SYSTEM_PROMPT, "schema": OUTPUT_SCHEMA},
+        {
+            "model": GENERATION_MODEL,
+            "effort": GENERATION_EFFORT,
+            "system": SYSTEM_PROMPT,
+            "schema": OUTPUT_SCHEMA,
+        },
         sort_keys=True,
         ensure_ascii=False,
     )
@@ -137,6 +143,7 @@ def run(root: Path, report_path: Path, generator: TextGenerator) -> dict[str, ob
         "source_manifest_sha256": _sha256_file(manifest_path),
         "index_build_id": build_id,
         "generation_model": GENERATION_MODEL,
+        "generation_effort": GENERATION_EFFORT,
         "generator_config_sha256": hashlib.sha256(generator_config.encode("utf-8")).hexdigest(),
         "top_k": TOP_K,
         "summary": summarize(records),
@@ -155,7 +162,7 @@ def main() -> None:
     api_key = api_key_from_env(args.root)
     if not api_key:
         parser.error("Set ANTHROPIC_API_KEY in the local .env file or environment")
-    report_path = args.report or args.root / "data/07_reporting/answers-v1.json"
+    report_path = args.report or args.root / f"data/07_reporting/answers-{GENERATION_MODEL}.json"
     report = run(args.root, report_path, AnthropicGenerator(api_key))
     print(json.dumps(report["summary"], indent=2))
     print(f"Saved {report_path}")
