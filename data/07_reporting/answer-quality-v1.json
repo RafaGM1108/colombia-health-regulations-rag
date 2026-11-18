@@ -1,0 +1,75 @@
+{
+  "runs": [
+    {
+      "abstained_when_evidence_absent": {
+        "count": 7,
+        "of": 7,
+        "rate": 1.0
+      },
+      "answers_citing_gold": {
+        "count": 18,
+        "of": 18,
+        "rate": 1.0
+      },
+      "answers_report": "data/07_reporting/answers-claude-haiku-5-5.json",
+      "claims_supported": {
+        "count": 24,
+        "of": 24,
+        "rate": 1.0
+      },
+      "correct_of_answerable": {
+        "count": 18,
+        "of": 22,
+        "rate": 0.818182
+      },
+      "correct_of_answered": {
+        "count": 18,
+        "of": 18,
+        "rate": 1.0
+      },
+      "generation_model": "claude-haiku-5-5",
+      "grader": "Claude Opus 5.5 (claude-opus-5-5), reviewing each output against the gold answer and retrieved passage text",
+      "refused_with_gold_available": {
+        "count": 1,
+        "of": 19,
+        "rate": 0.052632
+      }
+    },
+    {
+      "abstained_when_evidence_absent": {
+        "count": 6,
+        "of": 7,
+        "rate": 0.857143
+      },
+      "answers_citing_gold": {
+        "count": 16,
+        "of": 17,
+        "rate": 0.941176
+      },
+      "answers_report": "data/07_reporting/answers-claude-sonnet-4-6.json",
+      "claims_supported": {
+        "count": 24,
+        "of": 26,
+        "rate": 0.923077
+      },
+      "correct_of_answerable": {
+        "count": 16,
+        "of": 22,
+        "rate": 0.727273
+      },
+      "correct_of_answered": {
+        "count": 16,
+        "of": 17,
+        "rate": 0.941176
+      },
+      "generation_model": "claude-sonnet-4-6",
+      "grader": "Claude Opus 5.5 (claude-opus-5-5), reviewing each output against the gold answer and retrieved passage text",
+      "refused_with_gold_available": {
+        "count": 3,
+        "of": 19,
+        "rate": 0.157895
+      }
+    }
+  ],
+  "schema_version": 1
+}

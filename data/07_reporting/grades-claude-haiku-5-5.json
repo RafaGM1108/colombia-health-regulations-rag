@@ -1,0 +1,207 @@
+{
+  "answers_report": "data/07_reporting/answers-claude-haiku-5-5.json",
+  "answers_sha256": "9fc77624b77f6b3db3a27238dffde55798d6d5f6552c59aaeb34e8bed09c32ea",
+  "graded_on": "2026-11-18",
+  "grader": "Claude Opus 5.5 (claude-opus-5-5), reviewing each output against the gold answer and retrieved passage text",
+  "grades": [
+    {
+      "claim_support": [
+        "supported",
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q01",
+      "rationale": "Both parts of the expected answer, each with an exact quote from article 5."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q02",
+      "rationale": "Names the Ministry's contingency form; omits the secondary equivalence to a medical order."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q03",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q04",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q05",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q06",
+      "rationale": "Refused; the gold location was not among the five retrieved passages, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q07",
+      "rationale": "Refused; the gold location was not among the five retrieved passages, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q08",
+      "rationale": "States the three calendar days after the initial care; the quote keeps the source spelling 'síguientes'."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q09",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q10",
+      "rationale": "Matches the expected presumption and affiliation-only check (article 39); the article 40 claims are accurate, related context."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q11",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q12",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported",
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q13",
+      "rationale": "Both required elements, each supported by the same quote."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q14",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported",
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q15",
+      "rationale": "Lists all expected services; the extra complexity-change claim is another accurate article 14 case."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q16",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q17",
+      "rationale": "Refused; the gold location was not among the five retrieved passages, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q18",
+      "rationale": "Names the departmental or district health secretariat where the service is offered; omits the secondary REPS registration."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q19",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q20",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "q21",
+      "rationale": "Refused (abstained) although the gold article ranked first and states the revoked act verbatim: a missed answer."
+    },
+    {
+      "claim_support": [
+        "supported"
+      ],
+      "correctness": "correct",
+      "question_id": "q22",
+      "rationale": "Matches the expected answer; each quote directly states the claim."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "u01",
+      "rationale": "Refused; the question is outside the corpus, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "u02",
+      "rationale": "Refused; the question is outside the corpus, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "u03",
+      "rationale": "Refused; the question is outside the corpus, so abstaining is appropriate."
+    },
+    {
+      "claim_support": [],
+      "correctness": null,
+      "question_id": "u04",
+      "rationale": "Refused; the question is outside the corpus, so abstaining is appropriate."
+    }
+  ],
+  "schema_version": 1
+}
