@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Added
 
+- README reproducibility steps and known limits, a test that keeps the README result tables in sync with the reporting files, and a v1.0.0 release checklist.
 - Spanish Streamlit chat for reviewed public questions and local passage search, with quotations, official PDF page links, refusal reasons, and a visible informational-only disclaimer.
 - FastAPI endpoints for reviewed public questions, local passage search, and cited answers with official PDF page links, typed errors, and an informational-only disclaimer.
 - Privacy-bounded service layer: cited answers only for reviewed public question IDs, local-only free-form passage search, and a documented input contract.
