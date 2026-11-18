@@ -15,6 +15,19 @@ Free-form screening cannot reliably detect personal details in Spanish text: nam
 
 Search embeds the query with the pinned E5 model on the serving machine and ranks passages in the local Chroma index. The query is not stored, written to logs, or sent to another service. Request bodies are not part of the server's access log. Do not type patient or personal details anyway: the search box is for regulation topics only.
 
+## API
+
+`make api` serves the FastAPI application locally; interactive documentation is at `/docs`. It needs the verified local index (see the [data layers](data.md)), and `/answers` also needs `ANTHROPIC_API_KEY` in the local `.env`.
+
+| Method and path | Body | Returns |
+|---|---|---|
+| `GET /health` | — | Service status and version |
+| `GET /questions` | — | The reviewed public questions (`id`, `question`) |
+| `POST /search` | `{"query": "..."}`, 3–300 characters | Up to five official passages with citation, text, and a link to the PDF page |
+| `POST /answers` | `{"question_id": "q01"}` | Claims with exact quotations and citations, or a refusal with its reason |
+
+Unknown fields are rejected, so free text cannot be passed to `/answers`. Errors: `404` for an unknown question ID, `422` for invalid input, `503` when the index or the API key is missing, and `502` when the generation service fails. Every search and answer response includes the informational-only disclaimer.
+
 ## Limits
 
 - The answer set is fixed. New public questions require a reviewed change to the question set, not user input.

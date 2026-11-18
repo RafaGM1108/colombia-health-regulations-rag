@@ -27,7 +27,7 @@ The FTI pattern is mapped to this retrieval system as follows:
 | Indexing | Validated chunks | Multilingual embeddings and vector index | Phases 3–4 |
 | Serving | Question, index, and cited passages | Grounded answer with resolution and article citations | Phases 5–6 |
 
-The implemented parsing and indexing stack uses PyMuPDF, sentence-transformers, and Chroma. Cited generation uses Claude Haiku 5.5 through the Anthropic API. FastAPI and Streamlit chat integration remains planned; the repository currently has an API health endpoint and a UI landing page.
+The implemented parsing and indexing stack uses PyMuPDF, sentence-transformers, and Chroma. Cited generation uses Claude Haiku 5.5 through the Anthropic API. A FastAPI service exposes reviewed-question answers and local passage search; Streamlit chat integration remains planned.
 
 ## Roadmap
 
@@ -77,7 +77,7 @@ With the article-aware index built and `ANTHROPIC_API_KEY` set in local `.env`, 
 uv run --frozen --group embeddings python -m colombia_health_rag.serving.generation q01
 ```
 
-The command accepts IDs from the public evaluation set, not patient details. It prints a refusal if a response lacks a verified source quote. See [Methodology](docs/methodology.md) for the citation checks and their limits.
+The command accepts IDs from the public evaluation set, not patient details. `make api` serves the same operations over HTTP; the endpoints and input rules are in the [input contract](docs/interface.md#api). It prints a refusal if a response lacks a verified source quote. See [Methodology](docs/methodology.md) for the citation checks and their limits.
 
 ## Repository structure
 
