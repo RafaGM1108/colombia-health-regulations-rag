@@ -199,43 +199,19 @@ def build_index(root: Path, build_dir: Path, *, rebuild: bool = False) -> Path:
     return index_dir
 
 
-def search_index(
-    index_dir: Path,
-    vector: list[float],
-    *,
-    k: int = 5,
-    resolution: str | None = None,
-    article_number: int | None = None,
-    section_id: str | None = None,
-    kind: str | None = None,
-) -> list[SearchHit]:
+def search_index(index_dir: Path, vector: list[float], *, k: int = 5) -> list[SearchHit]:
     """Search normalized vectors and retain citation and source metadata in every hit."""
     manifest = _read_json(index_dir / "index.json")
     if manifest.get("model_id") != MODEL_ID or manifest.get("model_revision") != MODEL_REVISION:
         raise ValueError("Index uses a different embedding model")
     if k < 1 or not _valid_vectors([vector], 1, manifest["dimension"]):
         raise ValueError("Search needs a positive k and a normalized model-sized vector")
-    filters: dict[str, str | int] = {}
-    for key, value in (
-        ("resolution", resolution),
-        ("article_number", article_number),
-        ("section_id", section_id),
-        ("kind", kind),
-    ):
-        if value is not None:
-            filters[key] = value
-    where: dict[str, Any] | None = None
-    if len(filters) == 1:
-        where = filters
-    elif filters:
-        where = {"$and": [{key: value} for key, value in filters.items()]}
     collection = _client(index_dir).get_collection(COLLECTION)
     if collection.count() != manifest["passage_count"]:
         raise ValueError("Index count differs from its build manifest")
     result = collection.query(
         query_embeddings=cast(Embeddings, [vector]),
         n_results=min(k, manifest["passage_count"]),
-        where=where,
         include=["documents", "metadatas", "distances"],
     )
     documents, metadatas, distances = result["documents"], result["metadatas"], result["distances"]
@@ -263,9 +239,14 @@ def main() -> None:
         build_dir = builds / args.build_id
     else:
         candidates = sorted(builds.glob("*/build.json"))
-        if len(candidates) != 1:
+        report = args.root / "data/07_reporting/retrieval-v1.json"
+        if len(candidates) == 1:
+            build_dir = candidates[0].parent
+        elif candidates and report.exists():
+            # `make evaluate` adds the fixed-window build; serving uses the article-aware one.
+            build_dir = builds / _read_json(report)["results"]["article_aware"]["build_id"]
+        else:
             parser.error("Specify --build-id when zero or multiple embedding builds exist")
-        build_dir = candidates[0].parent
     index_dir = build_index(args.root, build_dir, rebuild=args.rebuild)
     count = _read_json(index_dir / "index.json")["passage_count"]
     print(f"Indexed {count} passages in {index_dir}")

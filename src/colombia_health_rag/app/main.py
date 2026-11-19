@@ -7,14 +7,15 @@ only for local search. Nothing typed here is stored, logged, or sent to an exter
 from pathlib import Path
 
 import streamlit as st
+from anthropic import APIError
 
 from colombia_health_rag.serving.generation import Answer, RefusalReason
 from colombia_health_rag.serving.service import (
     MAX_QUERY_CHARS,
     GenerationUnavailableError,
+    InvalidQueryError,
     RegulationService,
 )
-from colombia_health_rag.utils.config import get_config
 
 DISCLAIMER = (
     "Solo informativo; no es asesoría legal ni médica. Las respuestas citan el texto original "
@@ -75,6 +76,9 @@ def questions_tab(service: RegulationService) -> None:
         except FileNotFoundError:
             st.error("El índice local no está construido. Ejecute make embeddings y make index.")
             return
+        except APIError:
+            st.error("El servicio de generación falló; intente de nuevo.")
+            return
         history.append((question.question, answer))
         st.rerun()
 
@@ -90,7 +94,7 @@ def search_tab(service: RegulationService) -> None:
         return
     try:
         hits = service.search(query)
-    except ValueError as error:
+    except InvalidQueryError as error:
         st.error(str(error))
         return
     except FileNotFoundError:
@@ -104,7 +108,7 @@ def search_tab(service: RegulationService) -> None:
 
 def main() -> None:
     """Lay out the disclaimer, the reviewed-question chat, and local search."""
-    st.set_page_config(page_title=get_config().project.name)
+    st.set_page_config(page_title="Colombian Health Regulations RAG")
     st.title("Normativa de salud de Colombia")
     st.info(DISCLAIMER)
     service = get_service()

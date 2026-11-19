@@ -32,7 +32,19 @@ All notable changes to this project are documented here. The project follows [Se
 
 ### Changed
 
+- Cited answers are reused per reviewed question within a process, so repeated requests make no new paid API calls; refusals are retried.
+- `make index` selects the article-aware build recorded in the retrieval report when `make evaluate` has added other builds.
 - Updated locked Python dependencies, including PyMuPDF 2.1, sentence-transformers 6.2, and PyTorch 2.15. Parsed passages and retrieval metrics are unchanged; the retrieval report records the new embedding build IDs.
 - Switched cited generation from Claude Sonnet 4.6 to Claude Haiku 5.5 at `high` effort, based on the graded comparison.
 - Updated the README to reflect the available local index and measured retrieval results.
 - Adapted the data-science template to article-level regulation retrieval and removed unrelated template content.
+
+### Fixed
+
+- The chat shows a message instead of a traceback when the generation service fails.
+- Citation checks accept the same official subdomains as the source manifest.
+- `/search` returns 422 only for invalid queries; index faults are server errors and no longer expose internal messages.
+
+### Removed
+
+- The unused YAML configuration loader, `conf/base.yaml`, the logging helper, PyYAML, and the search filters that no caller used.

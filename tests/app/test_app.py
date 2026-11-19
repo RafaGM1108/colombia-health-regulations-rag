@@ -6,6 +6,7 @@ from typing import ClassVar
 
 import pytest
 import streamlit as st
+from anthropic import APIError
 from streamlit.testing.v1 import AppTest
 
 from colombia_health_rag.evaluation.questions import Evidence, Question
@@ -18,8 +19,14 @@ URL = "https://www.minsalud.gov.co/resolucion-740.pdf"
 LABEL = "Resolución 740 de 2024, artículo 5"
 
 
+class _UpstreamError(APIError):
+    def __init__(self) -> None:
+        Exception.__init__(self, "upstream failure")
+
+
 class FakeService:
     searched: ClassVar[list[str]] = []
+    fail: ClassVar[bool] = False
 
     def __init__(self, _root: Path) -> None:
         pass
@@ -36,6 +43,8 @@ class FakeService:
         ]
 
     def answer(self, question_id: str) -> tuple[Question, Answer]:
+        if FakeService.fail:
+            raise _UpstreamError()
         question = next(item for item in self.public_questions() if item.id == question_id)
         if question_id == "u01":
             return question, Answer(REFUSAL, True, (), "abstained")
@@ -63,6 +72,7 @@ class FakeService:
 def app(monkeypatch: pytest.MonkeyPatch) -> Iterator[AppTest]:
     monkeypatch.setattr(service_module, "RegulationService", FakeService)
     FakeService.searched = []
+    FakeService.fail = False
     st.cache_resource.clear()
     yield AppTest.from_file(str(APP), default_timeout=30).run()
     st.cache_resource.clear()
@@ -98,3 +108,10 @@ def test_search_lists_cited_passages(app: AppTest) -> None:
     app.text_input[0].input("prescripción en MIPRES").run()
     assert f"[{LABEL}]({URL}#page=2)" in _markdown(app)
     assert FakeService.searched == ["prescripción en MIPRES"]
+
+
+def test_generation_failure_shows_a_message_not_a_traceback(app: AppTest) -> None:
+    FakeService.fail = True
+    app.button[0].click().run()
+    assert not app.exception
+    assert "falló" in app.error[0].value

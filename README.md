@@ -82,10 +82,9 @@ The command accepts IDs from the public evaluation set, not patient details, and
 ## Repository structure
 
 ```text
-conf/base.yaml                 Paths and application name
 data/                          Local raw, parsed, chunk, embedding, index, evaluation, reporting layers
 docs/                          Source policy and methodology
-src/colombia_health_rag/       Ingestion, indexing, serving, API, UI, and shared utilities
+src/colombia_health_rag/       Ingestion, indexing, serving, API, and UI
 tests/                         Parsing, indexing, evaluation, API, and UI checks
 ```
 

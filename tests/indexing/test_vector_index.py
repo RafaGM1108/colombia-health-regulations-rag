@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import sys
 from collections.abc import Iterable, Sequence
 from pathlib import Path
 
@@ -15,7 +16,7 @@ from colombia_health_rag.indexing.embeddings import (
     _sha256,
     build_embeddings,
 )
-from colombia_health_rag.indexing.vector_index import build_index, search_index
+from colombia_health_rag.indexing.vector_index import build_index, main, search_index
 
 
 class FakeEncoder:
@@ -97,7 +98,7 @@ def source_build(tmp_path: Path) -> tuple[Path, Path]:
     return tmp_path, build_dir
 
 
-def test_index_reopens_and_filters_with_citation(source_build: tuple[Path, Path]) -> None:
+def test_index_reopens_and_returns_citation(source_build: tuple[Path, Path]) -> None:
     root, build_dir = source_build
     index_dir = build_index(root, build_dir)
     assert build_index(root, build_dir) == index_dir
@@ -106,10 +107,6 @@ def test_index_reopens_and_filters_with_citation(source_build: tuple[Path, Path]
     assert [hit.metadata["article_number"] for hit in hits] == [1, 2]
     assert hits[0].metadata["citation"] == "Resolución 1 de 2024, artículo 1"
     assert hits[0].metadata["source_url"] == "https://www.minsalud.gov.co/test/resolution.pdf"
-    filtered = search_index(index_dir, query, article_number=2, kind="article", k=2)
-    assert len(filtered) == 1
-    assert filtered[0].metadata["article_number"] == 2
-    assert search_index(index_dir, query, resolution="Resolución 2 de 2024") == []
     with pytest.raises(ValueError, match="normalized"):
         search_index(index_dir, [0.0] * MODEL_DIMENSION)
 
@@ -148,3 +145,22 @@ def test_source_checksum_and_passage_provenance_are_required(
     batch_path.write_text(json.dumps(batch), encoding="utf-8")
     with pytest.raises(ValueError, match="unverified official provenance"):
         build_index(root, build_dir)
+
+
+def test_index_command_picks_the_reported_build_when_several_exist(
+    source_build: tuple[Path, Path],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    root, build_dir = source_build
+    other = root / "data/04_embeddings/fixed-window-build"
+    other.mkdir()
+    (other / "build.json").write_text("{}", encoding="utf-8")
+    report = root / "data/07_reporting/retrieval-v1.json"
+    report.parent.mkdir(parents=True)
+    report.write_text(
+        json.dumps({"results": {"article_aware": {"build_id": build_dir.name}}}), encoding="utf-8"
+    )
+    monkeypatch.setattr(sys, "argv", ["index", "--root", str(root)])
+    main()
+    assert f"data/05_index/{build_dir.name}" in capsys.readouterr().out

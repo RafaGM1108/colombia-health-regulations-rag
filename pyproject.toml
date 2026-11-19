@@ -12,7 +12,6 @@ dependencies = [
     "pydantic>=2.9",
     "pymupdf>=1.25,<3",
     "python-dotenv>=1.2.4",
-    "pyyaml>=6.0",
     "uvicorn[standard]>=0.32",
 ]
 
@@ -26,7 +25,6 @@ dev = [
     "pytest>=8.3",
     "pytest-cov>=6.0",
     "ruff>=0.8",
-    "types-pyyaml>=6.0",
 ]
 app = ["streamlit>=1.40"]
 docs = ["mkdocs-material>=9.5"]
