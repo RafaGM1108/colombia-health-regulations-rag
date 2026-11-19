@@ -11,6 +11,7 @@ from colombia_health_rag.indexing.vector_index import SearchHit
 from colombia_health_rag.serving.generation import Answer, Citation, SupportedClaim
 from colombia_health_rag.serving.service import (
     GenerationUnavailableError,
+    InvalidQueryError,
     UnknownQuestionError,
 )
 
@@ -145,3 +146,14 @@ def test_answer_errors_map_to_status_codes(
 def test_search_reports_missing_index(fake: FakeService) -> None:
     fake.error = FileNotFoundError("index")
     assert TestClient(app).post("/search", json={"query": "MIPRES"}).status_code == 503
+
+
+def test_search_separates_bad_queries_from_server_faults(fake: FakeService) -> None:
+    fake.error = InvalidQueryError("Query must have between 3 and 300 characters")
+    assert TestClient(app).post("/search", json={"query": "   x  "}).status_code == 422
+    fake.error = ValueError("Index count differs from its build manifest")
+    response = TestClient(app, raise_server_exceptions=False).post(
+        "/search", json={"query": "MIPRES"}
+    )
+    assert response.status_code == 500
+    assert "Index count" not in response.text

@@ -25,6 +25,7 @@ from colombia_health_rag.indexing.embeddings import (
     normalize_text,
 )
 from colombia_health_rag.indexing.vector_index import SearchHit, build_index, search_index
+from colombia_health_rag.ingestion.manifest import is_official_host
 
 GENERATION_MODEL = "claude-haiku-5-5"
 # Exact quotations need strict instruction following; the model's default is "medium".
@@ -204,10 +205,7 @@ def _citation(hit: SearchHit) -> Citation:
         raise ValueError("Search result has an unsupported evidence kind")
     source_url = cast(str, metadata["source_url"])
     parsed = urlparse(source_url)
-    if parsed.scheme != "https" or parsed.hostname not in (
-        "minsalud.gov.co",
-        "www.minsalud.gov.co",
-    ):
+    if parsed.scheme != "https" or not is_official_host(parsed.hostname or ""):
         raise ValueError("Search result has a non-official source URL")
     page_start = metadata.get("page_start")
     source_sha256 = cast(str, metadata["source_sha256"])

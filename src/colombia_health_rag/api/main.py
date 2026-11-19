@@ -18,6 +18,7 @@ from colombia_health_rag.serving.generation import RefusalReason
 from colombia_health_rag.serving.service import (
     MAX_QUERY_CHARS,
     GenerationUnavailableError,
+    InvalidQueryError,
     RegulationService,
     UnknownQuestionError,
 )
@@ -154,7 +155,7 @@ def search(request: SearchRequest, service: Service) -> SearchResponse:
     """Return up to five official passages for a regulation topic, searched locally."""
     try:
         hits = service.search(request.query)
-    except ValueError as error:
+    except InvalidQueryError as error:
         raise HTTPException(status_code=422, detail=str(error)) from None
     except FileNotFoundError:
         raise HTTPException(status_code=503, detail="The local index is not built") from None

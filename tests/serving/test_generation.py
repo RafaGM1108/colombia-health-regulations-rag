@@ -131,6 +131,12 @@ def test_unofficial_or_mismatched_citation_is_rejected_before_api_call() -> None
         answer_from_hits("¿Qué dice la norma?", [unofficial], generator)
     assert generator.prompts == []
 
+    # The manifest admits official subdomains, so citations must accept them too.
+    subdomain = _hit()
+    subdomain.metadata["source_url"] = "https://normas.minsalud.gov.co/resolucion.pdf"
+    assert not answer_from_hits("¿Qué dice la norma?", [subdomain], generator).refused
+    generator.prompts.clear()
+
     mismatched = _hit()
     mismatched.metadata["article_number"] = 9
     with pytest.raises(ValueError, match="article citation"):

@@ -17,6 +17,11 @@ from pydantic import (
 OFFICIAL_DOMAINS = ("minsalud.gov.co",)
 
 
+def is_official_host(host: str) -> bool:
+    """Accept a reviewed government domain or one of its subdomains."""
+    return any(host == domain or host.endswith(f".{domain}") for domain in OFFICIAL_DOMAINS)
+
+
 class SourceRecord(BaseModel):
     """Metadata required before a public document can enter the corpus."""
 
@@ -39,9 +44,7 @@ class SourceRecord(BaseModel):
     def official_https_url(cls, value: HttpUrl) -> HttpUrl:
         """Accept HTTPS URLs only from reviewed government source domains."""
         host = value.host or ""
-        if value.scheme != "https" or not any(
-            host == domain or host.endswith(f".{domain}") for domain in OFFICIAL_DOMAINS
-        ):
+        if value.scheme != "https" or not is_official_host(host):
             raise ValueError("source_url must use HTTPS on an approved official domain")
         return value
 

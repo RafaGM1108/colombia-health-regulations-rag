@@ -10,9 +10,10 @@ import pytest
 from colombia_health_rag.indexing.embeddings import MODEL_DIMENSION, Encoder
 from colombia_health_rag.indexing.vector_index import SearchHit
 from colombia_health_rag.serving import service as service_module
-from colombia_health_rag.serving.generation import TextGenerator
+from colombia_health_rag.serving.generation import Answer, TextGenerator
 from colombia_health_rag.serving.service import (
     GenerationUnavailableError,
+    InvalidQueryError,
     RegulationService,
     UnknownQuestionError,
 )
@@ -135,12 +136,31 @@ def test_search_stays_local_and_is_not_logged(
     assert "Ana Pérez" not in caplog.text
 
 
+def test_answers_are_reused_but_refusals_are_retried(
+    parts: tuple[RegulationService, FakeEncoder, list[object]],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    service, _, _ = parts
+    calls: list[str] = []
+    answers = iter([Answer("No.", True, (), "invalid_output"), Answer("Sí.", False, ())])
+
+    def fake_answer(question: str, *_args: object) -> Answer:
+        calls.append(question)
+        return next(answers)
+
+    monkeypatch.setattr(service_module, "answer_from_index", fake_answer)
+    assert service.answer("q01")[1].refused
+    assert service.answer("q01")[1].text == "Sí."
+    assert service.answer("q01")[1].text == "Sí."
+    assert len(calls) == 2
+
+
 @pytest.mark.parametrize("query", ["ab", "x" * 301, "   "])
 def test_search_rejects_empty_or_long_queries(
     parts: tuple[RegulationService, FakeEncoder, list[object]], query: str
 ) -> None:
     service, encoder, _ = parts
-    with pytest.raises(ValueError, match="between 3 and 300"):
+    with pytest.raises(InvalidQueryError, match="between 3 and 300"):
         service.search(query)
     assert encoder.sentences == []
 

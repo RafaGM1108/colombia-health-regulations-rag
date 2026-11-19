@@ -32,6 +32,10 @@ class UnknownQuestionError(LookupError):
     """The requested ID is not a reviewed public question."""
 
 
+class InvalidQueryError(ValueError):
+    """A search query is empty or too long."""
+
+
 class GenerationUnavailableError(RuntimeError):
     """No API key is configured, so cited answers cannot be generated."""
 
@@ -63,6 +67,8 @@ class RegulationService:
         self._make_generator = make_generator
         self._index: tuple[Path, Encoder] | None = None
         self._generator: TextGenerator | None = None
+        # At most one paid call per reviewed question; refusals are retried.
+        self._answers: dict[str, Answer] = {}
         self._lock = threading.Lock()
 
     def public_questions(self) -> list[Question]:
@@ -80,7 +86,7 @@ class RegulationService:
         """Retrieve official passages locally; the query is not stored, logged, or sent."""
         text = normalize_text(query)
         if not 3 <= len(text) <= MAX_QUERY_CHARS:
-            raise ValueError(f"Query must have between 3 and {MAX_QUERY_CHARS} characters")
+            raise InvalidQueryError(f"Query must have between 3 and {MAX_QUERY_CHARS} characters")
         index_dir, encoder = self._loaded_index()
         return retrieve(text, index_dir, encoder, k=SEARCH_RESULTS)
 
@@ -89,9 +95,15 @@ class RegulationService:
         question = self._questions.get(question_id)
         if question is None:
             raise UnknownQuestionError(question_id)
+        cached = self._answers.get(question_id)
+        if cached is not None:
+            return question, cached
         with self._lock:
             if self._generator is None:
                 self._generator = self._make_generator(self.root)
             generator = self._generator
         index_dir, encoder = self._loaded_index()
-        return question, answer_from_index(question.question, index_dir, encoder, generator)
+        answer = answer_from_index(question.question, index_dir, encoder, generator)
+        if not answer.refused:
+            self._answers[question_id] = answer
+        return question, answer
